@@ -25,6 +25,14 @@ enum ApartmentType {
   apartment
   villa
   pool
+  treehouse
+  castle
+  cabin
+  cottage
+  townhouse
+  penthouse
+  duplex
+  studio
 }
 
 enum Role {
@@ -46,7 +54,7 @@ model User {
   banDate      DateTime? 
   createdAt    DateTime  @default(now())
   lastLogin    DateTime?
-  deleted      Boolean   @default(false) // ✅ Soft delete
+  deleted      Boolean   @default(false)
 
   // Relations
   wishlist     Apartment[] @relation("UserWishlist")
@@ -69,7 +77,7 @@ model Apartment {
   bookedDates    BookedDate[]
   createdAt      DateTime     @default(now())
   avgRating      Float        @default(0.0)
-  deleted        Boolean      @default(false) // ✅ Soft delete
+  deleted        Boolean      @default(false)
 
   entrepreneur   User        @relation("EntrepreneurApartments", fields: [entrepreneurId], references: [id])
   entrepreneurId String
@@ -122,7 +130,7 @@ model Contact {
   message      String
   isRead       Boolean  @default(false)
   submittedAt  DateTime @default(now())
-  deleted      Boolean  @default(false) // ✅ Soft delete
+  deleted      Boolean  @default(false)
 }
 
 model Coupon {
