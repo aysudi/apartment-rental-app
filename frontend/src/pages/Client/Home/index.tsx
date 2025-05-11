@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <main className="mb-4">
       <section id="hero" className="h-[50vh] ">
-        <div className="flex justify-center text-white w-[60%] h-[100%] items-center ">
+        <div className="flex justify-center text-white w-[70%] h-[100%] items-center ">
           <div className="w-[60%] m-auto flex flex-col gap-[1rem] ">
             <h1 className="font-bold text-6xl text-center">
               Want to know what your house is worth?
@@ -37,7 +37,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="w-[60%] mx-auto pt-[6rem] flex justify-between gap-2 ">
+      <section className="w-[70%] mx-auto pt-[6rem] flex justify-between gap-2 ">
         <div className="w-[19rem] ">
           <img
             className="w-[100%] h-[100%] object-cover "
