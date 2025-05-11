@@ -2,7 +2,7 @@ import { Star } from "lucide-react";
 
 const Apartments = () => {
   return (
-    <div className="w-[90%] mx-auto my-[2rem] flex flex-col gap-4">
+    <div className="w-[90%] mx-auto py-[6.1rem] flex flex-col gap-4">
       <h1>Apartments</h1>
       <div className=" grid grid-cols-5 ">
         <div className="flex flex-col gap-3">
