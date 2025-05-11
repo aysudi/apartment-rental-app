@@ -1,4 +1,5 @@
 import ClientLayout from "../layout/Client";
+import ApartmentDetails from "../pages/Client/ApartmentDetails";
 import Apartments from "../pages/Client/Apartments";
 import Contact from "../pages/Client/Contact";
 import Home from "../pages/Client/Home";
@@ -16,20 +17,32 @@ const ROUTES = [
         element: <Home />,
       },
       {
-        path: "/apartments",
+        path: "apartments",
         element: <Apartments />,
       },
       {
-        path: "/user",
+        path: "apartment-details",
+        children: [
+          {
+            path: ":id",
+            element: <ApartmentDetails />,
+          },
+        ],
+      },
+      {
+        path: "user",
         element: <UserProfile />,
       },
       {
-        path: "/contact",
+        path: "contact",
         element: <Contact />,
       },
       {
-        path: "/wishlist",
+        path: "wishlist",
         element: <Wishlist />,
+      },
+      {
+        path: "login",
       },
     ],
   },
