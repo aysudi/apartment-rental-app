@@ -79,13 +79,16 @@ model Apartment {
   avgRating      Float        @default(0.0)
   deleted        Boolean      @default(false)
 
-  entrepreneur   User        @relation("EntrepreneurApartments", fields: [entrepreneurId], references: [id])
+  rentalCount    Int          @default(0)
+
+  entrepreneur   User         @relation("EntrepreneurApartments", fields: [entrepreneurId], references: [id])
   entrepreneurId String
 
   reviews        Review[]
   bookings       Booking[]
   wishlistedBy   User[]       @relation("UserWishlist")
 }
+
 
 model Booking {
   id          String    @id @default(uuid())

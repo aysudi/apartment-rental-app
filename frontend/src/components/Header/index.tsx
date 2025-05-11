@@ -4,7 +4,7 @@ import { House, Hotel, BookUser } from "lucide-react";
 
 const Header = () => {
   return (
-    <header className="bg-[#FF9A1E] ">
+    <header className="bg-[#FF9A1E] fixed w-full">
       <div className="w-[70%] mx-auto flex justify-between gap-2 items-center ">
         <div className="w-[5.3rem]">
           <img className="w-full h-full rounded-lg" src={logo} alt="Logo" />

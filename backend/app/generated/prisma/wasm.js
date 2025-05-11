@@ -150,6 +150,7 @@ exports.Prisma.ApartmentScalarFieldEnum = {
   createdAt: 'createdAt',
   avgRating: 'avgRating',
   deleted: 'deleted',
+  rentalCount: 'rentalCount',
   entrepreneurId: 'entrepreneurId'
 };
 
@@ -233,7 +234,15 @@ exports.ApartmentType = exports.$Enums.ApartmentType = {
   island: 'island',
   apartment: 'apartment',
   villa: 'villa',
-  pool: 'pool'
+  pool: 'pool',
+  treehouse: 'treehouse',
+  castle: 'castle',
+  cabin: 'cabin',
+  cottage: 'cottage',
+  townhouse: 'townhouse',
+  penthouse: 'penthouse',
+  duplex: 'duplex',
+  studio: 'studio'
 };
 
 exports.BookingStatus = exports.$Enums.BookingStatus = {

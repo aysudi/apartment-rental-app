@@ -5,7 +5,7 @@ import { Check } from "lucide-react";
 const Home = () => {
   return (
     <main className="mb-4">
-      <section id="hero" className="h-[50vh] ">
+      <section id="hero" className="h-[60vh] pt-[4rem]">
         <div className="flex justify-center text-white w-[70%] h-[100%] items-center ">
           <div className="w-[60%] m-auto flex flex-col gap-[1rem] ">
             <h1 className="font-bold text-6xl text-center">

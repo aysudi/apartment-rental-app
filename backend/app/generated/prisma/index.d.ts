@@ -71,7 +71,15 @@ export const ApartmentType: {
   island: 'island',
   apartment: 'apartment',
   villa: 'villa',
-  pool: 'pool'
+  pool: 'pool',
+  treehouse: 'treehouse',
+  castle: 'castle',
+  cabin: 'cabin',
+  cottage: 'cottage',
+  townhouse: 'townhouse',
+  penthouse: 'penthouse',
+  duplex: 'duplex',
+  studio: 'studio'
 };
 
 export type ApartmentType = (typeof ApartmentType)[keyof typeof ApartmentType]
@@ -2973,11 +2981,13 @@ export namespace Prisma {
   export type ApartmentAvgAggregateOutputType = {
     pricePerNight: number | null
     avgRating: number | null
+    rentalCount: number | null
   }
 
   export type ApartmentSumAggregateOutputType = {
     pricePerNight: number | null
     avgRating: number | null
+    rentalCount: number | null
   }
 
   export type ApartmentMinAggregateOutputType = {
@@ -2991,6 +3001,7 @@ export namespace Prisma {
     createdAt: Date | null
     avgRating: number | null
     deleted: boolean | null
+    rentalCount: number | null
     entrepreneurId: string | null
   }
 
@@ -3005,6 +3016,7 @@ export namespace Prisma {
     createdAt: Date | null
     avgRating: number | null
     deleted: boolean | null
+    rentalCount: number | null
     entrepreneurId: string | null
   }
 
@@ -3022,6 +3034,7 @@ export namespace Prisma {
     createdAt: number
     avgRating: number
     deleted: number
+    rentalCount: number
     entrepreneurId: number
     _all: number
   }
@@ -3030,11 +3043,13 @@ export namespace Prisma {
   export type ApartmentAvgAggregateInputType = {
     pricePerNight?: true
     avgRating?: true
+    rentalCount?: true
   }
 
   export type ApartmentSumAggregateInputType = {
     pricePerNight?: true
     avgRating?: true
+    rentalCount?: true
   }
 
   export type ApartmentMinAggregateInputType = {
@@ -3048,6 +3063,7 @@ export namespace Prisma {
     createdAt?: true
     avgRating?: true
     deleted?: true
+    rentalCount?: true
     entrepreneurId?: true
   }
 
@@ -3062,6 +3078,7 @@ export namespace Prisma {
     createdAt?: true
     avgRating?: true
     deleted?: true
+    rentalCount?: true
     entrepreneurId?: true
   }
 
@@ -3079,6 +3096,7 @@ export namespace Prisma {
     createdAt?: true
     avgRating?: true
     deleted?: true
+    rentalCount?: true
     entrepreneurId?: true
     _all?: true
   }
@@ -3183,6 +3201,7 @@ export namespace Prisma {
     createdAt: Date
     avgRating: number
     deleted: boolean
+    rentalCount: number
     entrepreneurId: string
     _count: ApartmentCountAggregateOutputType | null
     _avg: ApartmentAvgAggregateOutputType | null
@@ -3219,6 +3238,7 @@ export namespace Prisma {
     createdAt?: boolean
     avgRating?: boolean
     deleted?: boolean
+    rentalCount?: boolean
     entrepreneurId?: boolean
     bookedDates?: boolean | Apartment$bookedDatesArgs<ExtArgs>
     entrepreneur?: boolean | UserDefaultArgs<ExtArgs>
@@ -3242,6 +3262,7 @@ export namespace Prisma {
     createdAt?: boolean
     avgRating?: boolean
     deleted?: boolean
+    rentalCount?: boolean
     entrepreneurId?: boolean
     entrepreneur?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["apartment"]>
@@ -3260,6 +3281,7 @@ export namespace Prisma {
     createdAt?: boolean
     avgRating?: boolean
     deleted?: boolean
+    rentalCount?: boolean
     entrepreneurId?: boolean
     entrepreneur?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["apartment"]>
@@ -3278,10 +3300,11 @@ export namespace Prisma {
     createdAt?: boolean
     avgRating?: boolean
     deleted?: boolean
+    rentalCount?: boolean
     entrepreneurId?: boolean
   }
 
-  export type ApartmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "type" | "location" | "pricePerNight" | "coverImage" | "images" | "description" | "features" | "rules" | "createdAt" | "avgRating" | "deleted" | "entrepreneurId", ExtArgs["result"]["apartment"]>
+  export type ApartmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "type" | "location" | "pricePerNight" | "coverImage" | "images" | "description" | "features" | "rules" | "createdAt" | "avgRating" | "deleted" | "rentalCount" | "entrepreneurId", ExtArgs["result"]["apartment"]>
   export type ApartmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     bookedDates?: boolean | Apartment$bookedDatesArgs<ExtArgs>
     entrepreneur?: boolean | UserDefaultArgs<ExtArgs>
@@ -3320,6 +3343,7 @@ export namespace Prisma {
       createdAt: Date
       avgRating: number
       deleted: boolean
+      rentalCount: number
       entrepreneurId: string
     }, ExtArgs["result"]["apartment"]>
     composites: {}
@@ -3762,6 +3786,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Apartment", 'DateTime'>
     readonly avgRating: FieldRef<"Apartment", 'Float'>
     readonly deleted: FieldRef<"Apartment", 'Boolean'>
+    readonly rentalCount: FieldRef<"Apartment", 'Int'>
     readonly entrepreneurId: FieldRef<"Apartment", 'String'>
   }
     
@@ -10701,6 +10726,7 @@ export namespace Prisma {
     createdAt: 'createdAt',
     avgRating: 'avgRating',
     deleted: 'deleted',
+    rentalCount: 'rentalCount',
     entrepreneurId: 'entrepreneurId'
   };
 
@@ -10888,20 +10914,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'BookingStatus'
-   */
-  export type EnumBookingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingStatus'>
-    
-
-
-  /**
-   * Reference to a field of type 'BookingStatus[]'
-   */
-  export type ListEnumBookingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingStatus[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -10912,6 +10924,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'BookingStatus'
+   */
+  export type EnumBookingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'BookingStatus[]'
+   */
+  export type ListEnumBookingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingStatus[]'>
     
   /**
    * Deep Input Types
@@ -11041,6 +11067,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Apartment"> | Date | string
     avgRating?: FloatFilter<"Apartment"> | number
     deleted?: BoolFilter<"Apartment"> | boolean
+    rentalCount?: IntFilter<"Apartment"> | number
     entrepreneurId?: StringFilter<"Apartment"> | string
     bookedDates?: BookedDateListRelationFilter
     entrepreneur?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -11063,6 +11090,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     avgRating?: SortOrder
     deleted?: SortOrder
+    rentalCount?: SortOrder
     entrepreneurId?: SortOrder
     bookedDates?: BookedDateOrderByRelationAggregateInput
     entrepreneur?: UserOrderByWithRelationInput
@@ -11088,6 +11116,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Apartment"> | Date | string
     avgRating?: FloatFilter<"Apartment"> | number
     deleted?: BoolFilter<"Apartment"> | boolean
+    rentalCount?: IntFilter<"Apartment"> | number
     entrepreneurId?: StringFilter<"Apartment"> | string
     bookedDates?: BookedDateListRelationFilter
     entrepreneur?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -11110,6 +11139,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     avgRating?: SortOrder
     deleted?: SortOrder
+    rentalCount?: SortOrder
     entrepreneurId?: SortOrder
     _count?: ApartmentCountOrderByAggregateInput
     _avg?: ApartmentAvgOrderByAggregateInput
@@ -11135,6 +11165,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Apartment"> | Date | string
     avgRating?: FloatWithAggregatesFilter<"Apartment"> | number
     deleted?: BoolWithAggregatesFilter<"Apartment"> | boolean
+    rentalCount?: IntWithAggregatesFilter<"Apartment"> | number
     entrepreneurId?: StringWithAggregatesFilter<"Apartment"> | string
   }
 
@@ -11653,6 +11684,7 @@ export namespace Prisma {
     createdAt?: Date | string
     avgRating?: number
     deleted?: boolean
+    rentalCount?: number
     bookedDates?: BookedDateCreateNestedManyWithoutApartmentInput
     entrepreneur: UserCreateNestedOneWithoutApartmentsInput
     reviews?: ReviewCreateNestedManyWithoutApartmentInput
@@ -11674,6 +11706,7 @@ export namespace Prisma {
     createdAt?: Date | string
     avgRating?: number
     deleted?: boolean
+    rentalCount?: number
     entrepreneurId: string
     bookedDates?: BookedDateUncheckedCreateNestedManyWithoutApartmentInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutApartmentInput
@@ -11695,6 +11728,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
     bookedDates?: BookedDateUpdateManyWithoutApartmentNestedInput
     entrepreneur?: UserUpdateOneRequiredWithoutApartmentsNestedInput
     reviews?: ReviewUpdateManyWithoutApartmentNestedInput
@@ -11716,6 +11750,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
     entrepreneurId?: StringFieldUpdateOperationsInput | string
     bookedDates?: BookedDateUncheckedUpdateManyWithoutApartmentNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutApartmentNestedInput
@@ -11737,6 +11772,7 @@ export namespace Prisma {
     createdAt?: Date | string
     avgRating?: number
     deleted?: boolean
+    rentalCount?: number
     entrepreneurId: string
   }
 
@@ -11754,6 +11790,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
   }
 
   export type ApartmentUncheckedUpdateManyInput = {
@@ -11770,6 +11807,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
     entrepreneurId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -12406,6 +12444,17 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type BookedDateListRelationFilter = {
     every?: BookedDateWhereInput
     some?: BookedDateWhereInput
@@ -12445,12 +12494,14 @@ export namespace Prisma {
     createdAt?: SortOrder
     avgRating?: SortOrder
     deleted?: SortOrder
+    rentalCount?: SortOrder
     entrepreneurId?: SortOrder
   }
 
   export type ApartmentAvgOrderByAggregateInput = {
     pricePerNight?: SortOrder
     avgRating?: SortOrder
+    rentalCount?: SortOrder
   }
 
   export type ApartmentMaxOrderByAggregateInput = {
@@ -12464,6 +12515,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     avgRating?: SortOrder
     deleted?: SortOrder
+    rentalCount?: SortOrder
     entrepreneurId?: SortOrder
   }
 
@@ -12478,12 +12530,14 @@ export namespace Prisma {
     createdAt?: SortOrder
     avgRating?: SortOrder
     deleted?: SortOrder
+    rentalCount?: SortOrder
     entrepreneurId?: SortOrder
   }
 
   export type ApartmentSumOrderByAggregateInput = {
     pricePerNight?: SortOrder
     avgRating?: SortOrder
+    rentalCount?: SortOrder
   }
 
   export type EnumApartmentTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -12494,6 +12548,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumApartmentTypeFilter<$PrismaModel>
     _max?: NestedEnumApartmentTypeFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type EnumBookingStatusFilter<$PrismaModel = never> = {
@@ -12562,17 +12632,6 @@ export namespace Prisma {
     _max?: NestedEnumBookingStatusFilter<$PrismaModel>
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type ReviewCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -12609,22 +12668,6 @@ export namespace Prisma {
 
   export type ReviewSumOrderByAggregateInput = {
     rating?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type BookedDateCountOrderByAggregateInput = {
@@ -13020,6 +13063,14 @@ export namespace Prisma {
     push?: string | string[]
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type BookedDateUpdateManyWithoutApartmentNestedInput = {
     create?: XOR<BookedDateCreateWithoutApartmentInput, BookedDateUncheckedCreateWithoutApartmentInput> | BookedDateCreateWithoutApartmentInput[] | BookedDateUncheckedCreateWithoutApartmentInput[]
     connectOrCreate?: BookedDateCreateOrConnectWithoutApartmentInput | BookedDateCreateOrConnectWithoutApartmentInput[]
@@ -13180,14 +13231,6 @@ export namespace Prisma {
     create?: XOR<ApartmentCreateWithoutReviewsInput, ApartmentUncheckedCreateWithoutReviewsInput>
     connectOrCreate?: ApartmentCreateOrConnectWithoutReviewsInput
     connect?: ApartmentWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
@@ -13397,6 +13440,22 @@ export namespace Prisma {
     _max?: NestedEnumApartmentTypeFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type NestedEnumBookingStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.BookingStatus | EnumBookingStatusFieldRefInput<$PrismaModel>
     in?: $Enums.BookingStatus[] | ListEnumBookingStatusFieldRefInput<$PrismaModel>
@@ -13414,22 +13473,6 @@ export namespace Prisma {
     _max?: NestedEnumBookingStatusFilter<$PrismaModel>
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
   export type ApartmentCreateWithoutWishlistedByInput = {
     id?: string
     title: string
@@ -13444,6 +13487,7 @@ export namespace Prisma {
     createdAt?: Date | string
     avgRating?: number
     deleted?: boolean
+    rentalCount?: number
     bookedDates?: BookedDateCreateNestedManyWithoutApartmentInput
     entrepreneur: UserCreateNestedOneWithoutApartmentsInput
     reviews?: ReviewCreateNestedManyWithoutApartmentInput
@@ -13464,6 +13508,7 @@ export namespace Prisma {
     createdAt?: Date | string
     avgRating?: number
     deleted?: boolean
+    rentalCount?: number
     entrepreneurId: string
     bookedDates?: BookedDateUncheckedCreateNestedManyWithoutApartmentInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutApartmentInput
@@ -13549,6 +13594,7 @@ export namespace Prisma {
     createdAt?: Date | string
     avgRating?: number
     deleted?: boolean
+    rentalCount?: number
     bookedDates?: BookedDateCreateNestedManyWithoutApartmentInput
     reviews?: ReviewCreateNestedManyWithoutApartmentInput
     bookings?: BookingCreateNestedManyWithoutApartmentInput
@@ -13569,6 +13615,7 @@ export namespace Prisma {
     createdAt?: Date | string
     avgRating?: number
     deleted?: boolean
+    rentalCount?: number
     bookedDates?: BookedDateUncheckedCreateNestedManyWithoutApartmentInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutApartmentInput
     bookings?: BookingUncheckedCreateNestedManyWithoutApartmentInput
@@ -13618,6 +13665,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Apartment"> | Date | string
     avgRating?: FloatFilter<"Apartment"> | number
     deleted?: BoolFilter<"Apartment"> | boolean
+    rentalCount?: IntFilter<"Apartment"> | number
     entrepreneurId?: StringFilter<"Apartment"> | string
   }
 
@@ -14067,6 +14115,7 @@ export namespace Prisma {
     createdAt?: Date | string
     avgRating?: number
     deleted?: boolean
+    rentalCount?: number
     bookedDates?: BookedDateCreateNestedManyWithoutApartmentInput
     entrepreneur: UserCreateNestedOneWithoutApartmentsInput
     reviews?: ReviewCreateNestedManyWithoutApartmentInput
@@ -14087,6 +14136,7 @@ export namespace Prisma {
     createdAt?: Date | string
     avgRating?: number
     deleted?: boolean
+    rentalCount?: number
     entrepreneurId: string
     bookedDates?: BookedDateUncheckedCreateNestedManyWithoutApartmentInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutApartmentInput
@@ -14172,6 +14222,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
     bookedDates?: BookedDateUpdateManyWithoutApartmentNestedInput
     entrepreneur?: UserUpdateOneRequiredWithoutApartmentsNestedInput
     reviews?: ReviewUpdateManyWithoutApartmentNestedInput
@@ -14192,6 +14243,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
     entrepreneurId?: StringFieldUpdateOperationsInput | string
     bookedDates?: BookedDateUncheckedUpdateManyWithoutApartmentNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutApartmentNestedInput
@@ -14255,6 +14307,7 @@ export namespace Prisma {
     createdAt?: Date | string
     avgRating?: number
     deleted?: boolean
+    rentalCount?: number
     bookedDates?: BookedDateCreateNestedManyWithoutApartmentInput
     entrepreneur: UserCreateNestedOneWithoutApartmentsInput
     bookings?: BookingCreateNestedManyWithoutApartmentInput
@@ -14275,6 +14328,7 @@ export namespace Prisma {
     createdAt?: Date | string
     avgRating?: number
     deleted?: boolean
+    rentalCount?: number
     entrepreneurId: string
     bookedDates?: BookedDateUncheckedCreateNestedManyWithoutApartmentInput
     bookings?: BookingUncheckedCreateNestedManyWithoutApartmentInput
@@ -14360,6 +14414,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
     bookedDates?: BookedDateUpdateManyWithoutApartmentNestedInput
     entrepreneur?: UserUpdateOneRequiredWithoutApartmentsNestedInput
     bookings?: BookingUpdateManyWithoutApartmentNestedInput
@@ -14380,6 +14435,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
     entrepreneurId?: StringFieldUpdateOperationsInput | string
     bookedDates?: BookedDateUncheckedUpdateManyWithoutApartmentNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutApartmentNestedInput
@@ -14400,6 +14456,7 @@ export namespace Prisma {
     createdAt?: Date | string
     avgRating?: number
     deleted?: boolean
+    rentalCount?: number
     entrepreneur: UserCreateNestedOneWithoutApartmentsInput
     reviews?: ReviewCreateNestedManyWithoutApartmentInput
     bookings?: BookingCreateNestedManyWithoutApartmentInput
@@ -14420,6 +14477,7 @@ export namespace Prisma {
     createdAt?: Date | string
     avgRating?: number
     deleted?: boolean
+    rentalCount?: number
     entrepreneurId: string
     reviews?: ReviewUncheckedCreateNestedManyWithoutApartmentInput
     bookings?: BookingUncheckedCreateNestedManyWithoutApartmentInput
@@ -14456,6 +14514,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
     entrepreneur?: UserUpdateOneRequiredWithoutApartmentsNestedInput
     reviews?: ReviewUpdateManyWithoutApartmentNestedInput
     bookings?: BookingUpdateManyWithoutApartmentNestedInput
@@ -14476,6 +14535,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
     entrepreneurId?: StringFieldUpdateOperationsInput | string
     reviews?: ReviewUncheckedUpdateManyWithoutApartmentNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutApartmentNestedInput
@@ -14516,6 +14576,7 @@ export namespace Prisma {
     createdAt?: Date | string
     avgRating?: number
     deleted?: boolean
+    rentalCount?: number
   }
 
   export type ApartmentUpdateWithoutWishlistedByInput = {
@@ -14532,6 +14593,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
     bookedDates?: BookedDateUpdateManyWithoutApartmentNestedInput
     entrepreneur?: UserUpdateOneRequiredWithoutApartmentsNestedInput
     reviews?: ReviewUpdateManyWithoutApartmentNestedInput
@@ -14552,6 +14614,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
     entrepreneurId?: StringFieldUpdateOperationsInput | string
     bookedDates?: BookedDateUncheckedUpdateManyWithoutApartmentNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutApartmentNestedInput
@@ -14572,6 +14635,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
     entrepreneurId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -14649,6 +14713,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
     bookedDates?: BookedDateUpdateManyWithoutApartmentNestedInput
     reviews?: ReviewUpdateManyWithoutApartmentNestedInput
     bookings?: BookingUpdateManyWithoutApartmentNestedInput
@@ -14669,6 +14734,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
     bookedDates?: BookedDateUncheckedUpdateManyWithoutApartmentNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutApartmentNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutApartmentNestedInput
@@ -14689,6 +14755,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     avgRating?: FloatFieldUpdateOperationsInput | number
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
   }
 
   export type BookedDateCreateManyApartmentInput = {

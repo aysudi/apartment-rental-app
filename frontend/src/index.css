@@ -5,7 +5,7 @@
   position: absolute;
   top: 4.1rem;
   left: 0;
-  height: 50vh;
+  height: 60vh;
   width: 100%;
   background-image: url("https://www.zillowstatic.com/bedrock/app/uploads/sites/5/2024/07/image2-m%402x.jpg");
   background-position: center;
@@ -13,5 +13,4 @@
   background-repeat: no-repeat;
   filter: brightness(85%);
   z-index: -1;
-  /* background-color: #f18502; */
 }
