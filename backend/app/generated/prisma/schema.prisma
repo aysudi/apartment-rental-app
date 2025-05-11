@@ -1,0 +1,141 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum BookingStatus {
+  pending
+  confirmed
+  cancelled
+}
+
+enum ApartmentType {
+  island
+  apartment
+  villa
+  pool
+}
+
+enum Role {
+  admin
+  client
+  entrepreneur
+}
+
+model User {
+  id           String    @id @default(uuid())
+  username     String    @unique
+  email        String    @unique
+  password     String
+  role         Role
+  profileImage String
+  balance      Float     @default(0.0)
+  hostRequest  Boolean   @default(false)
+  isBanned     Boolean   @default(false)
+  banDate      DateTime?
+  createdAt    DateTime  @default(now())
+  lastLogin    DateTime?
+  deleted      Boolean   @default(false) // ✅ Soft delete
+
+  // Relations
+  wishlist   Apartment[] @relation("UserWishlist")
+  bookings   Booking[]   @relation("UserBookings")
+  reviews    Review[]    @relation("UserReviews")
+  apartments Apartment[] @relation("EntrepreneurApartments")
+}
+
+model Apartment {
+  id            String        @id @default(uuid())
+  title         String
+  type          ApartmentType
+  location      String
+  pricePerNight Float
+  coverImage    String
+  images        String[]
+  description   String
+  features      String[]
+  rules         String[]
+  bookedDates   BookedDate[]
+  createdAt     DateTime      @default(now())
+  avgRating     Float         @default(0.0)
+  deleted       Boolean       @default(false) // ✅ Soft delete
+
+  entrepreneur   User   @relation("EntrepreneurApartments", fields: [entrepreneurId], references: [id])
+  entrepreneurId String
+
+  reviews      Review[]
+  bookings     Booking[]
+  wishlistedBy User[]    @relation("UserWishlist")
+}
+
+model Booking {
+  id          String        @id @default(uuid())
+  user        User          @relation("UserBookings", fields: [userId], references: [id])
+  userId      String
+  apartment   Apartment     @relation(fields: [apartmentId], references: [id])
+  apartmentId String
+  startDate   DateTime
+  endDate     DateTime
+  status      BookingStatus
+  totalPrice  Float
+  createdAt   DateTime      @default(now())
+  deleted     Boolean       @default(false)
+}
+
+model Review {
+  id          String    @id @default(uuid())
+  user        User      @relation("UserReviews", fields: [userId], references: [id])
+  userId      String
+  apartment   Apartment @relation(fields: [apartmentId], references: [id])
+  apartmentId String
+  rating      Int       @default(0) @db.SmallInt
+  comment     String
+  createdAt   DateTime  @default(now())
+  deleted     Boolean   @default(false)
+}
+
+model BookedDate {
+  id          String    @id @default(uuid())
+  startDate   DateTime
+  endDate     DateTime
+  apartment   Apartment @relation(fields: [apartmentId], references: [id])
+  apartmentId String
+  deleted     Boolean   @default(false)
+}
+
+model Contact {
+  id          String   @id @default(uuid())
+  fullName    String
+  email       String
+  subject     String
+  message     String
+  isRead      Boolean  @default(false)
+  submittedAt DateTime @default(now())
+  deleted     Boolean  @default(false) // ✅ Soft delete
+}
+
+model Coupon {
+  id              String   @id @default(uuid())
+  code            String   @unique
+  discountPercent Int
+  validUntil      DateTime
+  deleted         Boolean  @default(false)
+}
+
+model Slider {
+  id       String  @id @default(uuid())
+  title    String
+  imageURL String
+  deleted  Boolean @default(false)
+}
