@@ -5,6 +5,8 @@ import Contact from "../pages/Client/Contact";
 import Home from "../pages/Client/Home";
 import UserProfile from "../pages/Client/Profile";
 import Wishlist from "../pages/Client/Wishlist";
+import Login from "../pages/Common/Login";
+import Register from "../pages/Common/Register";
 
 const ROUTES = [
   //client
@@ -43,6 +45,11 @@ const ROUTES = [
       },
       {
         path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
       },
     ],
   },
