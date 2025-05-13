@@ -38,7 +38,7 @@ enum ApartmentType {
 enum Role {
   admin
   client
-  entrepreneur
+  host
 }
 
 model User {
