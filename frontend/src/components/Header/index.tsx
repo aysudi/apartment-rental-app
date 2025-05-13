@@ -51,7 +51,7 @@ const Header = () => {
               }`
             }
           >
-            Sign In
+            Sign Up
           </NavLink>
         </div>
       </div>
