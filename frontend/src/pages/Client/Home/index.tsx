@@ -5,7 +5,7 @@ import SliderComponent from "../../../components/HomeSlider";
 
 const Home = () => {
   return (
-    <main className="mb-4">
+    <main>
       <section id="hero" className="h-[66.7vh] pt-[4rem]">
         <div className="flex justify-center text-white w-[70%] h-[100%] items-center ">
           <div className="w-[60%] m-auto flex flex-col gap-[1rem] ">
@@ -46,7 +46,7 @@ const Home = () => {
             </p>
             <Link
               to={"/register"}
-              className="text-lg border-1 rounded-lg font-bold text-[#0133AA] mt-[0.5rem] py-2 w-[5.9rem] flex justify-center "
+              className="text-lg border-1 rounded-lg font-bold text-[#0133AA] mt-[0.5rem] py-2 w-[5.9rem] flex justify-center hover:bg-[#0133AA] hover:text-white "
             >
               Sign in
             </Link>
@@ -56,15 +56,15 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="w-[70%] mx-auto pt-[6rem] flex justify-between gap-2 ">
-        <div className="w-[19rem] ">
+      <section className="w-[70%] mx-auto pt-[6rem] flex justify-between gap-2">
+        <div className="w-[25rem] h-[15rem] ml-6">
           <img
-            className="w-[100%] h-[100%] object-cover "
+            className="w-[100%] h-[100%] object-cover"
             src="https://nuxt.fstatic.nl/eecf9a6ac9bc47c8/mijn-huis/_nuxt/phone-my-home.CQHiM1Rz.png"
             alt=""
           />
         </div>
-        <div className="flex flex-col gap-4 justify-end pb-4">
+        <div className="flex flex-col gap-4 justify-end pb-8">
           <h3 className="font-bold text-3xl">What to expect in My Home</h3>
           <div className="flex flex-col gap-4">
             <div className="flex gap-2 text-lg items-center">
