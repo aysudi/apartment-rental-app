@@ -1,34 +1,12 @@
 import { Link } from "react-router";
 import img from "../../../assets/images/home-image.jpeg";
 import { Check } from "lucide-react";
-import { useEffect, useState } from "react";
-import apartmentsController from "../../../services/api/apartments/apartmentsApi";
+import SliderComponent from "../../../components/HomeSlider";
 
 const Home = () => {
-  const [data, setData] = useState(null);
-  const [filteredData, setFilteredData] = useState();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const apartments = await apartmentsController.getAllApartments();
-        setData(apartments);
-        setFilteredData(apartments);
-      } catch (error) {
-        console.error("Failed to fetch comments", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  console.log(data);
-
-  console.log(filteredData);
-
   return (
     <main className="mb-4">
-      <section id="hero" className="h-[60vh] pt-[4rem]">
+      <section id="hero" className="h-[66.7vh] pt-[4rem]">
         <div className="flex justify-center text-white w-[70%] h-[100%] items-center ">
           <div className="w-[60%] m-auto flex flex-col gap-[1rem] ">
             <h1 className="font-bold text-6xl text-center">
@@ -39,6 +17,11 @@ const Home = () => {
               neighbourhood.
             </p>
           </div>
+        </div>
+      </section>
+      <section className="">
+        <div className="py-[3rem]">
+          <SliderComponent />
         </div>
       </section>
       <section className="bg-[#E6F6FF] ">
