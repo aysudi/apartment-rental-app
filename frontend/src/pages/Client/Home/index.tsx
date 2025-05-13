@@ -1,8 +1,31 @@
 import { Link } from "react-router";
 import img from "../../../assets/images/home-image.jpeg";
 import { Check } from "lucide-react";
+import { useEffect, useState } from "react";
+import apartmentsController from "../../../services/api/apartments/apartmentsApi";
 
 const Home = () => {
+  const [data, setData] = useState(null);
+  const [filteredData, setFilteredData] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const apartments = await apartmentsController.getAllApartments();
+        setData(apartments);
+        setFilteredData(apartments);
+      } catch (error) {
+        console.error("Failed to fetch comments", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(data);
+
+  console.log(filteredData);
+
   return (
     <main className="mb-4">
       <section id="hero" className="h-[60vh] pt-[4rem]">

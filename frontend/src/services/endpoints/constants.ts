@@ -1,9 +1,9 @@
-export const API_URL = "http://localhost:3000/api";
+export const API_URL = "http://localhost:3000";
 
 const endpoints = {
-  apartments: "/apartments",
-  users: "/users",
-  bookings: "/bookings",
+  apartments: "/api/apartments",
+  users: "/api/users",
+  bookings: "/api/bookings",
 };
 
 export default endpoints;

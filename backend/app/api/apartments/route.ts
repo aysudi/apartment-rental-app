@@ -1,8 +1,19 @@
 import { prisma } from "@/lib/prisma";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+
+// Function to manually set CORS headers
+const setCorsHeaders = (res: NextResponse) => {
+  res.headers.set("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.headers.set(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization"
+  );
+  return res;
+};
 
 // GET
-export async function GET(req: NextRequest) {
+export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
@@ -14,21 +25,26 @@ export async function GET(req: NextRequest) {
       });
 
       if (!apartment) {
-        return NextResponse.json({ error: "Blog not found" }, { status: 404 });
+        return setCorsHeaders(
+          NextResponse.json({ error: "Apartment not found" }, { status: 404 })
+        );
       }
 
-      return NextResponse.json(apartment, { status: 200 });
+      return setCorsHeaders(NextResponse.json(apartment, { status: 200 }));
     }
 
     const apartments = await prisma.apartment.findMany({
       include: { entrepreneur: true, wishlistedBy: true },
     });
 
-    return NextResponse.json(apartments, { status: 200 });
+    const res = NextResponse.json(apartments, { status: 200 });
+    return setCorsHeaders(res);
   } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to fetch apartment(s)" },
-      { status: 500 }
+    return setCorsHeaders(
+      NextResponse.json(
+        { error: "Failed to fetch apartments" },
+        { status: 500 }
+      )
     );
   }
 }
@@ -74,9 +90,8 @@ export async function POST(req: Request) {
       !wishlistedBy ||
       !entrepreneurId
     ) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
+      return setCorsHeaders(
+        NextResponse.json({ error: "Missing required fields" }, { status: 400 })
       );
     }
 
@@ -101,11 +116,20 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json(newApartment, { status: 201 });
+    const res = NextResponse.json(newApartment, { status: 201 });
+    return setCorsHeaders(res);
   } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to create apartment" },
-      { status: 500 }
+    return setCorsHeaders(
+      NextResponse.json(
+        { error: "Failed to create apartment" },
+        { status: 500 }
+      )
     );
   }
+}
+
+// Handling OPTIONS (for preflight requests)
+export async function OPTIONS(req: Request) {
+  const res = NextResponse.json({});
+  return setCorsHeaders(res); // Ensure CORS headers are set for OPTIONS
 }
