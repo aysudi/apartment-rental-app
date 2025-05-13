@@ -1,31 +1,30 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css"; // Import core Swiper styles
+import "swiper/css";
 import { Navigation } from "swiper/modules";
 
 const SliderComponent = () => {
   return (
     <div
       className="swiper-container"
-      style={{ position: "relative", width: "80%", margin: "auto" }}
+      style={{ position: "relative", width: "98%", margin: "auto" }}
     >
       <Swiper
-        modules={[Navigation]} // Enable navigation module
-        spaceBetween={30} // Space between slides
-        slidesPerView={4} // 4 slides per view
-        loop={true} // Enable loop
+        modules={[Navigation]}
+        spaceBetween={30}
+        slidesPerView={4}
+        loop={true}
         navigation={{
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         }}
       >
-        {/* Slide 1 */}
         <SwiperSlide>
           <div
             className="slide-content"
             style={{
               background: "#FF9A1E",
-              height: "200px",
+              height: "350px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -35,13 +34,12 @@ const SliderComponent = () => {
           </div>
         </SwiperSlide>
 
-        {/* Slide 2 */}
         <SwiperSlide>
           <div
             className="slide-content"
             style={{
               background: "#FF9A1E",
-              height: "200px",
+              height: "350px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -51,13 +49,12 @@ const SliderComponent = () => {
           </div>
         </SwiperSlide>
 
-        {/* Slide 3 */}
         <SwiperSlide>
           <div
             className="slide-content"
             style={{
               background: "#FF9A1E",
-              height: "200px",
+              height: "350px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -67,13 +64,12 @@ const SliderComponent = () => {
           </div>
         </SwiperSlide>
 
-        {/* Slide 4 */}
         <SwiperSlide>
           <div
             className="slide-content"
             style={{
               background: "#FF9A1E",
-              height: "200px",
+              height: "350px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -88,7 +84,7 @@ const SliderComponent = () => {
             className="slide-content"
             style={{
               background: "#FF9A1E",
-              height: "200px",
+              height: "350px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -99,21 +95,35 @@ const SliderComponent = () => {
         </SwiperSlide>
       </Swiper>
 
-      {/* Custom Navigation Buttons */}
-      <div className="swiper-button-prev" style={buttonStyle}>
+      <div className="swiper-button-prev" style={prevButtonStyle}>
         Prev
       </div>
-      <div className="swiper-button-next" style={buttonStyle}>
+      <div className="swiper-button-next" style={nextButtonStyle}>
         Next
       </div>
     </div>
   );
 };
 
-// Custom button styles for next/prev buttons
-const buttonStyle: React.CSSProperties = {
+const prevButtonStyle: React.CSSProperties = {
   position: "absolute",
   top: "50%",
+  left: "10px",
+  zIndex: 10,
+  //   backgroundColor: "#FF9A1E",
+  backgroundColor: "red",
+  color: "#fff",
+  padding: "10px",
+  borderRadius: "5px",
+  cursor: "pointer",
+  fontSize: "16px",
+  transform: "translateY(-50%)",
+};
+
+const nextButtonStyle: React.CSSProperties = {
+  position: "absolute",
+  top: "50%",
+  right: "10px",
   zIndex: 10,
   //   backgroundColor: "#FF9A1E",
   backgroundColor: "red",

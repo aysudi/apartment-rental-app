@@ -19,9 +19,22 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="">
-        <div className="py-[3rem]">
+      <section>
+        <div className="py-[4rem] flex flex-col gap-5">
+          <div className="flex flex-col gap-1 justify-center items-center mb-3">
+            <h2 className="font-bold text-2xl">Featured Apartments</h2>
+            <p className="text-gray-500">
+              Discover our handpicked selection of premium apartments, offering
+              exceptional comfort and style for your next stay.
+            </p>
+          </div>
           <SliderComponent />
+          <Link
+            to={"/apartments"}
+            className="mx-auto mt-4 py-[0.6rem] w-[13rem] rounded-lg border border-gray-300 flex items-center justify-center font-medium cursor-pointer"
+          >
+            View All Apartments
+          </Link>
         </div>
       </section>
       <section className="bg-[#E6F6FF] ">
