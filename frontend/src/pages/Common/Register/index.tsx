@@ -1,27 +1,39 @@
-import { useState } from "react";
 import img from "../../../assets/images/sign-up-img.png";
 import { Check } from "lucide-react";
+import { useFormik } from "formik";
+// import { toast } from "sonner";
+import { User } from "@/classes/User";
 
 const Register = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
-  const [passwordError, setPasswordError] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (password !== confirmPassword || password.length < 8) {
-      setPasswordError(true);
-    } else {
-      setPasswordError(false);
-      console.log("Form submitted:", { firstName, lastName, email, password });
-    }
-  };
+  const registerFormik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      username: "",
+      password: "",
+      confirmPassword: "",
+    },
+    onSubmit: async (values, actions) => {
+      const newUser = new User(
+        values.firstName,
+        values.lastName,
+        values.username,
+        values.email,
+        values.password
+      );
+      console.log(newUser);
+      // const response = await .register(newUser);
+      // if (response.message == "dublicate email") {
+      //   toast("Signup failed. Email already taken!");
+      //   registerFormik.values.email = "";
+      // } else {
+      //   toast("Signup successful!");
+      //   navigate("/login");
+      // }
+      actions.resetForm();
+    },
+  });
 
   return (
     <div className="pt-[9.1rem] w-[70%] mb-[5rem] mx-auto flex justify-between min-h-[79vh] gap-10">
@@ -30,7 +42,7 @@ const Register = () => {
           <h2 className="text-2xl font-bold text-center mb-6">
             Create an account
           </h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={registerFormik.handleSubmit}>
             <div className="mb-4 flex gap-4 w-full">
               <div className="w-[50%]">
                 <label className="block text-sm font-medium text-gray-700">
@@ -39,8 +51,10 @@ const Register = () => {
                 <input
                   type="text"
                   className="w-full mt-2 p-2 border border-gray-300 rounded-md"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  value={registerFormik.values.firstName}
+                  onChange={registerFormik.handleChange}
+                  onBlur={registerFormik.handleBlur}
+                  name="firstName"
                   required
                 />
               </div>
@@ -52,8 +66,10 @@ const Register = () => {
                 <input
                   type="text"
                   className="w-full mt-2 p-2 border border-gray-300 rounded-md"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  value={registerFormik.values.lastName}
+                  onChange={registerFormik.handleChange}
+                  onBlur={registerFormik.handleBlur}
+                  name="lastName"
                   required
                 />
               </div>
@@ -66,8 +82,10 @@ const Register = () => {
               <input
                 type="text"
                 className="w-full mt-2 p-2 border border-gray-300 rounded-md"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={registerFormik.values.username}
+                onChange={registerFormik.handleChange}
+                onBlur={registerFormik.handleBlur}
+                name="username"
                 required
               />
             </div>
@@ -79,8 +97,10 @@ const Register = () => {
               <input
                 type="email"
                 className="w-full mt-2 p-2 border border-gray-300 rounded-md"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={registerFormik.values.email}
+                onChange={registerFormik.handleChange}
+                onBlur={registerFormik.handleBlur}
+                name="email"
                 required
               />
             </div>
@@ -92,16 +112,18 @@ const Register = () => {
               <input
                 type="password"
                 className="w-full mt-2 p-2 border border-gray-300 rounded-md"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={registerFormik.values.password}
+                onChange={registerFormik.handleChange}
+                onBlur={registerFormik.handleBlur}
+                name="password"
                 required
               />
-              {passwordError && (
-                <p className="text-sm text-red-500 mt-2">
-                  Password must be at least 8 characters long and include a
-                  number and a special character.
-                </p>
-              )}
+              {registerFormik.errors.password &&
+                registerFormik.touched.password && (
+                  <p className="text-sm text-red-500 mt-2">
+                    {registerFormik.errors.password}
+                  </p>
+                )}
             </div>
 
             <div className="mb-6">
@@ -111,8 +133,10 @@ const Register = () => {
               <input
                 type="password"
                 className="w-full mt-2 p-2 border border-gray-300 rounded-md"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                value={registerFormik.values.confirmPassword}
+                onChange={registerFormik.handleChange}
+                onBlur={registerFormik.handleBlur}
+                name="confirmPassword"
                 required
               />
             </div>

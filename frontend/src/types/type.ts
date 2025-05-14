@@ -44,3 +44,17 @@ export type NewApartment = {
   createdAt: Date;
   entrepreneurId: string;
 };
+
+export type User = {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  password: string;
+  role: string;
+  profileImage: string;
+  balance: number;
+  hostRequest: boolean;
+  isBanned: boolean;
+  deleted: boolean;
+};
