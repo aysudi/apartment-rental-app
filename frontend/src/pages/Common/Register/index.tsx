@@ -3,6 +3,7 @@ import { Check } from "lucide-react";
 import { useFormik } from "formik";
 // import { toast } from "sonner";
 import { User } from "@/classes/User";
+import { Link } from "react-router";
 
 const Register = () => {
   const registerFormik = useFormik({
@@ -36,15 +37,15 @@ const Register = () => {
   });
 
   return (
-    <div className="pt-[9.1rem] w-[70%] mb-[5rem] mx-auto flex justify-between min-h-[79vh] gap-10">
-      <div className="w-[50%]">
-        <div className="w-[100%] p-6 bg-white shadow-2xl rounded-md">
+    <div className="pt-[6rem] px-4 mb-[5rem] mx-auto flex flex-col lg:flex-row justify-between min-h-[79vh] gap-10 max-w-7xl">
+      <div className="w-full lg:w-1/2">
+        <div className="w-full p-6 bg-white shadow-2xl rounded-md">
           <h2 className="text-2xl font-bold text-center mb-6">
             Create an account
           </h2>
           <form onSubmit={registerFormik.handleSubmit}>
-            <div className="mb-4 flex gap-4 w-full">
-              <div className="w-[50%]">
+            <div className="mb-4 flex flex-col md:flex-row gap-4 w-full">
+              <div className="w-full md:w-1/2">
                 <label className="block text-sm font-medium text-gray-700">
                   First name
                 </label>
@@ -55,11 +56,12 @@ const Register = () => {
                   onChange={registerFormik.handleChange}
                   onBlur={registerFormik.handleBlur}
                   name="firstName"
+                  placeholder="John"
                   required
                 />
               </div>
 
-              <div className="w-[50%]">
+              <div className="w-full md:w-1/2">
                 <label className="block text-sm font-medium text-gray-700">
                   Last name
                 </label>
@@ -70,6 +72,7 @@ const Register = () => {
                   onChange={registerFormik.handleChange}
                   onBlur={registerFormik.handleBlur}
                   name="lastName"
+                  placeholder="Doe"
                   required
                 />
               </div>
@@ -86,6 +89,7 @@ const Register = () => {
                 onChange={registerFormik.handleChange}
                 onBlur={registerFormik.handleBlur}
                 name="username"
+                placeholder="john123"
                 required
               />
             </div>
@@ -101,6 +105,7 @@ const Register = () => {
                 onChange={registerFormik.handleChange}
                 onBlur={registerFormik.handleBlur}
                 name="email"
+                placeholder="name@example.com"
                 required
               />
             </div>
@@ -116,6 +121,7 @@ const Register = () => {
                 onChange={registerFormik.handleChange}
                 onBlur={registerFormik.handleBlur}
                 name="password"
+                placeholder="********"
                 required
               />
               {registerFormik.errors.password &&
@@ -137,6 +143,7 @@ const Register = () => {
                 onChange={registerFormik.handleChange}
                 onBlur={registerFormik.handleBlur}
                 name="confirmPassword"
+                placeholder="********"
                 required
               />
             </div>
@@ -152,9 +159,9 @@ const Register = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Already have an account?{" "}
-              <a href="#" className="text-blue-600 hover:underline">
+              <Link to="/login" className="text-blue-600 hover:underline">
                 Login
-              </a>
+              </Link>
             </p>
           </div>
 
@@ -168,26 +175,27 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-center flex-col gap-8">
-        <div className="w-[20rem] ">
-          <img className="w-full h-full object-cover " src={img} alt="" />
+
+      <div className="w-full lg:w-1/2 flex items-center justify-center flex-col gap-8">
+        <div className="w-[16rem] sm:w-[18rem] md:w-[20rem]">
+          <img className="w-full h-full object-cover" src={img} alt="" />
         </div>
-        <div className="flex flex-col gap-4 w-[60%]">
+        <div className="flex flex-col gap-4 w-full sm:w-[90%] lg:w-[60%]">
           <div className="flex gap-3 items-center">
-            <Check size={43} className="text-[#0171B2] " />
-            <span className="text-lg">
+            <Check size={30} className="text-[#0171B2]" />
+            <span className="text-base sm:text-lg">
               Personal dashboard with monthly value check for your home
             </span>
           </div>
           <div className="flex gap-3 items-center">
-            <Check size={35} className="text-[#0171B2] " />
-            <span className="text-lg">
+            <Check size={30} className="text-[#0171B2]" />
+            <span className="text-base sm:text-lg">
               Save your favourite houses and receive updates
             </span>
           </div>
           <div className="flex gap-3 items-center">
-            <Check size={43} className="text-[#0171B2] " />
-            <span className="text-lg">
+            <Check size={30} className="text-[#0171B2]" />
+            <span className="text-base sm:text-lg">
               Receive the latest homes in your inbox with saved searches
             </span>
           </div>
