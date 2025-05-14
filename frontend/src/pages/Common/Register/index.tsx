@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 // import { toast } from "sonner";
 import { User } from "@/classes/User";
 import { Link } from "react-router";
+import registerSchema from "@/validation/registerSchema";
 
 const Register = () => {
   const registerFormik = useFormik({
@@ -34,6 +35,7 @@ const Register = () => {
       // }
       actions.resetForm();
     },
+    validationSchema: registerSchema,
   });
 
   return (
