@@ -1,4 +1,4 @@
-import img from "../../../assets/images/sign-up-img.png";
+import img from "../../../assets/images/sign-img.png";
 import { Check } from "lucide-react";
 import { Link } from "react-router";
 import SignUpForm from "@/components/SigUpForm";
