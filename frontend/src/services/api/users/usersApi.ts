@@ -36,7 +36,7 @@ async function getUserByEmail(email: string) {
 }
 
 // Login user
-async function login(credentials: User) {
+async function login(credentials: { email: string; password: string }) {
   try {
     const user = await getUserByEmail(credentials.email);
     if (user.length == 0) {

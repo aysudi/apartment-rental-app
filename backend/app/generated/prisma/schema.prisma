@@ -38,11 +38,13 @@ enum ApartmentType {
 enum Role {
   admin
   client
-  entrepreneur
+  host
 }
 
 model User {
   id           String    @id @default(uuid())
+  firstName    String?
+  lastName     String?
   username     String    @unique
   email        String    @unique
   password     String
@@ -56,11 +58,10 @@ model User {
   lastLogin    DateTime?
   deleted      Boolean   @default(false)
 
-  // Relations
   wishlist   Apartment[] @relation("UserWishlist")
   bookings   Booking[]   @relation("UserBookings")
   reviews    Review[]    @relation("UserReviews")
-  apartments Apartment[] @relation("EntrepreneurApartments")
+  apartments Apartment[] @relation("HostApartments")
 }
 
 model Apartment {
@@ -78,11 +79,10 @@ model Apartment {
   createdAt     DateTime      @default(now())
   avgRating     Float         @default(0.0)
   deleted       Boolean       @default(false)
+  rentalCount   Int           @default(0)
 
-  rentalCount Int @default(0)
-
-  entrepreneur   User   @relation("EntrepreneurApartments", fields: [entrepreneurId], references: [id])
-  entrepreneurId String
+  host   User   @relation("HostApartments", fields: [hostId], references: [id])
+  hostId String
 
   reviews      Review[]
   bookings     Booking[]

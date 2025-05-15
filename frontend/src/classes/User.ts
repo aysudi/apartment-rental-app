@@ -17,7 +17,7 @@ export class User {
     email: string,
     password: string,
     role = "client",
-    profileImage: string = "",
+    profileImage: string = "../assets/images/user-profile.jpeg",
     balance: number = 0,
     hostRequest: boolean = false,
     isBanned: boolean = false,
