@@ -1,12 +1,15 @@
 import img from "../../../assets/images/sign-up-img.png";
 import { Check } from "lucide-react";
 import { useFormik } from "formik";
-// import { toast } from "sonner";
+import { toast } from "sonner";
 import { User } from "@/classes/User";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import registerSchema from "@/validation/registerSchema";
+import authController from "@/services/api/users/usersApi";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const registerFormik = useFormik({
     initialValues: {
       firstName: "",
@@ -25,14 +28,14 @@ const Register = () => {
         values.password
       );
       console.log(newUser);
-      // const response = await .register(newUser);
-      // if (response.message == "dublicate email") {
-      //   toast("Signup failed. Email already taken!");
-      //   registerFormik.values.email = "";
-      // } else {
-      //   toast("Signup successful!");
-      //   navigate("/login");
-      // }
+      const response = await authController.register(newUser);
+      if (response.message == "dublicate email") {
+        toast("Signup failed. Email already taken!");
+        registerFormik.values.email = "";
+      } else {
+        toast("Signup successful!");
+        navigate("/login");
+      }
       actions.resetForm();
     },
     validationSchema: registerSchema,

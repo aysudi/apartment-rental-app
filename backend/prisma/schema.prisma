@@ -43,8 +43,8 @@ enum Role {
 
 model User {
   id           String    @id @default(uuid())
-  firstName String
-  lastName String
+  firstName    String?
+  lastName     String?
   username     String    @unique
   email        String    @unique
   password     String
@@ -53,44 +53,41 @@ model User {
   balance      Float     @default(0.0)
   hostRequest  Boolean   @default(false)
   isBanned     Boolean   @default(false)
-  banDate      DateTime? 
+  banDate      DateTime?
   createdAt    DateTime  @default(now())
   lastLogin    DateTime?
   deleted      Boolean   @default(false)
 
-  // Relations
   wishlist     Apartment[] @relation("UserWishlist")
   bookings     Booking[]   @relation("UserBookings")
   reviews      Review[]    @relation("UserReviews")
-  apartments   Apartment[] @relation("EntrepreneurApartments")
+  apartments   Apartment[] @relation("HostApartments")
 }
 
 model Apartment {
-  id             String       @id @default(uuid())
-  title          String
-  type           ApartmentType
-  location       String
-  pricePerNight  Float
-  coverImage     String
-  images         String[]    
-  description    String
-  features       String[]     
-  rules          String[]    
-  bookedDates    BookedDate[]
-  createdAt      DateTime     @default(now())
-  avgRating      Float        @default(0.0)
-  deleted        Boolean      @default(false)
+  id            String       @id @default(uuid())
+  title         String
+  type          ApartmentType
+  location      String
+  pricePerNight Float
+  coverImage    String
+  images        String[]
+  description   String
+  features      String[]
+  rules         String[]
+  bookedDates   BookedDate[]
+  createdAt     DateTime     @default(now())
+  avgRating     Float        @default(0.0)
+  deleted       Boolean      @default(false)
+  rentalCount   Int          @default(0)
 
-  rentalCount    Int          @default(0)
+  host          User         @relation("HostApartments", fields: [hostId], references: [id])
+  hostId        String
 
-  entrepreneur   User         @relation("EntrepreneurApartments", fields: [entrepreneurId], references: [id])
-  entrepreneurId String
-
-  reviews        Review[]
-  bookings       Booking[]
-  wishlistedBy   User[]       @relation("UserWishlist")
+  reviews       Review[]
+  bookings      Booking[]
+  wishlistedBy  User[]       @relation("UserWishlist")
 }
-
 
 model Booking {
   id          String    @id @default(uuid())
@@ -112,7 +109,7 @@ model Review {
   userId       String
   apartment    Apartment @relation(fields: [apartmentId], references: [id])
   apartmentId  String
-  rating       Int       @default(0) @db.SmallInt 
+  rating       Int       @default(0) @db.SmallInt
   comment      String
   createdAt    DateTime  @default(now())
   deleted      Boolean   @default(false)
@@ -141,7 +138,7 @@ model Contact {
 model Coupon {
   id              String   @id @default(uuid())
   code            String   @unique
-  discountPercent Int      
+  discountPercent Int
   validUntil      DateTime
   deleted         Boolean  @default(false)
 }
@@ -152,3 +149,4 @@ model Slider {
   imageURL String
   deleted  Boolean @default(false)
 }
+

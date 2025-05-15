@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-// Function to manually set CORS headers
 const setCorsHeaders = (res: NextResponse) => {
   res.headers.set("Access-Control-Allow-Origin", "http://localhost:5173");
   res.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
@@ -21,7 +20,7 @@ export async function GET(req: Request) {
     if (id) {
       const apartment = await prisma.apartment.findUnique({
         where: { id },
-        include: { entrepreneur: true, wishlistedBy: true },
+        include: { host: true, wishlistedBy: true },
       });
 
       if (!apartment) {
@@ -34,7 +33,7 @@ export async function GET(req: Request) {
     }
 
     const apartments = await prisma.apartment.findMany({
-      include: { entrepreneur: true, wishlistedBy: true },
+      include: { host: true, wishlistedBy: true },
     });
 
     const res = NextResponse.json(apartments, { status: 200 });
@@ -69,7 +68,7 @@ export async function POST(req: Request) {
       reviews,
       bookings,
       wishlistedBy,
-      entrepreneurId,
+      hostId,
     } = body;
 
     if (
@@ -88,7 +87,7 @@ export async function POST(req: Request) {
       !reviews ||
       !bookings ||
       !wishlistedBy ||
-      !entrepreneurId
+      !hostId
     ) {
       return setCorsHeaders(
         NextResponse.json({ error: "Missing required fields" }, { status: 400 })
@@ -112,7 +111,7 @@ export async function POST(req: Request) {
         reviews,
         bookings,
         wishlistedBy,
-        entrepreneurId,
+        hostId,
       },
     });
 
