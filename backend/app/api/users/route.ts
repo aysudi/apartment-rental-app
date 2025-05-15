@@ -6,6 +6,7 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
+    const email = searchParams.get("email");
 
     if (id) {
       const user = await prisma.user.findUnique({
@@ -23,6 +24,24 @@ export async function GET(req: NextRequest) {
       }
 
       return NextResponse.json(user, { status: 200 });
+    }
+
+    if (email) {
+      const user = await prisma.user.findUnique({
+        where: { email },
+        include: {
+          apartments: true,
+          wishlist: true,
+          bookings: true,
+          reviews: true,
+        },
+      });
+
+      if (!user) {
+        return NextResponse.json([], { status: 200 });
+      }
+
+      return NextResponse.json([user], { status: 200 });
     }
 
     const users = await prisma.user.findMany({
@@ -47,7 +66,15 @@ export async function GET(req: NextRequest) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { username, email, password, profileImage, role } = body;
+    const {
+      firstName,
+      lastName,
+      username,
+      email,
+      password,
+      profileImage,
+      role,
+    } = body;
 
     if (!username || !email || !password || !profileImage || !role) {
       return NextResponse.json(
@@ -58,6 +85,8 @@ export async function POST(req: Request) {
 
     const newUser = await prisma.user.create({
       data: {
+        firstName,
+        lastName,
         username,
         email,
         password,

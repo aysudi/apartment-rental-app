@@ -58,3 +58,11 @@ export type User = {
   isBanned: boolean;
   deleted: boolean;
 };
+
+export type RegisteredUser = {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  password: string;
+};

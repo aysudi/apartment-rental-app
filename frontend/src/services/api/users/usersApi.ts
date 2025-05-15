@@ -1,6 +1,6 @@
 import instance from "@/services/axios/axiosConfig";
 import endpoints from "@/services/endpoints/constants";
-import type { User } from "@/types/type";
+import type { RegisteredUser, User } from "@/types/type";
 
 // Fetch all users
 async function getAllUsers() {
@@ -28,9 +28,13 @@ async function getOneUser(userId: string) {
 async function getUserByEmail(email: string) {
   try {
     const response = await instance.get(`${endpoints.users}?email=${email}`);
-    return response.data;
+    if (response.data && response.data.length > 0) {
+      return response.data;
+    } else {
+      return [];
+    }
   } catch (error) {
-    console.error(`Error fetching user`, error);
+    console.error(`Error fetching user by email`, error);
     throw error;
   }
 }
@@ -67,9 +71,10 @@ async function login(credentials: { email: string; password: string }) {
 }
 
 // Register new user
-async function register(userData: User) {
+async function register(userData: RegisteredUser) {
   try {
     const duplicateEmail = await getUserByEmail(userData.email);
+    console.log(duplicateEmail);
     if (duplicateEmail.length > 0) {
       return {
         message: "duplicate email",
@@ -132,7 +137,7 @@ async function updateUser(userId: string, userData: User) {
 }
 
 // Create a new user
-async function postUser(userData: User) {
+async function postUser(userData: RegisteredUser) {
   try {
     const response = await instance.post(endpoints.users, userData);
     return response.data;
