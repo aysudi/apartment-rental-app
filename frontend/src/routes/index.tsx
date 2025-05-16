@@ -1,3 +1,5 @@
+// import HostLayout from "@/layout/Host";
+import BecomeHost from "@/pages/Client/BecomeHost";
 import ClientLayout from "../layout/Client";
 import ApartmentDetails from "../pages/Client/ApartmentDetails";
 import Apartments from "../pages/Client/Apartments";
@@ -51,8 +53,56 @@ const ROUTES = [
         path: "register",
         element: <Register />,
       },
+      {
+        path: "/become-host",
+        element: <BecomeHost />,
+      },
     ],
   },
+  //host
+  // {
+  //   path: "/",
+  //   element: <HostLayout />,
+  //   children: [
+  //     {
+  //       index: true,
+  //       element: <Home />,
+  //     },
+  //     {
+  //       path: "apartments",
+  //       element: <Apartments />,
+  //     },
+  //     {
+  //       path: "apartment-details",
+  //       children: [
+  //         {
+  //           path: ":id",
+  //           element: <ApartmentDetails />,
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       path: "user",
+  //       element: <UserProfile />,
+  //     },
+  //     {
+  //       path: "contact",
+  //       element: <Contact />,
+  //     },
+  //     {
+  //       path: "wishlist",
+  //       element: <Wishlist />,
+  //     },
+  //     {
+  //       path: "login",
+  //       element: <Login />,
+  //     },
+  //     {
+  //       path: "register",
+  //       element: <Register />,
+  //     },
+  //   ],
+  // },
 ];
 
 export default ROUTES;
