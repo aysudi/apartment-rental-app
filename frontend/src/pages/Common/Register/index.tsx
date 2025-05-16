@@ -5,7 +5,7 @@ import SignUpForm from "@/components/SigUpForm";
 
 const Register = () => {
   return (
-    <div className="pt-[6rem] px-4 mb-[5rem] mx-auto flex flex-col lg:flex-row justify-between min-h-[79vh] gap-10 max-w-7xl">
+    <div className="pt-[8.1rem] px-4 mb-[5rem] mx-auto flex flex-col  lg:flex-row justify-between min-h-[79vh] gap-10 max-w-7xl">
       <div className="w-full lg:w-1/2">
         <div className="w-full p-6 bg-white shadow-2xl rounded-md">
           <h2 className="text-2xl font-bold text-center mb-6">

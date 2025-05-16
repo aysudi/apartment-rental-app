@@ -69,7 +69,7 @@ const LogInForm = () => {
 
       <button
         type="submit"
-        className="w-full py-2 px-4 bg-black text-white rounded-md hover:bg-gray-800 transition text-sm sm:text-base"
+        className="w-full py-2 px-4 bg-black text-white rounded-md hover:bg-gray-800 transition text-sm sm:text-base cursor-pointer"
       >
         Login
       </button>
