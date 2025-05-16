@@ -15,8 +15,8 @@ const Apartments = () => {
 
   return (
     <div className="w-[90%] mx-auto py-[6.1rem] flex flex-col gap-4">
-      <h1 className="font-bold text-3xl">Apartments</h1>
-      <div className=" grid grid-cols-5 ">
+      <h1 className="font-bold text-3xl">Find Your Perfect Apartment</h1>
+      <div className=" grid grid-cols-4 mt-2">
         {apartments &&
           apartments.map((apartment: Apartment, idx) => {
             return (
@@ -32,22 +32,32 @@ const Apartments = () => {
                     alt=""
                   />
                 </div>
-                <div className="flex justify-between px-3">
-                  <div className="flex flex-col">
+                <div className="flex flex-col gap-1">
+                  <Link
+                    to={`/apartment-details?id=${apartment.id}`}
+                    className="font-medium text-lg cursor-pointer hover:underline "
+                  >
+                    {apartment.title}
+                  </Link>
+                  <p className="text-gray-500">{apartment.location} </p>
+                  <div className="flex gap-1 items-center">
+                    <Star size={16} />
+                    <span>{apartment.avgRating} </span>
+                    {/* <span>({apartment.reviews.length} reviews)</span> */}
+                  </div>
+                  <div className="flex justify-between items-center mt-1">
+                    <div className="flex gap-1 items-center text-lg">
+                      <span className="font-bold">
+                        ${apartment.pricePerNight}
+                      </span>
+                      /<span className="text-gray-600">night</span>
+                    </div>
                     <Link
                       to={`/apartment-details?id=${apartment.id}`}
-                      className="font-medium text-lg cursor-pointer hover:underline "
+                      className="py-2 w-[7rem] rounded-lg border flex items-center justify-center font-medium"
                     >
-                      {apartment.title}
+                      View Details
                     </Link>
-                    <p className="text-gray-600">{apartment.location} </p>
-                    <p className="text-gray-600">{apartment.type} </p>
-                  </div>
-                  <div>
-                    <div className="flex gap-2 items-center">
-                      <Star size={17} />
-                      <span>{apartment.avgRating}</span>
-                    </div>
                   </div>
                 </div>
               </div>
