@@ -5,7 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
 
 const Header = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [openedMenu, setOpenedMenu] = useState(false);
 
   return (
@@ -81,6 +81,7 @@ const Header = () => {
                     to={"/login"}
                     onClick={() => {
                       setOpenedMenu(false);
+                      logout();
                     }}
                   >
                     Log Out
