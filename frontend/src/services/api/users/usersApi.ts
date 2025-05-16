@@ -16,7 +16,7 @@ async function getAllUsers() {
 // Fetch one user by ID
 async function getOneUser(userId: string) {
   try {
-    const response = await instance.get(`${endpoints.users}/${userId}`);
+    const response = await instance.get(`${endpoints.users}?id=${userId}`);
     return response.data;
   } catch (error) {
     console.error(`Error fetching user with ID ${userId}`, error);

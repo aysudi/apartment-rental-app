@@ -1,6 +1,17 @@
 import { Link, NavLink } from "react-router";
 import logo from "../../assets/images/header-logo.jpeg";
-import { House, Hotel, BookUser, User, AlignJustify } from "lucide-react";
+import {
+  House,
+  Hotel,
+  BookUser,
+  User,
+  AlignJustify,
+  UserPlus,
+  LogIn,
+  LogOut,
+  Heart,
+  DoorOpen,
+} from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
 
@@ -48,7 +59,7 @@ const Header = () => {
             <BookUser size={17} />
             Contact
           </NavLink>
-          <div className="flex relative flex-col gap-2 justify-start items-start">
+          <div className="flex relative flex-col gap-3 justify-start items-start">
             <div
               onClick={() => {
                 if (openedMenu == false) {
@@ -63,9 +74,11 @@ const Header = () => {
               <User />
             </div>
             <div
-              className={`${
-                openedMenu == false ? "hidden" : "flex"
-              } absolute bottom-[-6.8rem] w-[8rem] text-black right-0 gap-2 flex-col p-4 rounded-md z-10 bg-white shadow-lg text-[1.1rem]`}
+              className={`${openedMenu == false ? "hidden" : "flex"} ${
+                user
+                  ? "bottom-[-8.9rem] w-[12rem]"
+                  : "bottom-[-6.78rem] w-[9rem]"
+              } absolute text-black right-0 gap-2 flex-col p-4 rounded-md z-10 bg-white shadow-lg text-[1.1rem]`}
             >
               {user ? (
                 <>
@@ -74,8 +87,20 @@ const Header = () => {
                     onClick={() => {
                       setOpenedMenu(false);
                     }}
+                    className="flex items-center gap-3"
                   >
+                    <Heart size={19} />
                     Wishlist
+                  </Link>
+                  <Link
+                    to={"/become-host"}
+                    onClick={() => {
+                      setOpenedMenu(false);
+                    }}
+                    className="flex items-center gap-3"
+                  >
+                    <DoorOpen size={19} />
+                    Become Host
                   </Link>
                   <Link
                     to={"/login"}
@@ -83,7 +108,9 @@ const Header = () => {
                       setOpenedMenu(false);
                       logout();
                     }}
+                    className="flex items-center gap-3"
                   >
+                    <LogOut size={19} />
                     Log Out
                   </Link>
                 </>
@@ -94,7 +121,9 @@ const Header = () => {
                     onClick={() => {
                       setOpenedMenu(false);
                     }}
+                    className="flex items-center gap-2"
                   >
+                    <UserPlus size={19} />
                     Sign Up
                   </Link>
                   <Link
@@ -102,7 +131,9 @@ const Header = () => {
                     onClick={() => {
                       setOpenedMenu(false);
                     }}
+                    className="flex items-center gap-2"
                   >
+                    <LogIn size={19} />
                     Log In
                   </Link>
                 </>
