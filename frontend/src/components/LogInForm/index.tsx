@@ -1,12 +1,33 @@
+import { useAuth } from "@/context/AuthContext";
+import authController from "@/services/api/users/usersApi";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 const LogInForm = () => {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
   const loginFormik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-    onSubmit: () => {},
+    onSubmit: async (values, actions) => {
+      const response = await authController.login(values);
+      if (!response.isLogged) {
+        toast.error(response.message);
+      } else {
+        toast.success(response.message);
+        login(values);
+        if (response.data[0].role == "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/user");
+        }
+      }
+      actions.resetForm();
+    },
   });
   return (
     <form onSubmit={loginFormik.handleSubmit}>
@@ -49,7 +70,7 @@ const LogInForm = () => {
         type="submit"
         className="w-full p-2 bg-black text-white rounded-md hover:bg-gray-800 cursor-pointer"
       >
-        Create account
+        Login
       </button>
     </form>
   );

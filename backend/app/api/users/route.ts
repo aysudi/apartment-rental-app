@@ -20,10 +20,10 @@ export async function GET(req: NextRequest) {
       });
 
       if (!user) {
-        return NextResponse.json({ error: "User not found" }, { status: 404 });
+        return NextResponse.json([], { status: 404 });
       }
 
-      return NextResponse.json(user, { status: 200 });
+      return NextResponse.json([user], { status: 200 });
     }
 
     if (email) {
