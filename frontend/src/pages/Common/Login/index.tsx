@@ -5,12 +5,12 @@ import { Link } from "react-router";
 
 const Login = () => {
   return (
-    <div className="pt-[6rem] px-4 mb-[5rem] mx-auto flex flex-col lg:flex-row justify-between min-h-[79vh] gap-10 max-w-7xl">
+    <div className="pt-24 px-4 mb-20 mx-auto flex flex-col lg:flex-row justify-between min-h-screen gap-10 max-w-7xl">
       <div className="flex justify-center items-center w-full lg:w-1/2">
-        <div className="w-full p-6 bg-white shadow-2xl rounded-md">
+        <div className="w-full sm:max-w-md p-6 bg-white shadow-lg rounded-md">
           <div className="mb-6 flex flex-col text-center">
             <h2 className="text-2xl font-bold">Login</h2>
-            <p className="text-gray-500">
+            <p className="text-gray-500 text-sm sm:text-base">
               Enter your email and password to access your account
             </p>
           </div>
@@ -38,28 +38,22 @@ const Login = () => {
       </div>
 
       <div className="w-full lg:w-1/2 flex items-center justify-center flex-col gap-8">
-        <div className="w-[16rem] sm:w-[18rem] md:w-[20rem]">
-          <img className="w-full h-full object-cover" src={img} alt="" />
+        <div className="w-48 sm:w-60 md:w-72">
+          <img className="w-full h-full object-contain" src={img} alt="" />
         </div>
-        <div className="flex flex-col gap-4 w-full sm:w-[90%] lg:w-[60%]">
-          <div className="flex gap-3 items-center">
-            <Check size={30} className="text-[#0171B2]" />
-            <span className="text-base sm:text-lg">
-              Personal dashboard with monthly value check for your home
-            </span>
-          </div>
-          <div className="flex gap-3 items-center">
-            <Check size={30} className="text-[#0171B2]" />
-            <span className="text-base sm:text-lg">
-              Save your favourite houses and receive updates
-            </span>
-          </div>
-          <div className="flex gap-3 items-center">
-            <Check size={30} className="text-[#0171B2]" />
-            <span className="text-base sm:text-lg">
-              Receive the latest homes in your inbox with saved searches
-            </span>
-          </div>
+        <div className="flex flex-col gap-4 w-full px-2 sm:px-4 md:px-0 sm:w-11/12 lg:w-3/4">
+          {[
+            "Personal dashboard with monthly value check for your home",
+            "Save your favourite houses and receive updates",
+            "Receive the latest homes in your inbox with saved searches",
+          ].map((text, index) => (
+            <div key={index} className="flex gap-3 items-start">
+              <Check size={24} className="text-[#0171B2] mt-1" />
+              <span className="text-sm sm:text-base md:text-lg leading-snug">
+                {text}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
