@@ -11,6 +11,7 @@ import {
   LogOut,
   Heart,
   DoorOpen,
+  BookOpen,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
@@ -25,7 +26,7 @@ const Header = () => {
         <div className="w-[5.3rem]">
           <img className="w-full h-full rounded-lg" src={logo} alt="Logo" />
         </div>
-        <div className="flex gap-4 items-center text-white ">
+        <div className="flex items-center gap-1 text-white ">
           <NavLink
             to={"/"}
             className={({ isActive }) =>
@@ -49,6 +50,17 @@ const Header = () => {
             Apartments
           </NavLink>
           <NavLink
+            to={"/about"}
+            className={({ isActive }) =>
+              `py-[1.3rem] px-3 hover:bg-[#f18502] flex items-center gap-3 ${
+                isActive ? "bg-[#f18502]" : ""
+              }`
+            }
+          >
+            <BookOpen size={17} />
+            About
+          </NavLink>
+          <NavLink
             to={"/contact"}
             className={({ isActive }) =>
               `py-[1.3rem] px-3 hover:bg-[#f18502] flex items-center gap-3 ${
@@ -59,7 +71,7 @@ const Header = () => {
             <BookUser size={17} />
             Contact
           </NavLink>
-          <div className="flex relative flex-col gap-3 justify-start items-start">
+          <div className="flex relative flex-col gap-3 justify-start items-start ml-2">
             <div
               onClick={() => {
                 if (openedMenu == false) {

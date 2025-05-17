@@ -1,11 +1,9 @@
 import { useParams } from "react-router";
-import { Calendar } from "@/components/ui/calendar";
-import React from "react";
 import useFetchOneApartment from "@/hooks/useFetchOneApartment";
-import { MapPin, Check, Star } from "lucide-react";
+import { MapPin, Check } from "lucide-react";
+import BookApartment from "@/components/BookApartment";
 
 const ApartmentDetails = () => {
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
   const { id } = useParams();
   const { apartment, loading, error } = useFetchOneApartment(id!);
 
@@ -137,29 +135,7 @@ const ApartmentDetails = () => {
               })}
           </div>
         </div>
-        <div className="flex flex-col gap-4 bg-gray-100 p-6 rounded-lg w-[200rem]">
-          <div className="flex justify-between">
-            <div className="flex gap-2 items-center">
-              <span className="text-2xl font-semibold">
-                ${apartment.pricePerNight}
-              </span>
-              <span className="text-gray-500">/ night</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Star className="text-orange-500" size={17} />
-              <span>{apartment.avgRating}</span>
-            </div>
-          </div>
-          <div className="flex gap-2 flex-col">
-            <h4 className="font-semibold text-sm">Check-in Date</h4>
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={setDate}
-              className="rounded-md border shadow w-full"
-            />
-          </div>
-        </div>
+        <BookApartment apartment={apartment} />
       </div>
     </div>
   );
