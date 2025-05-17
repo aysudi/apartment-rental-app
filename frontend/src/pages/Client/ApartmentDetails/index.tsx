@@ -2,12 +2,13 @@ import { useParams } from "react-router";
 import useFetchOneApartment from "@/hooks/useFetchOneApartment";
 import { MapPin, Check } from "lucide-react";
 import BookApartment from "@/components/BookApartment";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const ApartmentDetails = () => {
   const { id } = useParams();
   const { apartment, loading, error } = useFetchOneApartment(id!);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <LoadingSpinner />;
   if (error) return <p>{error}</p>;
   if (!apartment) return <p>No apartment found.</p>;
 
