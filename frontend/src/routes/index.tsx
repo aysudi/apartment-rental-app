@@ -8,6 +8,7 @@ import UserProfile from "../pages/Client/Profile";
 import Wishlist from "../pages/Client/Wishlist";
 import Login from "../pages/Common/Login";
 import Register from "../pages/Common/Register";
+import About from "@/pages/Client/About";
 
 const ROUTES = [
   //client
@@ -39,6 +40,10 @@ const ROUTES = [
       {
         path: "contact",
         element: <Contact />,
+      },
+      {
+        path: "about",
+        element: <About />,
       },
       {
         path: "wishlist",
