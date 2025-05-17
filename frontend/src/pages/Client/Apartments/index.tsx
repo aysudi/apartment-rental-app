@@ -34,7 +34,7 @@ const Apartments = () => {
                 </div>
                 <div className="flex flex-col gap-1">
                   <Link
-                    to={`/apartment-details?id=${apartment.id}`}
+                    to={`/apartment-details/${apartment.id}`}
                     className="font-medium text-lg cursor-pointer hover:underline "
                   >
                     {apartment.title}
@@ -43,7 +43,10 @@ const Apartments = () => {
                   <div className="flex gap-1 items-center">
                     <Star size={16} />
                     <span>{apartment.avgRating} </span>
-                    {/* <span>({apartment.reviews.length} reviews)</span> */}
+                    <span>
+                      ({apartment.reviews ? apartment.reviews.length : 0}{" "}
+                      reviews)
+                    </span>
                   </div>
                   <div className="flex justify-between items-center mt-1">
                     <div className="flex gap-1 items-center text-lg">
@@ -69,27 +72,3 @@ const Apartments = () => {
 };
 
 export default Apartments;
-
-{
-  /* <div className="flex flex-col gap-3">
-  <div className="h-[18rem] ">
-    <img
-      className="w-[100%] h-[100%] object-cover rounded-2xl "
-      src="https://a0.muscache.com/im/pictures/26a43325-6538-4d5b-88d3-cf7034fa751e.jpg?im_w=1200"
-      alt=""
-    />
-  </div>
-  <div className="flex justify-between px-3">
-    <div className="flex flex-col">
-      <h4 className="font-medium text-lg">Protaras</h4>
-      <p className="text-gray-600">Jul 12-17</p>
-    </div>
-    <div>
-      <div className="flex gap-2 items-center">
-        <Star size={17} />
-        <span>4.8</span>
-      </div>
-    </div>
-  </div>
-</div>; */
-}

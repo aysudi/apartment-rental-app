@@ -28,6 +28,7 @@ export type Apartment = {
   deleted: boolean;
   reviews: string[];
   bookings: string[];
+  host: User;
 };
 
 export type NewApartment = {
@@ -57,6 +58,7 @@ export type User = {
   hostRequest: boolean;
   isBanned: boolean;
   deleted: boolean;
+  createdAt: string;
 };
 
 export type RegisteredUser = {

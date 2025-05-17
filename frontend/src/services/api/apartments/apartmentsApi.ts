@@ -17,7 +17,7 @@ async function getAllApartments() {
 async function getOneApartment(apartmentId: string) {
   try {
     const response = await instance.get(
-      `${endpoints.apartments}/${apartmentId}`
+      `${endpoints.apartments}?id=${apartmentId}`
     );
     return response.data;
   } catch (error) {
