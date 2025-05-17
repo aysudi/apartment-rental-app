@@ -21,7 +21,7 @@ const Header = () => {
   const [openedMenu, setOpenedMenu] = useState(false);
 
   return (
-    <header className="bg-[#FF9A1E] fixed w-full">
+    <header className="bg-[#FF9A1E] fixed w-full z-50">
       <div className="w-[70%] mx-auto flex justify-between gap-2 items-center ">
         <div className="w-[5.3rem]">
           <img className="w-full h-full rounded-lg" src={logo} alt="Logo" />
@@ -90,7 +90,7 @@ const Header = () => {
                 user
                   ? "bottom-[-8.9rem] w-[12rem]"
                   : "bottom-[-6.78rem] w-[9rem]"
-              } absolute text-black right-0 gap-2 flex-col p-4 rounded-md z-10 bg-white shadow-lg text-[1.1rem]`}
+              } absolute text-black right-0 gap-2 flex-col p-4 rounded-md z-50 bg-white shadow-lg text-[1.1rem]`}
             >
               {user ? (
                 <>
