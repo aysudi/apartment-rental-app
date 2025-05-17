@@ -1,10 +1,8 @@
-// import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 import { Star } from "lucide-react";
 import DateRangeCalendar from "../DateRangePicker";
 
 const BookApartment = ({ apartment }: any) => {
-  //   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const [guestsQuantity, setGuestsQuantity] = useState(1);
 
   return (
@@ -24,12 +22,6 @@ const BookApartment = ({ apartment }: any) => {
       <div className="flex gap-2 flex-col">
         <h4 className="font-semibold text-sm">Check-in Date</h4>
         <DateRangeCalendar />
-        {/* <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
-          className="rounded-md border shadow w-full"
-        /> */}
       </div>
       <div className="flex gap-2 flex-col mt-2">
         <h4 className="font-semibold text-sm">Guests</h4>

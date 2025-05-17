@@ -1,4 +1,5 @@
 import { useState } from "react";
+import dayjs from "dayjs";
 
 const getDaysInMonth = (year: number, month: number) => {
   const date = new Date(year, month, 1);
@@ -19,14 +20,14 @@ const isInRange = (date: Date, start: Date | null, end: Date | null) => {
 };
 
 const DateRangeCalendar = () => {
+  const today = new Date();
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
+  const [currentMonth, setCurrentMonth] = useState<number>(today.getMonth());
+  const [currentYear, setCurrentYear] = useState<number>(today.getFullYear());
 
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth();
-  const days = getDaysInMonth(year, month);
-  const firstDayIndex = new Date(year, month, 1).getDay();
+  const days = getDaysInMonth(currentYear, currentMonth);
+  const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
 
   const handleDateClick = (day: Date) => {
     if (!startDate || (startDate && endDate)) {
@@ -40,9 +41,37 @@ const DateRangeCalendar = () => {
     }
   };
 
+  console.log(dayjs(endDate).format("MMM D, YYYY"));
+
   return (
     <div className="p-4 w-full max-w-md bg-white rounded-lg shadow-md">
       <h2 className="text-lg font-bold mb-4">Select Date Range</h2>
+
+      <div className="flex justify-between mb-2">
+        <select
+          className="border px-2 py-1 rounded"
+          value={currentMonth}
+          onChange={(e) => setCurrentMonth(parseInt(e.target.value))}
+        >
+          {Array.from({ length: 12 }, (_, i) => (
+            <option key={i} value={i}>
+              {dayjs(new Date(currentYear, i)).format("MMMM")}
+            </option>
+          ))}
+        </select>
+        <select
+          className="border px-2 py-1 rounded"
+          value={currentYear}
+          onChange={(e) => setCurrentYear(parseInt(e.target.value))}
+        >
+          {Array.from({ length: 10 }, (_, i) => (
+            <option key={i} value={today.getFullYear() + i}>
+              {today.getFullYear() + i}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className="grid grid-cols-7 gap-2 text-center text-sm text-gray-600 font-medium">
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
           <div key={d}>{d}</div>
