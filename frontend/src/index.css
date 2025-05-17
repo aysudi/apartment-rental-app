@@ -18,6 +18,21 @@
   z-index: -1;
 }
 
+#about::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50rem;
+  width: 100%;
+  background-image: url("https://www.pixelstalk.net/wp-content/uploads/2016/10/Photos-Apartment-HD.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: brightness(55%);
+  z-index: -1;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
