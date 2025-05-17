@@ -3,7 +3,7 @@ const About = () => {
     <div className="pt-[4.1rem] flex flex-col gap-4">
       <section
         id={"about"}
-        className="h-[50rem] relative z-1 flex flex-col gap-2 justify-center items-center text-white"
+        className="h-[50rem] relative z-0 flex flex-col gap-2 justify-center items-center text-white"
       >
         <h1 className="text-7xl font-bold">About Funda</h1>
         <p className="text-xl">
