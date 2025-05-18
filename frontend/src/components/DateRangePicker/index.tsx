@@ -19,10 +19,20 @@ const isInRange = (date: Date, start: Date | null, end: Date | null) => {
   return date > start && date < end;
 };
 
-const DateRangeCalendar = () => {
+type Props = {
+  startDate: Date | null;
+  setStartDate: React.Dispatch<React.SetStateAction<Date | null>>;
+  endDate: Date | null;
+  setEndDate: React.Dispatch<React.SetStateAction<Date | null>>;
+};
+
+const DateRangeCalendar = ({
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+}: Props) => {
   const today = new Date();
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
   const [currentMonth, setCurrentMonth] = useState<number>(today.getMonth());
   const [currentYear, setCurrentYear] = useState<number>(today.getFullYear());
 
@@ -40,8 +50,6 @@ const DateRangeCalendar = () => {
       setEndDate(day);
     }
   };
-
-  console.log(dayjs(endDate).format("MMM D, YYYY"));
 
   return (
     <div className="p-4 w-full max-w-md bg-white rounded-lg shadow-md">
