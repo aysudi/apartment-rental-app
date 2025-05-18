@@ -90,7 +90,7 @@ const ApartmentDetails = () => {
                 return (
                   <span
                     key={idx}
-                    className="px-4 py-1 border text-sm font-bold rounded-2xl"
+                    className="px-4 py-1 bg-[#FF9A1E] text-white text-sm font-bold rounded-2xl"
                   >
                     {feature}
                   </span>

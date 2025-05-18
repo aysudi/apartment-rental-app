@@ -1,9 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import DateRangeCalendar from "../DateRangePicker";
+import dayjs from "dayjs";
+// import { Booking } from "@/classes/Booking";
+import BookingApartmentModal from "../BookingModal";
 
 const BookApartment = ({ apartment }: any) => {
   const [guestsQuantity, setGuestsQuantity] = useState(1);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openEditModal = () => {
+    setIsModalOpen(true);
+  };
+
+  function dateDifferenceInDays(
+    date1: Date | null,
+    date2: Date | null
+  ): number {
+    if (!date1 || !date2) return NaN;
+
+    const parsedDate1 = dayjs(date1);
+    const parsedDate2 = dayjs(date2);
+
+    return parsedDate2.diff(parsedDate1, "day") + 1;
+  }
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      const nights = dateDifferenceInDays(startDate, endDate);
+      setTotalPrice(nights * apartment.pricePerNight + 50 + 30);
+    }
+  }, [startDate, endDate, apartment.pricePerNight]);
+
+  // const handleBook = () => {
+  //   if (startDate && endDate) {
+  //     const newBooking = new Booking(
+  //       apartment.id,
+  //       apartment.host.id,
+  //       totalPrice,
+  //       startDate.toISOString(),
+  //       endDate.toISOString()
+  //     );
+  //     console.log(newBooking);
+  //   } else {
+  //     console.log("Invalid or missing dates");
+  //   }
+  // };
 
   return (
     <div className="flex flex-col gap-4 bg-gray-100 p-6 rounded-lg w-[200rem]">
@@ -21,7 +66,12 @@ const BookApartment = ({ apartment }: any) => {
       </div>
       <div className="flex gap-2 flex-col">
         <h4 className="font-semibold text-sm">Check-in Date</h4>
-        <DateRangeCalendar />
+        <DateRangeCalendar
+          startDate={startDate}
+          setStartDate={setStartDate}
+          endDate={endDate}
+          setEndDate={setEndDate}
+        />
       </div>
       <div className="flex gap-2 flex-col mt-2">
         <h4 className="font-semibold text-sm">Guests</h4>
@@ -67,7 +117,7 @@ const BookApartment = ({ apartment }: any) => {
           <p>
             ${apartment.pricePerNight} {"\u00D7"} 1 night
           </p>
-          <p>${apartment.pricePerNight}</p>
+          <p>${totalPrice && totalPrice - 80}</p>
         </div>
         <div className="flex justify-between items-center">
           <p>Cleaning fee</p>
@@ -81,12 +131,23 @@ const BookApartment = ({ apartment }: any) => {
       <hr />
       <div className="flex justify-between items-center font-bold text-lg">
         <p>Total</p>
-        <p>${apartment.pricePerNight + 50 + 30}</p>
+        <p>${totalPrice}</p>
       </div>
-      <button className="py-2 w-full bg-black text-white font-semibold hover:opacity-80 cursor-pointer rounded-sm">
+      <button
+        onClick={() => {
+          openEditModal();
+          // setIsModalOpen(true);
+        }}
+        className="py-2 w-full bg-black text-white font-semibold hover:opacity-80 cursor-pointer rounded-sm"
+      >
         Book Now
       </button>
       <p className="text-center text-gray-500">You won't be charged yet</p>
+
+      <BookingApartmentModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };
