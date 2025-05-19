@@ -95,8 +95,8 @@ model Booking {
   userId      String
   apartment   Apartment     @relation(fields: [apartmentId], references: [id])
   apartmentId String
-  startDate   DateTime
-  endDate     DateTime
+  startDate   String
+  endDate     String
   status      BookingStatus
   totalPrice  Float
   createdAt   DateTime      @default(now())

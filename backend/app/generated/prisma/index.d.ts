@@ -369,7 +369,7 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.0
+   * Prisma Client JS version: 6.8.2
    * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
@@ -4348,8 +4348,8 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     apartmentId: string | null
-    startDate: Date | null
-    endDate: Date | null
+    startDate: string | null
+    endDate: string | null
     status: $Enums.BookingStatus | null
     totalPrice: number | null
     createdAt: Date | null
@@ -4360,8 +4360,8 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     apartmentId: string | null
-    startDate: Date | null
-    endDate: Date | null
+    startDate: string | null
+    endDate: string | null
     status: $Enums.BookingStatus | null
     totalPrice: number | null
     createdAt: Date | null
@@ -4517,8 +4517,8 @@ export namespace Prisma {
     id: string
     userId: string
     apartmentId: string
-    startDate: Date
-    endDate: Date
+    startDate: string
+    endDate: string
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt: Date
@@ -4622,8 +4622,8 @@ export namespace Prisma {
       id: string
       userId: string
       apartmentId: string
-      startDate: Date
-      endDate: Date
+      startDate: string
+      endDate: string
       status: $Enums.BookingStatus
       totalPrice: number
       createdAt: Date
@@ -5056,8 +5056,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Booking", 'String'>
     readonly userId: FieldRef<"Booking", 'String'>
     readonly apartmentId: FieldRef<"Booking", 'String'>
-    readonly startDate: FieldRef<"Booking", 'DateTime'>
-    readonly endDate: FieldRef<"Booking", 'DateTime'>
+    readonly startDate: FieldRef<"Booking", 'String'>
+    readonly endDate: FieldRef<"Booking", 'String'>
     readonly status: FieldRef<"Booking", 'BookingStatus'>
     readonly totalPrice: FieldRef<"Booking", 'Float'>
     readonly createdAt: FieldRef<"Booking", 'DateTime'>
@@ -11214,8 +11214,8 @@ export namespace Prisma {
     id?: StringFilter<"Booking"> | string
     userId?: StringFilter<"Booking"> | string
     apartmentId?: StringFilter<"Booking"> | string
-    startDate?: DateTimeFilter<"Booking"> | Date | string
-    endDate?: DateTimeFilter<"Booking"> | Date | string
+    startDate?: StringFilter<"Booking"> | string
+    endDate?: StringFilter<"Booking"> | string
     status?: EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
     totalPrice?: FloatFilter<"Booking"> | number
     createdAt?: DateTimeFilter<"Booking"> | Date | string
@@ -11245,8 +11245,8 @@ export namespace Prisma {
     NOT?: BookingWhereInput | BookingWhereInput[]
     userId?: StringFilter<"Booking"> | string
     apartmentId?: StringFilter<"Booking"> | string
-    startDate?: DateTimeFilter<"Booking"> | Date | string
-    endDate?: DateTimeFilter<"Booking"> | Date | string
+    startDate?: StringFilter<"Booking"> | string
+    endDate?: StringFilter<"Booking"> | string
     status?: EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
     totalPrice?: FloatFilter<"Booking"> | number
     createdAt?: DateTimeFilter<"Booking"> | Date | string
@@ -11279,8 +11279,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Booking"> | string
     userId?: StringWithAggregatesFilter<"Booking"> | string
     apartmentId?: StringWithAggregatesFilter<"Booking"> | string
-    startDate?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
-    endDate?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
+    startDate?: StringWithAggregatesFilter<"Booking"> | string
+    endDate?: StringWithAggregatesFilter<"Booking"> | string
     status?: EnumBookingStatusWithAggregatesFilter<"Booking"> | $Enums.BookingStatus
     totalPrice?: FloatWithAggregatesFilter<"Booking"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
@@ -11865,8 +11865,8 @@ export namespace Prisma {
 
   export type BookingCreateInput = {
     id?: string
-    startDate: Date | string
-    endDate: Date | string
+    startDate: string
+    endDate: string
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
@@ -11879,8 +11879,8 @@ export namespace Prisma {
     id?: string
     userId: string
     apartmentId: string
-    startDate: Date | string
-    endDate: Date | string
+    startDate: string
+    endDate: string
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
@@ -11889,8 +11889,8 @@ export namespace Prisma {
 
   export type BookingUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: StringFieldUpdateOperationsInput | string
+    endDate?: StringFieldUpdateOperationsInput | string
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11903,8 +11903,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     apartmentId?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: StringFieldUpdateOperationsInput | string
+    endDate?: StringFieldUpdateOperationsInput | string
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11915,8 +11915,8 @@ export namespace Prisma {
     id?: string
     userId: string
     apartmentId: string
-    startDate: Date | string
-    endDate: Date | string
+    startDate: string
+    endDate: string
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
@@ -11925,8 +11925,8 @@ export namespace Prisma {
 
   export type BookingUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: StringFieldUpdateOperationsInput | string
+    endDate?: StringFieldUpdateOperationsInput | string
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11937,8 +11937,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     apartmentId?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: StringFieldUpdateOperationsInput | string
+    endDate?: StringFieldUpdateOperationsInput | string
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13648,8 +13648,8 @@ export namespace Prisma {
 
   export type BookingCreateWithoutUserInput = {
     id?: string
-    startDate: Date | string
-    endDate: Date | string
+    startDate: string
+    endDate: string
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
@@ -13660,8 +13660,8 @@ export namespace Prisma {
   export type BookingUncheckedCreateWithoutUserInput = {
     id?: string
     apartmentId: string
-    startDate: Date | string
-    endDate: Date | string
+    startDate: string
+    endDate: string
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
@@ -13818,8 +13818,8 @@ export namespace Prisma {
     id?: StringFilter<"Booking"> | string
     userId?: StringFilter<"Booking"> | string
     apartmentId?: StringFilter<"Booking"> | string
-    startDate?: DateTimeFilter<"Booking"> | Date | string
-    endDate?: DateTimeFilter<"Booking"> | Date | string
+    startDate?: StringFilter<"Booking"> | string
+    endDate?: StringFilter<"Booking"> | string
     status?: EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
     totalPrice?: FloatFilter<"Booking"> | number
     createdAt?: DateTimeFilter<"Booking"> | Date | string
@@ -13972,8 +13972,8 @@ export namespace Prisma {
 
   export type BookingCreateWithoutApartmentInput = {
     id?: string
-    startDate: Date | string
-    endDate: Date | string
+    startDate: string
+    endDate: string
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
@@ -13984,8 +13984,8 @@ export namespace Prisma {
   export type BookingUncheckedCreateWithoutApartmentInput = {
     id?: string
     userId: string
-    startDate: Date | string
-    endDate: Date | string
+    startDate: string
+    endDate: string
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
@@ -14701,8 +14701,8 @@ export namespace Prisma {
   export type BookingCreateManyUserInput = {
     id?: string
     apartmentId: string
-    startDate: Date | string
-    endDate: Date | string
+    startDate: string
+    endDate: string
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
@@ -14797,8 +14797,8 @@ export namespace Prisma {
 
   export type BookingUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: StringFieldUpdateOperationsInput | string
+    endDate?: StringFieldUpdateOperationsInput | string
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14809,8 +14809,8 @@ export namespace Prisma {
   export type BookingUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     apartmentId?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: StringFieldUpdateOperationsInput | string
+    endDate?: StringFieldUpdateOperationsInput | string
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14820,8 +14820,8 @@ export namespace Prisma {
   export type BookingUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     apartmentId?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: StringFieldUpdateOperationsInput | string
+    endDate?: StringFieldUpdateOperationsInput | string
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14933,8 +14933,8 @@ export namespace Prisma {
   export type BookingCreateManyApartmentInput = {
     id?: string
     userId: string
-    startDate: Date | string
-    endDate: Date | string
+    startDate: string
+    endDate: string
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
@@ -14991,8 +14991,8 @@ export namespace Prisma {
 
   export type BookingUpdateWithoutApartmentInput = {
     id?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: StringFieldUpdateOperationsInput | string
+    endDate?: StringFieldUpdateOperationsInput | string
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15003,8 +15003,8 @@ export namespace Prisma {
   export type BookingUncheckedUpdateWithoutApartmentInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: StringFieldUpdateOperationsInput | string
+    endDate?: StringFieldUpdateOperationsInput | string
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15014,8 +15014,8 @@ export namespace Prisma {
   export type BookingUncheckedUpdateManyWithoutApartmentInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: StringFieldUpdateOperationsInput | string
+    endDate?: StringFieldUpdateOperationsInput | string
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

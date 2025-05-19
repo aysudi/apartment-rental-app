@@ -1,9 +1,37 @@
+import { useAuth } from "@/context/AuthContext";
+import { useState } from "react";
+
 type Props = {
   isOpen: boolean;
   onClose: () => void;
+  handleApartmentData: () => void;
 };
 
-export default function BookingApartmentModal({ isOpen, onClose }: Props) {
+export default function BookingApartmentModal({
+  isOpen,
+  onClose,
+  handleApartmentData,
+}: Props) {
+  const { user, loading } = useAuth();
+  const [bookedUser, setBookedUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
+
+  if (!user) return <p>User is null</p>;
+  if (loading) return <p>Loading</p>;
+
+  const handleBooking = () => {
+    if (
+      user.firstName == bookedUser.firstName &&
+      user.lastName == bookedUser.lastName &&
+      user.email == bookedUser.email
+    ) {
+      handleApartmentData();
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -19,22 +47,50 @@ export default function BookingApartmentModal({ isOpen, onClose }: Props) {
 
         <div className="space-y-4">
           <div>
-            <label className="block font-medium">Full Name</label>
+            <label className="block font-medium">First Name</label>
             <input
+              onChange={(e) => {
+                setBookedUser(() => {
+                  return { ...bookedUser, firstName: e.target.value };
+                });
+              }}
               type="text"
-              name="fullName"
+              name="firstName"
               className="w-full border rounded p-2"
-              placeholder="Blog title"
+              placeholder="Enter first name"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block font-medium">Last Name</label>
+            <input
+              onChange={(e) => {
+                setBookedUser(() => {
+                  return { ...bookedUser, lastName: e.target.value };
+                });
+              }}
+              type="text"
+              name="lastName"
+              className="w-full border rounded p-2"
+              placeholder="Enter last name"
+              required
             />
           </div>
 
           <div>
             <label className="block font-medium">Email</label>
             <input
+              onChange={(e) => {
+                setBookedUser(() => {
+                  return { ...bookedUser, email: e.target.value };
+                });
+              }}
               type="email"
               name="email"
               className="w-full border rounded p-2"
-              placeholder="Blog title"
+              placeholder="Enter email"
+              required
             />
           </div>
 
@@ -45,7 +101,10 @@ export default function BookingApartmentModal({ isOpen, onClose }: Props) {
             >
               Cancel
             </button>
-            <button className="bg-[#FF9A1E] text-white font-bold px-4 py-2 rounded-md hover:opacity-80 cursor-pointer">
+            <button
+              onClick={handleBooking}
+              className="bg-[#FF9A1E] text-white font-bold px-4 py-2 rounded-md hover:opacity-80 cursor-pointer"
+            >
               Save Changes
             </button>
           </div>
