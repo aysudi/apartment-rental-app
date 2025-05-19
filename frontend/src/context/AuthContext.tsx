@@ -1,4 +1,5 @@
 import authController from "@/services/api/users/usersApi";
+import type { User } from "@/types/type";
 import {
   createContext,
   useState,
@@ -6,11 +7,6 @@ import {
   useEffect,
   type ReactNode,
 } from "react";
-
-type User = {
-  id: string;
-  role: string;
-};
 
 type AuthContextType = {
   user: User | null;
@@ -37,7 +33,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       if (savedUser?.id) {
         try {
           const userFromAPI = await authController.getOneUser(savedUser.id);
-          setUser(userFromAPI);
+          setUser(userFromAPI[0]);
         } catch (error) {
           console.error("Error fetching user:", error);
           setUser(null);

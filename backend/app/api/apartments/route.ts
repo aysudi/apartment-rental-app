@@ -130,5 +130,5 @@ export async function POST(req: Request) {
 // Handling OPTIONS (for preflight requests)
 export async function OPTIONS(req: Request) {
   const res = NextResponse.json({});
-  return setCorsHeaders(res); // Ensure CORS headers are set for OPTIONS
+  return setCorsHeaders(res);
 }

@@ -78,7 +78,7 @@ const ApartmentDetails = () => {
         </div>
       </div>
       <div className="flex gap-14 justify-between w-full">
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 w-[calc(100%-32rem)]">
           <h2 className="text-3xl font-bold">{apartment.title}</h2>
           <div className="flex gap-2 items-center">
             <MapPin size={17} />

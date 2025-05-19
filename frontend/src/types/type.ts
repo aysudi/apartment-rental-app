@@ -68,3 +68,11 @@ export type RegisteredUser = {
   email: string;
   password: string;
 };
+
+export type Booking = {
+  userId: string;
+  apartmentId: string;
+  startDate: string;
+  endDate: string;
+  totalPrice: number;
+};

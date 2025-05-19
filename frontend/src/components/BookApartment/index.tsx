@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import DateRangeCalendar from "../DateRangePicker";
 import dayjs from "dayjs";
-// import { Booking } from "@/classes/Booking";
+import { Booking } from "@/classes/Booking";
 import BookingApartmentModal from "../BookingModal";
+import bookingsController from "@/services/api/bookings/bookingsApi";
+import Swal from "sweetalert2";
 
 const BookApartment = ({ apartment }: any) => {
   const [guestsQuantity, setGuestsQuantity] = useState(1);
@@ -35,23 +37,30 @@ const BookApartment = ({ apartment }: any) => {
     }
   }, [startDate, endDate, apartment.pricePerNight]);
 
-  // const handleBook = () => {
-  //   if (startDate && endDate) {
-  //     const newBooking = new Booking(
-  //       apartment.id,
-  //       apartment.host.id,
-  //       totalPrice,
-  //       startDate.toISOString(),
-  //       endDate.toISOString()
-  //     );
-  //     console.log(newBooking);
-  //   } else {
-  //     console.log("Invalid or missing dates");
-  //   }
-  // };
+  const handleApartmentData = async () => {
+    if (startDate && endDate) {
+      const newBooking = new Booking(
+        apartment.id,
+        apartment.host.id,
+        totalPrice,
+        startDate.toISOString(),
+        endDate.toISOString()
+      );
+      await bookingsController.postBooking(newBooking);
+      Swal.fire({
+        title: "Success!",
+        text: "Your booking has been confirmed!",
+        icon: "success",
+        confirmButtonText: "Great!",
+      });
+      setIsModalOpen(false);
+    } else {
+      console.log("Invalid or missing datas");
+    }
+  };
 
   return (
-    <div className="flex flex-col gap-4 bg-gray-100 p-6 rounded-lg w-[200rem]">
+    <div className="flex flex-col gap-4 bg-gray-100 p-6 rounded-lg w-[30rem]">
       <div className="flex justify-between">
         <div className="flex gap-2 items-center">
           <span className="text-2xl font-semibold">
@@ -136,7 +145,6 @@ const BookApartment = ({ apartment }: any) => {
       <button
         onClick={() => {
           openEditModal();
-          // setIsModalOpen(true);
         }}
         className="py-2 w-full bg-black text-white font-semibold hover:opacity-80 cursor-pointer rounded-sm"
       >
@@ -145,6 +153,7 @@ const BookApartment = ({ apartment }: any) => {
       <p className="text-center text-gray-500">You won't be charged yet</p>
 
       <BookingApartmentModal
+        handleApartmentData={handleApartmentData}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
