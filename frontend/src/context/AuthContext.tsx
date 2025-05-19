@@ -57,6 +57,7 @@ function AuthProvider({ children }: AuthProviderProps) {
           "user",
           JSON.stringify({ id: user.id, role: user.role })
         );
+        localStorage.setItem("wishlist", JSON.stringify([]));
       }
     } catch (error) {
       console.error("Login error:", error);
@@ -66,6 +67,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
+    localStorage.removeItem("wishlist");
   };
 
   const value: AuthContextType = {
