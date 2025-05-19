@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { Star, Heart } from "lucide-react";
 import useFetchApartments from "../../../hooks/useFetchApartments";
 import type { Apartment } from "../../../types/type";
 import { Link } from "react-router";
@@ -25,12 +25,17 @@ const Apartments = () => {
                 id={`apartment-card${idx}`}
                 className="flex flex-col gap-3"
               >
-                <div className="h-[18rem] ">
-                  <img
-                    className="w-[100%] h-[100%] object-cover rounded-2xl "
-                    src={apartment.coverImage}
-                    alt=""
-                  />
+                <div className="relative">
+                  <div className="h-[18rem] ">
+                    <img
+                      className="w-[100%] h-[100%] object-cover rounded-2xl "
+                      src={apartment.coverImage}
+                      alt=""
+                    />
+                  </div>
+                  <div className="absolute h-5 top-[1rem] right-[1rem] flex justify-center items-center rounded-[50%] px-3 py-5 bg-white cursor-pointer ">
+                    <Heart size={19} />
+                  </div>
                 </div>
                 <div className="flex flex-col gap-1">
                   <Link
