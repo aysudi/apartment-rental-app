@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import DateRangeCalendar from "../DateRangePicker";
-import dayjs from "dayjs";
 import { Booking } from "@/classes/Booking";
 import BookingApartmentModal from "../BookingModal";
 import bookingsController from "@/services/api/bookings/bookingsApi";
 import Swal from "sweetalert2";
+import dateDifferenceInDays from "@/utils/dateDifference";
 
 const BookApartment = ({ apartment }: any) => {
   const [guestsQuantity, setGuestsQuantity] = useState(1);
@@ -17,18 +17,6 @@ const BookApartment = ({ apartment }: any) => {
   const openEditModal = () => {
     setIsModalOpen(true);
   };
-
-  function dateDifferenceInDays(
-    date1: Date | null,
-    date2: Date | null
-  ): number {
-    if (!date1 || !date2) return NaN;
-
-    const parsedDate1 = dayjs(date1);
-    const parsedDate2 = dayjs(date2);
-
-    return parsedDate2.diff(parsedDate1, "day") + 1;
-  }
 
   useEffect(() => {
     if (startDate && endDate) {

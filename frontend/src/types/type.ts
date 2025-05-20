@@ -26,7 +26,7 @@ export type Apartment = {
   entrepreneurId: string;
   rentalCount: number;
   deleted: boolean;
-  reviews: string[];
+  reviews: Review[];
   bookings: string[];
   host: User;
 };
@@ -75,4 +75,21 @@ export type Booking = {
   startDate: string;
   endDate: string;
   totalPrice: number;
+};
+
+export type Review = {
+  id: string;
+  user: User;
+  userId: string;
+  apartment: Apartment;
+  apartmentId: string;
+  rating: number;
+  comment: string;
+};
+
+export type PostedReview = {
+  userId: string;
+  apartmentId: string;
+  rating: number;
+  comment: string;
 };

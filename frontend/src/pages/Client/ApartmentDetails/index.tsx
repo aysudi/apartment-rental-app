@@ -3,38 +3,30 @@ import useFetchOneApartment from "@/hooks/useFetchOneApartment";
 import { MapPin, Check } from "lucide-react";
 import BookApartment from "@/components/BookApartment";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import type { Review } from "@/types/type";
+import useFetchReviews from "@/hooks/useFetchReviews";
+import { formatMonthYear } from "@/utils/formatMonthYear";
 
 const ApartmentDetails = () => {
   const { id } = useParams();
   const { apartment, loading, error } = useFetchOneApartment(id!);
+  const {
+    reviews,
+    loading: reviewsLoading,
+    error: reviewsError,
+  }: {
+    reviews: Review[];
+    loading: boolean;
+    error: string | null;
+  } = useFetchReviews();
 
-  if (loading) return <LoadingSpinner />;
-  if (error) return <p>{error}</p>;
+  if (loading && reviewsLoading) return <LoadingSpinner />;
+  if (error && reviewsError) return <p>{error}</p>;
   if (!apartment) return <p>No apartment found.</p>;
 
-  function formatMonthYear(isoDate: string): string {
-    const [year, month] = isoDate.split("T")[0].split("-");
-    const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-
-    const monthIndex = parseInt(month, 10) - 1;
-
-    if (monthIndex < 0 || monthIndex > 11 || !year) return "Invalid date";
-
-    return `${monthNames[monthIndex]} ${year}`;
-  }
+  const validReviews = reviews?.filter(
+    (review) => review.apartmentId == apartment.id
+  );
 
   return (
     <div className="flex flex-col mb-[3rem] gap-10 pt-[6.1rem] w-7xl m-auto h-min-[100vh] h-full">
@@ -78,28 +70,32 @@ const ApartmentDetails = () => {
         </div>
       </div>
       <div className="flex gap-14 justify-between w-full">
-        <div className="flex flex-col gap-2 w-[calc(100%-32rem)]">
-          <h2 className="text-3xl font-bold">{apartment.title}</h2>
-          <div className="flex gap-2 items-center">
-            <MapPin size={17} />
-            <span>{apartment.location}</span>
+        <div className="flex flex-col gap-8 w-[calc(100%-32rem)]">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-3xl font-bold">{apartment.title}</h2>
+            <div className="flex gap-2 items-center">
+              <MapPin size={17} />
+              <span>{apartment.location}</span>
+            </div>
+            <div className="flex gap-4 mt-2">
+              {apartment.features &&
+                apartment.features.map((feature, idx) => {
+                  return (
+                    <span
+                      key={idx}
+                      className="px-4 py-1 bg-[#FF9A1E] text-white text-sm font-bold rounded-2xl"
+                    >
+                      {feature}
+                    </span>
+                  );
+                })}
+            </div>
           </div>
-          <div className="flex gap-4 mt-2">
-            {apartment.features &&
-              apartment.features.map((feature, idx) => {
-                return (
-                  <span
-                    key={idx}
-                    className="px-4 py-1 bg-[#FF9A1E] text-white text-sm font-bold rounded-2xl"
-                  >
-                    {feature}
-                  </span>
-                );
-              })}
+          <div className="flex flex-col gap-2">
+            <h3 className="text-2xl font-bold">Description</h3>
+            <p>{apartment.description}</p>
           </div>
-          <h3 className="text-2xl font-bold mt-4">Description</h3>
-          <p>{apartment.description}</p>
-          <div className="mt-4 flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
             <h3 className="text-2xl font-bold">Host</h3>
             <div className="flex gap-4 items-center">
               <div className="w-[5rem] h-[4.5rem]">
@@ -119,21 +115,60 @@ const ApartmentDetails = () => {
               </div>
             </div>
           </div>
-          <h3 className="text-2xl font-bold mt-6">House rules</h3>
           <div className="flex flex-col gap-2">
-            {apartment.rules &&
-              apartment.rules.map((rule, idx) => {
-                return (
-                  <div key={idx} className="flex gap-2 items-center">
-                    <Check
-                      strokeWidth={3}
-                      className="text-green-600"
-                      size={17}
-                    />
-                    <span>{rule}</span>
-                  </div>
-                );
-              })}
+            <h3 className="text-2xl font-bold">House rules</h3>
+            <div className="flex flex-col gap-2">
+              {apartment.rules &&
+                apartment.rules.map((rule, idx) => {
+                  return (
+                    <div key={idx} className="flex gap-2 items-center">
+                      <Check
+                        strokeWidth={3}
+                        className="text-green-600"
+                        size={17}
+                      />
+                      <span>{rule}</span>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <h3 className="text-2xl font-bold">Reviews</h3>
+            <div>
+              {apartment.avgRating} |{" "}
+              {apartment?.reviews?.length > 0
+                ? apartment?.reviews?.length
+                : "0"}{" "}
+              {""}
+              reviews
+            </div>
+            <div className="flex flex-col gap-4 mt-4">
+              {validReviews &&
+                validReviews.map((review: Review, idx: number) => {
+                  return (
+                    <div key={idx} className="flex flex-col gap-4">
+                      <div className="flex gap-4 items-center">
+                        <div className="h-[3.5rem] ">
+                          <img
+                            className="h-full w-full object-cover rounded-full"
+                            src={review?.user.profileImage}
+                            alt=""
+                          />
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-lg">
+                            {review.user.firstName} {review.user.lastName}
+                          </h3>
+                          <p className="text-gray-500 text-sm">
+                            {formatMonthYear(review.user.createdAt)}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
         </div>
         <BookApartment apartment={apartment} />
