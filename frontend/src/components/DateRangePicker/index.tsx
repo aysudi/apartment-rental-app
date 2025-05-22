@@ -1,15 +1,6 @@
 import { useState } from "react";
 import dayjs from "dayjs";
-
-const getDaysInMonth = (year: number, month: number) => {
-  const date = new Date(year, month, 1);
-  const days = [];
-  while (date.getMonth() === month) {
-    days.push(new Date(date));
-    date.setDate(date.getDate() + 1);
-  }
-  return days;
-};
+import getDaysInMonth from "@/utils/getDaysInMonth";
 
 const isSameDate = (d1: Date, d2: Date) =>
   d1.toDateString() === d2.toDateString();
