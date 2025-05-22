@@ -4,7 +4,7 @@ import { useState } from "react";
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  handleApartmentData: () => void;
+  handleApartmentData: () => Promise<boolean>;
 };
 
 export default function BookingApartmentModal({
@@ -19,11 +19,11 @@ export default function BookingApartmentModal({
     email: "",
   });
 
-  if (!user) return <p>User is null</p>;
   if (loading) return <p>Loading</p>;
 
   const handleBooking = () => {
     if (
+      user &&
       user.firstName == bookedUser.firstName &&
       user.lastName == bookedUser.lastName &&
       user.email == bookedUser.email

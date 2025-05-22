@@ -6,6 +6,7 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import type { Review } from "@/types/type";
 import useFetchReviews from "@/hooks/useFetchReviews";
 import { formatMonthYear } from "@/utils/formatMonthYear";
+import { FaStar } from "react-icons/fa";
 
 const ApartmentDetails = () => {
   const { id } = useParams();
@@ -95,7 +96,7 @@ const ApartmentDetails = () => {
             <h3 className="text-2xl font-bold">Description</h3>
             <p>{apartment.description}</p>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
             <h3 className="text-2xl font-bold">Host</h3>
             <div className="flex gap-4 items-center">
               <div className="w-[5rem] h-[4.5rem]">
@@ -147,7 +148,7 @@ const ApartmentDetails = () => {
               {validReviews &&
                 validReviews.map((review: Review, idx: number) => {
                   return (
-                    <div key={idx} className="flex flex-col gap-4">
+                    <div key={idx} className="flex flex-col gap-3">
                       <div className="flex gap-4 items-center">
                         <div className="h-[3.5rem] ">
                           <img
@@ -164,6 +165,10 @@ const ApartmentDetails = () => {
                             {formatMonthYear(review.user.createdAt)}
                           </p>
                         </div>
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <FaStar color="#F59E0B" size={20} />
+                        <p className="text-gray-600 mt-1">{review.comment}</p>
                       </div>
                     </div>
                   );
