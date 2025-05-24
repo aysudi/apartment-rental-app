@@ -23,13 +23,16 @@ const ApartmentCard = ({ apartment, idx }: Props) => {
   const isFavorite = favorite.includes(apartment.id);
 
   return (
-    <div id={`apartment-card${idx}`} className="flex flex-col gap-3">
+    <div
+      id={`apartment-card${idx}`}
+      className="flex flex-col gap-3 bg-white rounded-lg shadow-lg overflow-hidden"
+    >
       <div className="relative">
-        <div className="h-[18rem] ">
+        <div className="h-[18rem] w-full">
           <img
-            className="w-[100%] h-[100%] object-cover rounded-2xl "
+            className="w-full h-full object-cover rounded-t-lg"
             src={apartment.coverImage}
-            alt=""
+            alt="Apartment"
           />
         </div>
         <div
@@ -48,39 +51,39 @@ const ApartmentCard = ({ apartment, idx }: Props) => {
               console.log("Please log in to add to wishlist.");
             }
           }}
-          className={`absolute h-5 top-[1rem] right-[1rem] flex justify-center items-center rounded-[50%] px-3 py-5 cursor-pointer ${
+          className={`absolute top-4 right-4 flex justify-center items-center rounded-full p-2 cursor-pointer ${
             isFavorite ? "bg-red-500" : "bg-white"
           }`}
         >
           <Heart
             className={`${isFavorite ? "text-white" : "text-black"}`}
-            size={20}
+            size={24}
           />
         </div>
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="p-4 flex flex-col gap-2">
         <Link
           to={`/apartment-details/${apartment.id}`}
-          className="font-medium text-lg cursor-pointer hover:underline "
+          className="font-medium text-lg cursor-pointer hover:underline truncate"
         >
           {apartment.title}
         </Link>
-        <p className="text-gray-500">{apartment.location} </p>
-        <div className="flex gap-1 items-center">
+        <p className="text-gray-500 text-sm truncate">{apartment.location}</p>
+        <div className="flex items-center gap-2">
           <Star size={16} />
-          <span>{apartment.avgRating} </span>
+          <span>{apartment.avgRating}</span>
           <span>
             ({apartment.reviews ? apartment.reviews.length : 0} reviews)
           </span>
         </div>
-        <div className="flex justify-between items-center mt-1">
+        <div className="flex justify-between items-center gap-2 mt-3 md:flex-col xl:flex-row">
           <div className="flex gap-1 items-center text-lg">
-            <span className="font-bold">${apartment.pricePerNight}</span>/
+            <span className="font-bold">${apartment.pricePerNight}</span> /{" "}
             <span className="text-gray-600">night</span>
           </div>
           <Link
             to={`/apartment-details/${apartment.id}`}
-            className="py-2 w-[7rem] rounded-lg border flex items-center justify-center font-medium"
+            className="py-2 px-6 text-sm bg-[#FF9A1E] text-white rounded-md hover:bg-[#f18502] transition-all duration-200"
           >
             View Details
           </Link>

@@ -27,6 +27,7 @@ const Header = () => {
           <img className="w-full h-full rounded-lg" src={logo} alt="Logo" />
         </div>
 
+        {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
           <NavLink
             to={"/"}
@@ -72,8 +73,69 @@ const Header = () => {
             <BookUser size={20} />
             Contact
           </NavLink>
+
+          <div className=" flex items-center relative">
+            <div
+              onClick={() => setOpenedMenu(!openedMenu)}
+              className="border py-2 px-3 rounded-2xl flex gap-2 justify-center items-center text-white hover:bg-white hover:text-[#FF9A1E] cursor-pointer"
+            >
+              <AlignJustify size={20} />
+              <User size={20} />
+            </div>
+
+            <div
+              className={`${
+                openedMenu ? "block" : "hidden"
+              } absolute top-16 right-0 bg-white text-black w-[12rem] p-4 rounded-md shadow-lg z-50`}
+            >
+              {user ? (
+                <>
+                  <NavLink
+                    to={"/wishlist"}
+                    className="py-3 flex items-center gap-2 px-2 hover:bg-[#f18502] rounded-md"
+                  >
+                    <Heart size={20} />
+                    Wishlist
+                  </NavLink>
+                  <NavLink
+                    to={"/become-host"}
+                    className="py-3 flex items-center gap-2 px-2 hover:bg-[#f18502] rounded-md"
+                  >
+                    <DoorOpen size={20} />
+                    Become Host
+                  </NavLink>
+                  <NavLink
+                    to={"/login"}
+                    onClick={logout}
+                    className="py-3 flex items-center gap-2 px-2 hover:bg-[#f18502] rounded-md"
+                  >
+                    <LogOut size={20} />
+                    Log Out
+                  </NavLink>
+                </>
+              ) : (
+                <>
+                  <NavLink
+                    to={"/wishlist"}
+                    className="py-3 flex items-center gap-2 px-2 hover:bg-[#f18502] rounded-md"
+                  >
+                    <LogIn size={20} />
+                    Log In
+                  </NavLink>
+                  <NavLink
+                    to={"/become-host"}
+                    className="py-3 flex items-center gap-2 px-2 hover:bg-[#f18502] rounded-md"
+                  >
+                    <UserPlus size={20} />
+                    Sign Up
+                  </NavLink>
+                </>
+              )}
+            </div>
+          </div>
         </div>
 
+        {/* Mobile Menu (Hamburger) */}
         <div className="md:hidden flex items-center">
           <div
             onClick={() => setOpenedMenu(!openedMenu)}
@@ -86,8 +148,41 @@ const Header = () => {
           <div
             className={`${
               openedMenu ? "block" : "hidden"
-            } absolute top-16 right-0 bg-white text-black w-[12rem] p-4 rounded-md shadow-lg z-50`}
+            } absolute top-16 right-4 bg-white text-black w-[12rem] p-4 rounded-md shadow-lg z-50`}
           >
+            <NavLink
+              to={"/"}
+              onClick={() => setOpenedMenu(false)}
+              className="flex items-center gap-3 py-2"
+            >
+              <House size={20} />
+              Home
+            </NavLink>
+            <NavLink
+              to={"/apartments"}
+              onClick={() => setOpenedMenu(false)}
+              className="flex items-center gap-3 py-2"
+            >
+              <Hotel size={20} />
+              Apartments
+            </NavLink>
+            <NavLink
+              to={"/about"}
+              onClick={() => setOpenedMenu(false)}
+              className="flex items-center gap-3 py-2"
+            >
+              <BookOpen size={20} />
+              About
+            </NavLink>
+            <NavLink
+              to={"/contact"}
+              onClick={() => setOpenedMenu(false)}
+              className="flex items-center gap-3 py-2"
+            >
+              <BookUser size={20} />
+              Contact
+            </NavLink>
+
             {user ? (
               <>
                 <Link
