@@ -14,8 +14,10 @@ const Apartments = () => {
 
   return (
     <div className="w-[90%] mx-auto py-[6.1rem] flex flex-col gap-4">
-      <h1 className="font-bold text-3xl">Find Your Perfect Apartment</h1>
-      <div className=" grid grid-cols-4 mt-2 gap-8">
+      <h1 className="font-bold text-3xl text-center">
+        Find Your Perfect Apartment
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-4">
         {apartments &&
           apartments.map((apartment: Apartment, idx: number) => {
             return <ApartmentCard key={idx} idx={idx} apartment={apartment} />;
