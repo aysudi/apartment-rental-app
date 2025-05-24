@@ -1,68 +1,62 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { handleOptionsRequest, setCorsHeaders } from "@/app/api/cors";
 
-// GET
+// Preflight CORS
+export async function OPTIONS() {
+  return handleOptionsRequest();
+}
+
+// GET /api/users (all users)
 export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const email = searchParams.get("email");
+
   try {
-    const { searchParams } = new URL(req.url);
-    const id = searchParams.get("id");
-    const email = searchParams.get("email");
-
-    if (id) {
-      const user = await prisma.user.findUnique({
-        where: { id },
-        include: {
-          apartments: true,
-          wishlist: true,
-          bookings: true,
-          reviews: true,
-        },
-      });
-
-      if (!user) {
-        return NextResponse.json([], { status: 404 });
-      }
-
-      return NextResponse.json([user], { status: 200 });
-    }
-
     if (email) {
       const user = await prisma.user.findUnique({
         where: { email },
         include: {
           apartments: true,
-          wishlist: true,
           bookings: true,
           reviews: true,
+          wishlist: true,
         },
       });
 
       if (!user) {
-        return NextResponse.json([], { status: 200 });
+        return setCorsHeaders(
+          NextResponse.json({ error: "User not found" }, { status: 404 })
+        );
       }
 
-      return NextResponse.json([user], { status: 200 });
+      return setCorsHeaders(NextResponse.json(user));
     }
 
+    // Fallback: get all users
     const users = await prisma.user.findMany({
       include: {
         apartments: true,
-        wishlist: true,
         bookings: true,
         reviews: true,
+        wishlist: true,
       },
     });
-
-    return NextResponse.json(users, { status: 200 });
+    return setCorsHeaders(NextResponse.json(users));
   } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to fetch user(s)" },
-      { status: 500 }
+    return setCorsHeaders(
+      NextResponse.json(
+        {
+          error: "Failed to fetch user(s)",
+          details: error instanceof Error ? error.message : "Unknown error",
+        },
+        { status: 500 }
+      )
     );
   }
 }
 
-// POST
+// POST /api/users
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -77,10 +71,11 @@ export async function POST(req: Request) {
     } = body;
 
     if (!username || !email || !password || !profileImage || !role) {
-      return NextResponse.json(
+      const res = NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
       );
+      return setCorsHeaders(res);
     }
 
     const newUser = await prisma.user.create({
@@ -95,11 +90,13 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json(newUser, { status: 201 });
+    const res = NextResponse.json(newUser, { status: 201 });
+    return setCorsHeaders(res);
   } catch (error) {
-    return NextResponse.json(
+    const res = NextResponse.json(
       { error: "Failed to create user" },
       { status: 500 }
     );
+    return setCorsHeaders(res);
   }
 }

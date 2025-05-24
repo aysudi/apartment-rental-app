@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Star } from "lucide-react";
 import DateRangeCalendar from "../DateRangePicker";
 import BookingApartmentModal from "../BookingModal";
+import { useBooking } from "@/hooks/useBooking";
 import { useAuth } from "@/context/AuthContext";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import BookingInfo from "../BookingInfo";
 import GuestsSelector from "../GueatsSelector";
-import { useBooking } from "@/hooks/useBooking";
+import BookingInfo from "../BookingInfo";
 
 const BookApartment = ({ apartment }: any) => {
   const [guestsQuantity, setGuestsQuantity] = useState(1);
@@ -29,7 +29,6 @@ const BookApartment = ({ apartment }: any) => {
 
   const handleBooking = async () => {
     if (user) {
-      openModal();
       if (!startDate && !endDate) {
         setIsModalOpen(false);
         Swal.fire({
@@ -38,15 +37,7 @@ const BookApartment = ({ apartment }: any) => {
           text: "You should select dates!",
         });
       } else {
-        const success = await handleApartmentData();
-        if (success) {
-          Swal.fire({
-            title: "Success!",
-            text: "Your booking has been confirmed!",
-            icon: "success",
-          });
-          setIsModalOpen(false);
-        }
+        openModal();
       }
     } else {
       toast.error("Login to book an apartment");
@@ -92,6 +83,7 @@ const BookApartment = ({ apartment }: any) => {
       <p className="text-center text-gray-500">You won't be charged yet</p>
 
       <BookingApartmentModal
+        totalPrice={totalPrice}
         handleApartmentData={handleApartmentData}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

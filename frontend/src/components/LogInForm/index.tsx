@@ -20,7 +20,7 @@ const LogInForm = () => {
       } else {
         toast.success(response.message);
         login(values);
-        if (response.data[0].role == "admin") {
+        if (response.data.role == "admin") {
           navigate("/admin");
         } else {
           navigate("/user");

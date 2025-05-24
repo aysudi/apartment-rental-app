@@ -57,7 +57,6 @@ async function updateBooking(bookingId: string, bookingData: Booking) {
 async function postBooking(bookingData: Booking) {
   try {
     const response = await instance.post(endpoints.bookings, bookingData);
-    console.log("hello");
     return response.data;
   } catch (error) {
     console.error("Error creating new booking", error);

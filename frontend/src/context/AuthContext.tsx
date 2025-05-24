@@ -33,7 +33,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       if (savedUser?.id) {
         try {
           const userFromAPI = await authController.getOneUser(savedUser.id);
-          setUser(userFromAPI[0]);
+          setUser(userFromAPI);
         } catch (error) {
           console.error("Error fetching user:", error);
           setUser(null);
@@ -50,8 +50,8 @@ function AuthProvider({ children }: AuthProviderProps) {
   const login = async (credentials: { email: string; password: string }) => {
     try {
       const res = await authController.login(credentials);
-      if (res.data.length > 0) {
-        const user = res.data[0];
+      if (res.data) {
+        const user = res.data;
         setUser(user);
         localStorage.setItem(
           "user",

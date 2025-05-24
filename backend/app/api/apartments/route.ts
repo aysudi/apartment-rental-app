@@ -1,17 +1,13 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { handleOptionsRequest, setCorsHeaders } from "../cors";
 
-const setCorsHeaders = (res: NextResponse) => {
-  res.headers.set("Access-Control-Allow-Origin", "http://localhost:5173");
-  res.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.headers.set(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization"
-  );
-  return res;
-};
+// Handling OPTIONS (for preflight requests)
+export async function OPTIONS() {
+  return handleOptionsRequest();
+}
 
-// GET
+// GET Method
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
@@ -48,7 +44,7 @@ export async function GET(req: Request) {
   }
 }
 
-// POST
+// POST Method
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -125,10 +121,4 @@ export async function POST(req: Request) {
       )
     );
   }
-}
-
-// Handling OPTIONS (for preflight requests)
-export async function OPTIONS(req: Request) {
-  const res = NextResponse.json({});
-  return setCorsHeaders(res);
 }
