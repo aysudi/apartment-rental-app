@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router";
+import { NavLink } from "react-router";
 import logo from "../../assets/images/header-logo.jpeg";
 import {
   House,
@@ -92,14 +92,22 @@ const Header = () => {
                 <>
                   <NavLink
                     to={"/wishlist"}
-                    className="py-3 flex items-center gap-2 px-2 hover:bg-[#f18502] rounded-md"
+                    className={({ isActive }) =>
+                      `py-3 flex items-center gap-2 px-2 hover:bg-[#f18502] rounded-md ${
+                        isActive ? "bg-[#f18502] text-white" : ""
+                      }`
+                    }
                   >
                     <Heart size={20} />
                     Wishlist
                   </NavLink>
                   <NavLink
                     to={"/become-host"}
-                    className="py-3 flex items-center gap-2 px-2 hover:bg-[#f18502] rounded-md"
+                    className={({ isActive }) =>
+                      `py-3 flex items-center gap-2 px-2 hover:bg-[#f18502] rounded-md ${
+                        isActive ? "bg-[#f18502] text-white" : ""
+                      }`
+                    }
                   >
                     <DoorOpen size={20} />
                     Become Host
@@ -107,7 +115,11 @@ const Header = () => {
                   <NavLink
                     to={"/login"}
                     onClick={logout}
-                    className="py-3 flex items-center gap-2 px-2 hover:bg-[#f18502] rounded-md"
+                    className={({ isActive }) =>
+                      `py-3 flex items-center gap-2 px-2 hover:bg-[#f18502] rounded-md ${
+                        isActive ? "bg-[#f18502] text-white" : ""
+                      }`
+                    }
                   >
                     <LogOut size={20} />
                     Log Out
@@ -117,14 +129,22 @@ const Header = () => {
                 <>
                   <NavLink
                     to={"/wishlist"}
-                    className="py-3 flex items-center gap-2 px-2 hover:bg-[#f18502] rounded-md"
+                    className={({ isActive }) =>
+                      `py-3 flex items-center gap-2 px-2 hover:bg-[#f18502] rounded-md ${
+                        isActive ? "bg-[#f18502] text-white" : ""
+                      }`
+                    }
                   >
                     <LogIn size={20} />
                     Log In
                   </NavLink>
                   <NavLink
                     to={"/become-host"}
-                    className="py-3 flex items-center gap-2 px-2 hover:bg-[#f18502] rounded-md"
+                    className={({ isActive }) =>
+                      `py-3 flex items-center gap-2 px-2 hover:bg-[#f18502] rounded-md ${
+                        isActive ? "bg-[#f18502] text-white" : ""
+                      }`
+                    }
                   >
                     <UserPlus size={20} />
                     Sign Up
@@ -135,25 +155,52 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Menu (Hamburger) */}
-        <div className="md:hidden flex items-center">
-          <div
-            onClick={() => setOpenedMenu(!openedMenu)}
-            className="border py-2 px-3 rounded-2xl flex gap-2 justify-center items-center text-white hover:bg-white hover:text-[#FF9A1E] cursor-pointer"
-          >
-            <AlignJustify size={20} />
-            <User size={20} />
+        {/* Mobile Sidebar */}
+        <div
+          onClick={() => setOpenedMenu(!openedMenu)}
+          className="md:hidden border py-2 px-3 rounded-2xl flex gap-2 justify-center items-center text-white hover:bg-white hover:text-[#FF9A1E] cursor-pointer"
+        >
+          <AlignJustify size={20} />
+          <User size={20} />
+        </div>
+
+        <div
+          className={`${
+            openedMenu ? "translate-x-0" : "-translate-x-full"
+          } fixed inset-0 bg-opacity-50 z-40 transition-transform ease-in-out duration-300 md:hidden`}
+          onClick={() => setOpenedMenu(false)}
+        ></div>
+
+        <div
+          className={`${
+            openedMenu ? "translate-x-0" : "-translate-x-full"
+          } fixed top-0 left-0 bg-white w-74 h-full p-6 z-50 transition-transform ease-in-out duration-300 md:hidden`}
+        >
+          <div className="flex pl-4 justify-between items-center">
+            <div className="w-[7rem]">
+              <img
+                className="w-full h-full rounded-lg object-cover"
+                src={logo}
+                alt="Logo"
+              />
+            </div>
+            <button
+              onClick={() => setOpenedMenu(false)}
+              className="text-black text-xl hover:text-[#FF9A1E]"
+            >
+              X
+            </button>
           </div>
 
-          <div
-            className={`${
-              openedMenu ? "block" : "hidden"
-            } absolute top-16 right-4 bg-white text-black w-[12rem] p-4 rounded-md shadow-lg z-50`}
-          >
+          <div className="mt-6 flex flex-col gap-1">
             <NavLink
               to={"/"}
               onClick={() => setOpenedMenu(false)}
-              className="flex items-center gap-3 py-2"
+              className={({ isActive }) =>
+                `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
+                  isActive ? "bg-[#f18502] text-white" : ""
+                }`
+              }
             >
               <House size={20} />
               Home
@@ -161,7 +208,11 @@ const Header = () => {
             <NavLink
               to={"/apartments"}
               onClick={() => setOpenedMenu(false)}
-              className="flex items-center gap-3 py-2"
+              className={({ isActive }) =>
+                `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
+                  isActive ? "bg-[#f18502] text-white" : ""
+                }`
+              }
             >
               <Hotel size={20} />
               Apartments
@@ -169,7 +220,11 @@ const Header = () => {
             <NavLink
               to={"/about"}
               onClick={() => setOpenedMenu(false)}
-              className="flex items-center gap-3 py-2"
+              className={({ isActive }) =>
+                `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
+                  isActive ? "bg-[#f18502] text-white" : ""
+                }`
+              }
             >
               <BookOpen size={20} />
               About
@@ -177,7 +232,11 @@ const Header = () => {
             <NavLink
               to={"/contact"}
               onClick={() => setOpenedMenu(false)}
-              className="flex items-center gap-3 py-2"
+              className={({ isActive }) =>
+                `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
+                  isActive ? "bg-[#f18502] text-white" : ""
+                }`
+              }
             >
               <BookUser size={20} />
               Contact
@@ -185,52 +244,72 @@ const Header = () => {
 
             {user ? (
               <>
-                <Link
+                <NavLink
                   to={"/wishlist"}
                   onClick={() => setOpenedMenu(false)}
-                  className="flex items-center gap-3 py-2"
+                  className={({ isActive }) =>
+                    `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
+                      isActive ? "bg-[#f18502] text-white" : ""
+                    }`
+                  }
                 >
                   <Heart size={20} />
                   Wishlist
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                   to={"/become-host"}
                   onClick={() => setOpenedMenu(false)}
-                  className="flex items-center gap-3 py-2"
+                  className={({ isActive }) =>
+                    `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
+                      isActive ? "bg-[#f18502] text-white" : ""
+                    }`
+                  }
                 >
                   <DoorOpen size={20} />
                   Become Host
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                   to={"/login"}
                   onClick={() => {
                     setOpenedMenu(false);
                     logout();
                   }}
-                  className="flex items-center gap-3 py-2"
+                  className={({ isActive }) =>
+                    `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
+                      isActive ? "bg-[#f18502] text-white" : ""
+                    }`
+                  }
                 >
                   <LogOut size={20} />
                   Log Out
-                </Link>
+                </NavLink>
               </>
             ) : (
               <>
-                <Link
+                <NavLink
                   to={"/register"}
                   onClick={() => setOpenedMenu(false)}
-                  className="flex items-center gap-3 py-2"
+                  className={({ isActive }) =>
+                    `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
+                      isActive ? "bg-[#f18502] text-white" : ""
+                    }`
+                  }
                 >
                   <UserPlus size={20} />
                   Sign Up
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                   to={"/login"}
                   onClick={() => setOpenedMenu(false)}
-                  className="flex items-center gap-3 py-2"
+                  className={({ isActive }) =>
+                    `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
+                      isActive ? "bg-[#f18502] text-white" : ""
+                    }`
+                  }
                 >
                   <LogIn size={20} />
                   Log In
-                </Link>
+                </NavLink>
               </>
             )}
           </div>
