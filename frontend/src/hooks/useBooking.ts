@@ -19,11 +19,11 @@ export const useBooking = (
     }
   }, [startDate, endDate, apartment.pricePerNight]);
 
-  const handleApartmentData = async () => {
+  const handleApartmentData = async (userId: string) => {
     if (startDate) {
       const newBooking = new Booking(
         apartment.id,
-        apartment.host.id,
+        userId,
         totalPrice,
         startDate.toISOString(),
         endDate == null ? startDate.toISOString() : endDate.toISOString()

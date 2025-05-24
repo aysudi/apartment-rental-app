@@ -78,7 +78,7 @@ const ApartmentDetails = () => {
               <MapPin size={17} />
               <span>{apartment.location}</span>
             </div>
-            <div className="flex gap-4 mt-2">
+            <div className="flex flex-wrap gap-2 mt-2">
               {apartment.features &&
                 apartment.features.map((feature, idx) => {
                   return (

@@ -1,22 +1,30 @@
-import Cors from "cors";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-const cors = Cors({
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  origin: "http://localhost:5173",
-});
+export const setCorsHeaders = (res: NextResponse) => {
+  res.headers.set("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.headers.set(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
+  res.headers.set(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization"
+  );
+  res.headers.set("Access-Control-Allow-Credentials", "true");
+  return res;
+};
 
-export const runCors = (req: NextRequest) => {
-  return new Promise<NextResponse>((resolve, reject) => {
-    const res = NextResponse.next();
-
-    cors(req as any, res as any, (result: any) => {
-      if (result instanceof Error) {
-        reject(result);
-      } else {
-        resolve(res);
-      }
-    });
-  });
+export const handleOptionsRequest = () => {
+  const res = new NextResponse(null, { status: 204 });
+  res.headers.set("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.headers.set(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
+  res.headers.set(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization"
+  );
+  res.headers.set("Access-Control-Allow-Credentials", "true");
+  return res;
 };

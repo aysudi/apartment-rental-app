@@ -1,28 +1,23 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+export const nextConfig = {
   async headers() {
     return [
       {
-        // Apply these headers to all routes starting with /api/
         source: "/api/:path*",
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "http://localhost:5173", // Your frontend URL
+            value: "http://localhost:5173",
           },
           {
             key: "Access-Control-Allow-Methods",
-            value: "GET, POST, OPTIONS", // Allow the required methods
+            value: "GET, POST, PUT, DELETE, PATCH, OPTIONS",
           },
           {
             key: "Access-Control-Allow-Headers",
-            value: "Content-Type, Authorization", // Allow the required headers
+            value: "Content-Type, Authorization",
           },
         ],
       },
     ];
   },
 };
-
-export default nextConfig;

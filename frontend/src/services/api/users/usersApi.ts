@@ -1,6 +1,6 @@
 import instance from "@/services/axios/axiosConfig";
 import endpoints from "@/services/endpoints/constants";
-import type { RegisteredUser, User } from "@/types/type";
+import type { RegisteredUser } from "@/types/type";
 
 // Fetch all users
 async function getAllUsers() {
@@ -16,7 +16,7 @@ async function getAllUsers() {
 // Fetch one user by ID
 async function getOneUser(userId: string) {
   try {
-    const response = await instance.get(`${endpoints.users}?id=${userId}`);
+    const response = await instance.get(`${endpoints.users}/${userId}`);
     return response.data;
   } catch (error) {
     console.error(`Error fetching user with ID ${userId}`, error);
@@ -28,11 +28,7 @@ async function getOneUser(userId: string) {
 async function getUserByEmail(email: string) {
   try {
     const response = await instance.get(`${endpoints.users}?email=${email}`);
-    if (response.data && response.data.length > 0) {
-      return response.data;
-    } else {
-      return [];
-    }
+    return response.data || null;
   } catch (error) {
     console.error(`Error fetching user by email`, error);
     throw error;
@@ -43,14 +39,15 @@ async function getUserByEmail(email: string) {
 async function login(credentials: { email: string; password: string }) {
   try {
     const user = await getUserByEmail(credentials.email);
-    if (user.length == 0) {
+    if (!user) {
       return {
         message: "User not found!",
         isLogged: false,
         data: null,
       };
     }
-    const validUser = user[0].password == credentials.password;
+
+    const validUser = user.password === credentials.password;
     if (validUser) {
       return {
         message: "Successfully logged in!",
@@ -74,8 +71,7 @@ async function login(credentials: { email: string; password: string }) {
 async function register(userData: RegisteredUser) {
   try {
     const duplicateEmail = await getUserByEmail(userData.email);
-    console.log(duplicateEmail);
-    if (duplicateEmail.length > 0) {
+    if (duplicateEmail) {
       return {
         message: "duplicate email",
         data: null,
@@ -123,9 +119,9 @@ async function unBanUser(userId: string) {
 }
 
 // Update user data by ID
-async function updateUser(userId: string, userData: User) {
+async function updateUser(userId: string, userData: {}) {
   try {
-    const response = await instance.put(
+    const response = await instance.patch(
       `${endpoints.users}/${userId}`,
       userData
     );

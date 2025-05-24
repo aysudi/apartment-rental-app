@@ -1,38 +1,55 @@
 import { useAuth } from "@/context/AuthContext";
-import { useState } from "react";
+import authController from "@/services/api/users/usersApi";
+import { useFormik } from "formik";
+import Swal from "sweetalert2";
 
-type Props = {
+type BookingApartmentModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  handleApartmentData: () => Promise<boolean>;
+  handleApartmentData: (userId: string) => Promise<boolean>;
+  totalPrice: number;
 };
 
-export default function BookingApartmentModal({
+const BookingApartmentModal = ({
   isOpen,
   onClose,
   handleApartmentData,
-}: Props) {
-  const { user, loading } = useAuth();
-  const [bookedUser, setBookedUser] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
+  totalPrice,
+}: BookingApartmentModalProps) => {
+  const { user } = useAuth();
+
+  const apartmentBooking = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+    },
+    onSubmit: async (values, actions) => {
+      if (!user) {
+        console.error("User is not authenticated");
+        return;
+      }
+      try {
+        const success = await handleApartmentData(user.id);
+        if (success && user) {
+          await authController.updateUser(user.id, {
+            balance: user.balance - totalPrice,
+          });
+          console.log(values);
+          actions.resetForm();
+          Swal.fire({
+            title: "Booked successfully!",
+            icon: "success",
+          });
+          onClose();
+        }
+      } catch (error) {
+        console.error("Error booking apartment:", error);
+      }
+    },
   });
 
-  if (loading) return <p>Loading</p>;
-
-  const handleBooking = () => {
-    if (
-      user &&
-      user.firstName == bookedUser.firstName &&
-      user.lastName == bookedUser.lastName &&
-      user.email == bookedUser.email
-    ) {
-      handleApartmentData();
-    }
-  };
-
-  if (!isOpen) return null;
+  if (!isOpen || !user) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
@@ -45,17 +62,15 @@ export default function BookingApartmentModal({
         </button>
         <h2 className="text-2xl font-semibold mb-4">Book Apartment</h2>
 
-        <div className="space-y-4">
+        <form onSubmit={apartmentBooking.handleSubmit} className="space-y-4">
           <div>
             <label className="block font-medium">First Name</label>
             <input
-              onChange={(e) => {
-                setBookedUser(() => {
-                  return { ...bookedUser, firstName: e.target.value };
-                });
-              }}
               type="text"
               name="firstName"
+              onChange={apartmentBooking.handleChange}
+              onBlur={apartmentBooking.handleBlur}
+              value={apartmentBooking.values.firstName}
               className="w-full border rounded p-2"
               placeholder="Enter first name"
               required
@@ -65,13 +80,11 @@ export default function BookingApartmentModal({
           <div>
             <label className="block font-medium">Last Name</label>
             <input
-              onChange={(e) => {
-                setBookedUser(() => {
-                  return { ...bookedUser, lastName: e.target.value };
-                });
-              }}
               type="text"
               name="lastName"
+              onChange={apartmentBooking.handleChange}
+              onBlur={apartmentBooking.handleBlur}
+              value={apartmentBooking.values.lastName}
               className="w-full border rounded p-2"
               placeholder="Enter last name"
               required
@@ -81,13 +94,11 @@ export default function BookingApartmentModal({
           <div>
             <label className="block font-medium">Email</label>
             <input
-              onChange={(e) => {
-                setBookedUser(() => {
-                  return { ...bookedUser, email: e.target.value };
-                });
-              }}
               type="email"
               name="email"
+              onChange={apartmentBooking.handleChange}
+              onBlur={apartmentBooking.handleBlur}
+              value={apartmentBooking.values.email}
               className="w-full border rounded p-2"
               placeholder="Enter email"
               required
@@ -98,18 +109,21 @@ export default function BookingApartmentModal({
             <button
               onClick={onClose}
               className="border border-[#FF9A1E] px-4 py-2 rounded-md cursor-pointer font-bold"
+              type="button"
             >
               Cancel
             </button>
             <button
-              onClick={handleBooking}
+              type="submit"
               className="bg-[#FF9A1E] text-white font-bold px-4 py-2 rounded-md hover:opacity-80 cursor-pointer"
             >
-              Save Changes
+              Book
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
-}
+};
+
+export default BookingApartmentModal;
