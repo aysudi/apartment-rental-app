@@ -22,135 +22,126 @@ const Header = () => {
 
   return (
     <header className="bg-[#FF9A1E] fixed w-full z-50">
-      <div className="w-[70%] mx-auto flex justify-between gap-2 items-center ">
+      <div className="max-w-7xl mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8">
+        {/* Logo Section */}
         <div className="w-[5.3rem]">
           <img className="w-full h-full rounded-lg" src={logo} alt="Logo" />
         </div>
-        <div className="flex items-center gap-1 text-white ">
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-6">
           <NavLink
             to={"/"}
             className={({ isActive }) =>
-              `py-[1.3rem] px-3 hover:bg-[#f18502] flex items-center gap-3 ${
-                isActive ? "bg-[#f18502] " : ""
+              `py-3 flex items-center gap-2 px-4 text-white hover:bg-[#f18502] rounded-md ${
+                isActive ? "bg-[#f18502]" : ""
               }`
             }
           >
-            <House size={17} />
+            <House size={20} />
             Home
           </NavLink>
           <NavLink
             to={"/apartments"}
             className={({ isActive }) =>
-              `py-[1.3rem] px-3 hover:bg-[#f18502] flex items-center gap-3 ${
-                isActive ? "bg-[#f18502] " : ""
+              `py-3 flex items-center gap-2 px-4 text-white hover:bg-[#f18502] rounded-md ${
+                isActive ? "bg-[#f18502]" : ""
               }`
             }
           >
-            <Hotel size={18} />
+            <Hotel size={20} />
             Apartments
           </NavLink>
           <NavLink
             to={"/about"}
             className={({ isActive }) =>
-              `py-[1.3rem] px-3 hover:bg-[#f18502] flex items-center gap-3 ${
+              `py-3 flex items-center gap-2 px-4 text-white hover:bg-[#f18502] rounded-md ${
                 isActive ? "bg-[#f18502]" : ""
               }`
             }
           >
-            <BookOpen size={17} />
+            <BookOpen size={20} />
             About
           </NavLink>
           <NavLink
             to={"/contact"}
             className={({ isActive }) =>
-              `py-[1.3rem] px-3 hover:bg-[#f18502] flex items-center gap-3 ${
+              `py-3 flex items-center gap-2 px-4 text-white hover:bg-[#f18502] rounded-md ${
                 isActive ? "bg-[#f18502]" : ""
               }`
             }
           >
-            <BookUser size={17} />
+            <BookUser size={20} />
             Contact
           </NavLink>
-          <div className="flex relative flex-col gap-3 justify-start items-start ml-2">
-            <div
-              onClick={() => {
-                if (openedMenu == false) {
-                  setOpenedMenu(true);
-                } else {
-                  setOpenedMenu(false);
-                }
-              }}
-              className={`border py-1 w-[5rem] rounded-2xl flex gap-2 justify-center items-center hover:bg-white hover:text-[#FF9A1E] cursor-pointer`}
-            >
-              <AlignJustify size={17} />
-              <User />
-            </div>
-            <div
-              className={`${openedMenu == false ? "hidden" : "flex"} ${
-                user
-                  ? "bottom-[-8.9rem] w-[12rem]"
-                  : "bottom-[-6.78rem] w-[9rem]"
-              } absolute text-black right-0 gap-2 flex-col p-4 rounded-md z-50 bg-white shadow-lg text-[1.1rem]`}
-            >
-              {user ? (
-                <>
-                  <Link
-                    to={"/wishlist"}
-                    onClick={() => {
-                      setOpenedMenu(false);
-                    }}
-                    className="flex items-center gap-3"
-                  >
-                    <Heart size={19} />
-                    Wishlist
-                  </Link>
-                  <Link
-                    to={"/become-host"}
-                    onClick={() => {
-                      setOpenedMenu(false);
-                    }}
-                    className="flex items-center gap-3"
-                  >
-                    <DoorOpen size={19} />
-                    Become Host
-                  </Link>
-                  <Link
-                    to={"/login"}
-                    onClick={() => {
-                      setOpenedMenu(false);
-                      logout();
-                    }}
-                    className="flex items-center gap-3"
-                  >
-                    <LogOut size={19} />
-                    Log Out
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link
-                    to={"/register"}
-                    onClick={() => {
-                      setOpenedMenu(false);
-                    }}
-                    className="flex items-center gap-2"
-                  >
-                    <UserPlus size={19} />
-                    Sign Up
-                  </Link>
-                  <Link
-                    to={"/login"}
-                    onClick={() => {
-                      setOpenedMenu(false);
-                    }}
-                    className="flex items-center gap-2"
-                  >
-                    <LogIn size={19} />
-                    Log In
-                  </Link>
-                </>
-              )}
-            </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <div className="md:hidden flex items-center">
+          <div
+            onClick={() => setOpenedMenu(!openedMenu)}
+            className="border py-2 px-3 rounded-2xl flex gap-2 justify-center items-center text-white hover:bg-white hover:text-[#FF9A1E] cursor-pointer"
+          >
+            <AlignJustify size={20} />
+            <User size={20} />
+          </div>
+
+          {/* Mobile Dropdown Menu */}
+          <div
+            className={`${
+              openedMenu ? "block" : "hidden"
+            } absolute top-16 right-0 bg-white text-black w-[12rem] p-4 rounded-md shadow-lg z-50`}
+          >
+            {user ? (
+              <>
+                <Link
+                  to={"/wishlist"}
+                  onClick={() => setOpenedMenu(false)}
+                  className="flex items-center gap-3 py-2"
+                >
+                  <Heart size={20} />
+                  Wishlist
+                </Link>
+                <Link
+                  to={"/become-host"}
+                  onClick={() => setOpenedMenu(false)}
+                  className="flex items-center gap-3 py-2"
+                >
+                  <DoorOpen size={20} />
+                  Become Host
+                </Link>
+                <Link
+                  to={"/login"}
+                  onClick={() => {
+                    setOpenedMenu(false);
+                    logout();
+                  }}
+                  className="flex items-center gap-3 py-2"
+                >
+                  <LogOut size={20} />
+                  Log Out
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  to={"/register"}
+                  onClick={() => setOpenedMenu(false)}
+                  className="flex items-center gap-3 py-2"
+                >
+                  <UserPlus size={20} />
+                  Sign Up
+                </Link>
+                <Link
+                  to={"/login"}
+                  onClick={() => setOpenedMenu(false)}
+                  className="flex items-center gap-3 py-2"
+                >
+                  <LogIn size={20} />
+                  Log In
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
