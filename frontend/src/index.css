@@ -33,6 +33,15 @@
   z-index: -1;
 }
 
+@media only screen and (max-width: 767px) {
+  #about::before {
+    height: 30rem;
+  }
+  #about {
+    height: 30rem;
+  }
+}
+
 #contact::before {
   content: "";
   position: absolute;
