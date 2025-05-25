@@ -243,7 +243,14 @@ exports.ApartmentType = exports.$Enums.ApartmentType = {
   townhouse: 'townhouse',
   penthouse: 'penthouse',
   duplex: 'duplex',
-  studio: 'studio'
+  studio: 'studio',
+  bungalow: 'bungalow',
+  loft: 'loft',
+  house: 'house',
+  farmhouse: 'farmhouse',
+  resort: 'resort',
+  tinyhome: 'tinyhome',
+  mansion: 'mansion'
 };
 
 exports.BookingStatus = exports.$Enums.BookingStatus = {

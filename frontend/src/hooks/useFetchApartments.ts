@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import apartmentsController from "../services/api/apartments/apartmentsApi";
+import type { Apartment } from "@/types/type";
 
 const useFetchApartments = () => {
-  const [apartments, setApartments] = useState([]);
+  const [apartments, setApartments] = useState<Apartment[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
