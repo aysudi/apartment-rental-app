@@ -46,7 +46,7 @@ const BookApartment = ({ apartment }: any) => {
   };
 
   return (
-    <div className="flex flex-col gap-4 bg-gray-100 p-6 rounded-lg w-[30rem]">
+    <div className="flex flex-col gap-4 bg-gray-100 p-6 rounded-lg w-full max-w-md mx-auto">
       <div className="flex justify-between">
         <div className="flex gap-2 items-center">
           <span className="text-2xl font-semibold">
@@ -66,12 +66,14 @@ const BookApartment = ({ apartment }: any) => {
         endDate={endDate}
         setEndDate={setEndDate}
       />
+
       <GuestsSelector
         guestsQuantity={guestsQuantity}
         setGuestsQuantity={setGuestsQuantity}
       />
 
       <hr />
+
       <BookingInfo apartment={apartment} totalPrice={totalPrice} />
 
       <button

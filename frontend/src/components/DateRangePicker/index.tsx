@@ -31,16 +31,26 @@ const DateRangeCalendar = ({
   const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
 
   const handleDateClick = (day: Date) => {
-    if (!startDate || (startDate && endDate)) {
+    if (!startDate && !endDate) {
       setStartDate(day);
-      setEndDate(null);
-    } else if (day < startDate) {
-      setStartDate(day);
-      setEndDate(null);
-    } else {
       setEndDate(day);
+    } else if (startDate && endDate && isSameDate(startDate, endDate)) {
+      if (day.getTime() < startDate.getTime()) {
+        setStartDate(day);
+        setEndDate(startDate);
+      } else if (day.getTime() > startDate.getTime()) {
+        setEndDate(day);
+      } else {
+        // clicked same day again – do nothing
+      }
+    } else {
+      setStartDate(null);
+      setEndDate(null);
     }
   };
+
+  const calculateDateDifference = (start: Date, end: Date) =>
+    dayjs(end).diff(dayjs(start), "day") + 1;
 
   return (
     <div className="p-4 w-full max-w-md bg-white rounded-lg shadow-md">
@@ -105,6 +115,16 @@ const DateRangeCalendar = ({
           );
         })}
       </div>
+
+      {startDate && endDate && (
+        <div className="mt-4 text-center">
+          <p>
+            You are booking this apartment for{" "}
+            {calculateDateDifference(startDate, endDate)} day
+            {calculateDateDifference(startDate, endDate) > 1 && "s"}.
+          </p>
+        </div>
+      )}
     </div>
   );
 };

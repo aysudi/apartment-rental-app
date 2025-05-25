@@ -160,11 +160,18 @@ exports.Prisma.BookingScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   apartmentId: 'apartmentId',
-  startDate: 'startDate',
-  endDate: 'endDate',
+  bookedDateId: 'bookedDateId',
   status: 'status',
   totalPrice: 'totalPrice',
   createdAt: 'createdAt',
+  deleted: 'deleted'
+};
+
+exports.Prisma.BookedDateScalarFieldEnum = {
+  id: 'id',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  apartmentId: 'apartmentId',
   deleted: 'deleted'
 };
 
@@ -175,14 +182,6 @@ exports.Prisma.ReviewScalarFieldEnum = {
   rating: 'rating',
   comment: 'comment',
   createdAt: 'createdAt',
-  deleted: 'deleted'
-};
-
-exports.Prisma.BookedDateScalarFieldEnum = {
-  id: 'id',
-  startDate: 'startDate',
-  endDate: 'endDate',
-  apartmentId: 'apartmentId',
   deleted: 'deleted'
 };
 
@@ -257,8 +256,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Apartment: 'Apartment',
   Booking: 'Booking',
-  Review: 'Review',
   BookedDate: 'BookedDate',
+  Review: 'Review',
   Contact: 'Contact',
   Coupon: 'Coupon',
   Slider: 'Slider'

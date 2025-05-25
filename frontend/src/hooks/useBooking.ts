@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { Booking } from "@/classes/Booking";
 import bookingsController from "@/services/api/bookings/bookingsApi";
 import dateDifferenceInDays from "@/utils/dateDifference";
+import BookedDate from "@/classes/BookedDate";
+import bookedDatesController from "@/services/api/bookedDates/bookedDatesApi";
+import { Booking } from "@/classes/Booking";
 
 export const useBooking = (
   apartment: any,
@@ -20,14 +22,11 @@ export const useBooking = (
   }, [startDate, endDate, apartment.pricePerNight]);
 
   const handleApartmentData = async (userId: string) => {
-    if (startDate) {
-      const newBooking = new Booking(
-        apartment.id,
-        userId,
-        totalPrice,
-        startDate.toISOString(),
-        endDate == null ? startDate.toISOString() : endDate.toISOString()
-      );
+    if (startDate && endDate) {
+      const bookedDate = new BookedDate(startDate, apartment.id, endDate);
+      const req = await bookedDatesController.postBookedDate(bookedDate);
+      console.log(req.id);
+      const newBooking = new Booking(apartment.id, userId, totalPrice, req.id);
       await bookingsController.postBooking(newBooking);
       return true;
     }
