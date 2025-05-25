@@ -8,7 +8,9 @@ import { Booking } from "@/classes/Booking";
 export const useBooking = (
   apartment: any,
   startDate: Date | null,
-  endDate: Date | null
+  endDate: Date | null,
+  setStartDate: React.Dispatch<React.SetStateAction<Date | null>>,
+  setEndDate: React.Dispatch<React.SetStateAction<Date | null>>
 ) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -25,9 +27,10 @@ export const useBooking = (
     if (startDate && endDate) {
       const bookedDate = new BookedDate(startDate, apartment.id, endDate);
       const req = await bookedDatesController.postBookedDate(bookedDate);
-      console.log(req.id);
       const newBooking = new Booking(apartment.id, userId, totalPrice, req.id);
       await bookingsController.postBooking(newBooking);
+      setStartDate(null);
+      setEndDate(null);
       return true;
     }
     return false;

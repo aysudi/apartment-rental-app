@@ -20,7 +20,9 @@ const BookApartment = ({ apartment }: any) => {
   const { totalPrice, handleApartmentData } = useBooking(
     apartment,
     startDate,
-    endDate
+    endDate,
+    setStartDate,
+    setEndDate
   );
 
   const openModal = () => {

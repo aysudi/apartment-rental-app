@@ -12,6 +12,7 @@ import {
   Heart,
   DoorOpen,
   BookOpen,
+  UserRoundPen,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
@@ -117,6 +118,20 @@ const Header = () => {
                   >
                     <DoorOpen size={20} />
                     Become Host
+                  </NavLink>
+                  <NavLink
+                    to={"/user"}
+                    onClick={() => {
+                      setOpenedMenu(false);
+                    }}
+                    className={({ isActive }) =>
+                      `py-2 flex items-center gap-2 px-2 hover:bg-[#f18502] hover:text-white rounded-md ${
+                        isActive ? "bg-[#f18502] text-white" : ""
+                      }`
+                    }
+                  >
+                    <UserRoundPen size={20} />
+                    Profile
                   </NavLink>
                   <NavLink
                     to={"/login"}
@@ -278,6 +293,20 @@ const Header = () => {
                 >
                   <DoorOpen size={20} />
                   Become Host
+                </NavLink>
+                <NavLink
+                  to={"/user"}
+                  onClick={() => {
+                    setOpenedMenu(false);
+                  }}
+                  className={({ isActive }) =>
+                    `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
+                      isActive ? "bg-[#f18502] text-white" : ""
+                    }`
+                  }
+                >
+                  <UserRoundPen size={20} />
+                  Profile
                 </NavLink>
                 <NavLink
                   to={"/login"}
