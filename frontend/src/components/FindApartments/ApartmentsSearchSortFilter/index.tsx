@@ -101,7 +101,11 @@ const ApartmentsSearchSortFilter = ({ setFilteredData, apartments }: Props) => {
         <ApartmentsSort sortBy={sortBy} setSortBy={setSortBy} />
       </div>
 
-      <ApartmentsFeaturesFilter features={features} setFeatures={setFeatures} />
+      <ApartmentsFeaturesFilter
+        apartments={apartments}
+        features={features}
+        setFeatures={setFeatures}
+      />
 
       <ApartmentRatingFilter
         minRating={minRating}

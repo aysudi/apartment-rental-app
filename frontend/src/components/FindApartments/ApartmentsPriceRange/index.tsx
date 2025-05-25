@@ -22,14 +22,14 @@ const ApartmentsPriceRange = ({
           placeholder="Min"
           value={minPrice}
           onChange={(e) => setMinPrice(e.target.value)}
-          className="w-full px-3 py-2 rounded-md border border-gray-300 text-sm"
+          className="w-full px-3 py-2 rounded-md border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF9A1E]"
         />
         <input
           type="number"
           placeholder="Max"
           value={maxPrice}
           onChange={(e) => setMaxPrice(e.target.value)}
-          className="w-full px-3 py-2 rounded-md border border-gray-300 text-sm"
+          className="w-full px-3 py-2 rounded-md border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF9A1E]"
         />
       </div>
     </div>
