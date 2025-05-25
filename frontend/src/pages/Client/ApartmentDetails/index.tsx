@@ -72,9 +72,7 @@ const ApartmentDetails = () => {
         </div>
       </div>
 
-      {/* Apartment Details Section */}
       <div className="flex flex-col lg:flex-row gap-6 justify-between w-full">
-        {/* Left side - Text Section */}
         <div className="flex flex-col gap-6 w-full lg:w-[calc(100%-18rem)]">
           <div className="flex flex-col gap-2">
             <h2 className="text-3xl font-bold">{apartment.title}</h2>
@@ -188,7 +186,6 @@ const ApartmentDetails = () => {
           </div>
         </div>
 
-        {/* Right side - Booking Section */}
         <BookApartment apartment={apartment} />
       </div>
     </div>
