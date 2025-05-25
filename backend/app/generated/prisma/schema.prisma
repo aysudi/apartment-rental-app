@@ -90,17 +90,27 @@ model Apartment {
 }
 
 model Booking {
-  id          String        @id @default(uuid())
-  user        User          @relation("UserBookings", fields: [userId], references: [id])
-  userId      String
-  apartment   Apartment     @relation(fields: [apartmentId], references: [id])
+  id           String        @id @default(uuid())
+  user         User          @relation("UserBookings", fields: [userId], references: [id])
+  userId       String
+  apartment    Apartment     @relation(fields: [apartmentId], references: [id])
+  apartmentId  String
+  bookedDates  BookedDate?   @relation("BookingDates", fields: [bookedDateId], references: [id])
+  bookedDateId String?
+  status       BookingStatus
+  totalPrice   Float
+  createdAt    DateTime      @default(now())
+  deleted      Boolean       @default(false)
+}
+
+model BookedDate {
+  id          String    @id @default(uuid())
+  startDate   DateTime
+  endDate     DateTime
+  apartment   Apartment @relation(fields: [apartmentId], references: [id])
   apartmentId String
-  startDate   String
-  endDate     String
-  status      BookingStatus
-  totalPrice  Float
-  createdAt   DateTime      @default(now())
-  deleted     Boolean       @default(false)
+  deleted     Boolean   @default(false)
+  booking     Booking[] @relation("BookingDates")
 }
 
 model Review {
@@ -112,15 +122,6 @@ model Review {
   rating      Int       @default(0) @db.SmallInt
   comment     String
   createdAt   DateTime  @default(now())
-  deleted     Boolean   @default(false)
-}
-
-model BookedDate {
-  id          String    @id @default(uuid())
-  startDate   DateTime
-  endDate     DateTime
-  apartment   Apartment @relation(fields: [apartmentId], references: [id])
-  apartmentId String
   deleted     Boolean   @default(false)
 }
 

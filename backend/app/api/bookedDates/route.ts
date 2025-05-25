@@ -18,29 +18,32 @@ export async function GET(req: Request) {
     const id = searchParams.get("id");
 
     if (id) {
-      const booking = await prisma.booking.findUnique({
+      const bookedDate = await prisma.bookedDate.findUnique({
         where: { id },
-        include: { user: true, apartment: true },
+        include: { apartment: true },
       });
 
-      if (!booking) {
+      if (!bookedDate) {
         return setCorsHeaders(
           NextResponse.json({ error: "Booking not found" }, { status: 404 })
         );
       }
 
-      return setCorsHeaders(NextResponse.json(booking, { status: 200 }));
+      return setCorsHeaders(NextResponse.json(bookedDate, { status: 200 }));
     }
 
-    const bookings = await prisma.booking.findMany({
-      include: { user: true, apartment: true },
+    const bookedDates = await prisma.bookedDate.findMany({
+      include: { apartment: true },
     });
 
-    const res = NextResponse.json(bookings, { status: 200 });
+    const res = NextResponse.json(bookedDates, { status: 200 });
     return setCorsHeaders(res);
   } catch (error) {
     return setCorsHeaders(
-      NextResponse.json({ error: "Failed to fetch bookings" }, { status: 500 })
+      NextResponse.json(
+        { error: "Failed to fetch booked date" },
+        { status: 500 }
+      )
     );
   }
 }
@@ -49,29 +52,30 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { userId, apartmentId, totalPrice, bookedDateId } = body;
+    const { startDate, apartmentId, endDate } = body;
 
-    if (!userId || !apartmentId || !totalPrice || !bookedDateId) {
+    if (!startDate || !apartmentId || !endDate) {
       return setCorsHeaders(
         NextResponse.json({ error: "Missing required fields" }, { status: 400 })
       );
     }
 
-    const newBooking = await prisma.booking.create({
+    const newBookedDate = await prisma.bookedDate.create({
       data: {
-        user: { connect: { id: userId } },
+        startDate,
         apartment: { connect: { id: apartmentId } },
-        totalPrice: parseFloat(totalPrice),
-        bookedDates: { connect: { id: bookedDateId } },
-        status: "pending",
+        endDate,
       },
     });
 
-    const res = NextResponse.json(newBooking, { status: 201 });
+    const res = NextResponse.json(newBookedDate, { status: 201 });
     return setCorsHeaders(res);
   } catch (error) {
     return setCorsHeaders(
-      NextResponse.json({ error: "Failed to create booking" }, { status: 500 })
+      NextResponse.json(
+        { error: "Failed to create booked date" },
+        { status: 500 }
+      )
     );
   }
 }

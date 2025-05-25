@@ -1,13 +1,13 @@
-export type BookedDate = {
-  id: string;
-  fullName: string;
-  email: string;
-  subject: string;
-  message: string;
-  isRead: boolean;
-  submittedAt: Date;
-  deleted: boolean;
-};
+// export type BookedDate = {
+//   id: string;
+//   fullName: string;
+//   email: string;
+//   subject: string;
+//   message: string;
+//   isRead: boolean;
+//   submittedAt: Date;
+//   deleted: boolean;
+// };
 
 export type Apartment = {
   id: string;
@@ -73,8 +73,7 @@ export type RegisteredUser = {
 export type Booking = {
   userId: string;
   apartmentId: string;
-  startDate: string;
-  endDate: string;
+  bookedDateId: string;
   totalPrice: number;
 };
 
@@ -93,4 +92,10 @@ export type PostedReview = {
   apartmentId: string;
   rating: number;
   comment: string;
+};
+
+export type BookedDate = {
+  startDate: Date;
+  apartmentId: string;
+  endDate: Date;
 };

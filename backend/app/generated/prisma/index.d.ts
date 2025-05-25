@@ -29,15 +29,15 @@ export type Apartment = $Result.DefaultSelection<Prisma.$ApartmentPayload>
  */
 export type Booking = $Result.DefaultSelection<Prisma.$BookingPayload>
 /**
- * Model Review
- * 
- */
-export type Review = $Result.DefaultSelection<Prisma.$ReviewPayload>
-/**
  * Model BookedDate
  * 
  */
 export type BookedDate = $Result.DefaultSelection<Prisma.$BookedDatePayload>
+/**
+ * Model Review
+ * 
+ */
+export type Review = $Result.DefaultSelection<Prisma.$ReviewPayload>
 /**
  * Model Contact
  * 
@@ -263,16 +263,6 @@ export class PrismaClient<
   get booking(): Prisma.BookingDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.review`: Exposes CRUD operations for the **Review** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Reviews
-    * const reviews = await prisma.review.findMany()
-    * ```
-    */
-  get review(): Prisma.ReviewDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.bookedDate`: Exposes CRUD operations for the **BookedDate** model.
     * Example usage:
     * ```ts
@@ -281,6 +271,16 @@ export class PrismaClient<
     * ```
     */
   get bookedDate(): Prisma.BookedDateDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.review`: Exposes CRUD operations for the **Review** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Reviews
+    * const reviews = await prisma.review.findMany()
+    * ```
+    */
+  get review(): Prisma.ReviewDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.contact`: Exposes CRUD operations for the **Contact** model.
@@ -754,8 +754,8 @@ export namespace Prisma {
     User: 'User',
     Apartment: 'Apartment',
     Booking: 'Booking',
-    Review: 'Review',
     BookedDate: 'BookedDate',
+    Review: 'Review',
     Contact: 'Contact',
     Coupon: 'Coupon',
     Slider: 'Slider'
@@ -777,7 +777,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "apartment" | "booking" | "review" | "bookedDate" | "contact" | "coupon" | "slider"
+      modelProps: "user" | "apartment" | "booking" | "bookedDate" | "review" | "contact" | "coupon" | "slider"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1003,80 +1003,6 @@ export namespace Prisma {
           }
         }
       }
-      Review: {
-        payload: Prisma.$ReviewPayload<ExtArgs>
-        fields: Prisma.ReviewFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ReviewFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ReviewFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
-          }
-          findFirst: {
-            args: Prisma.ReviewFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ReviewFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
-          }
-          findMany: {
-            args: Prisma.ReviewFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[]
-          }
-          create: {
-            args: Prisma.ReviewCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
-          }
-          createMany: {
-            args: Prisma.ReviewCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.ReviewCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[]
-          }
-          delete: {
-            args: Prisma.ReviewDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
-          }
-          update: {
-            args: Prisma.ReviewUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
-          }
-          deleteMany: {
-            args: Prisma.ReviewDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ReviewUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.ReviewUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[]
-          }
-          upsert: {
-            args: Prisma.ReviewUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
-          }
-          aggregate: {
-            args: Prisma.ReviewAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateReview>
-          }
-          groupBy: {
-            args: Prisma.ReviewGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ReviewGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ReviewCountArgs<ExtArgs>
-            result: $Utils.Optional<ReviewCountAggregateOutputType> | number
-          }
-        }
-      }
       BookedDate: {
         payload: Prisma.$BookedDatePayload<ExtArgs>
         fields: Prisma.BookedDateFieldRefs
@@ -1148,6 +1074,80 @@ export namespace Prisma {
           count: {
             args: Prisma.BookedDateCountArgs<ExtArgs>
             result: $Utils.Optional<BookedDateCountAggregateOutputType> | number
+          }
+        }
+      }
+      Review: {
+        payload: Prisma.$ReviewPayload<ExtArgs>
+        fields: Prisma.ReviewFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReviewFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReviewFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
+          }
+          findFirst: {
+            args: Prisma.ReviewFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReviewFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
+          }
+          findMany: {
+            args: Prisma.ReviewFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[]
+          }
+          create: {
+            args: Prisma.ReviewCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
+          }
+          createMany: {
+            args: Prisma.ReviewCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ReviewCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[]
+          }
+          delete: {
+            args: Prisma.ReviewDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
+          }
+          update: {
+            args: Prisma.ReviewUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
+          }
+          deleteMany: {
+            args: Prisma.ReviewDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReviewUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ReviewUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[]
+          }
+          upsert: {
+            args: Prisma.ReviewUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
+          }
+          aggregate: {
+            args: Prisma.ReviewAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReview>
+          }
+          groupBy: {
+            args: Prisma.ReviewGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReviewGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ReviewCountArgs<ExtArgs>
+            result: $Utils.Optional<ReviewCountAggregateOutputType> | number
           }
         }
       }
@@ -1460,8 +1460,8 @@ export namespace Prisma {
     user?: UserOmit
     apartment?: ApartmentOmit
     booking?: BookingOmit
-    review?: ReviewOmit
     bookedDate?: BookedDateOmit
+    review?: ReviewOmit
     contact?: ContactOmit
     coupon?: CouponOmit
     slider?: SliderOmit
@@ -1667,6 +1667,37 @@ export namespace Prisma {
    */
   export type ApartmentCountOutputTypeCountWishlistedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
+  }
+
+
+  /**
+   * Count Type BookedDateCountOutputType
+   */
+
+  export type BookedDateCountOutputType = {
+    booking: number
+  }
+
+  export type BookedDateCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    booking?: boolean | BookedDateCountOutputTypeCountBookingArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BookedDateCountOutputType without action
+   */
+  export type BookedDateCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookedDateCountOutputType
+     */
+    select?: BookedDateCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BookedDateCountOutputType without action
+   */
+  export type BookedDateCountOutputTypeCountBookingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BookingWhereInput
   }
 
 
@@ -4348,8 +4379,7 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     apartmentId: string | null
-    startDate: string | null
-    endDate: string | null
+    bookedDateId: string | null
     status: $Enums.BookingStatus | null
     totalPrice: number | null
     createdAt: Date | null
@@ -4360,8 +4390,7 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     apartmentId: string | null
-    startDate: string | null
-    endDate: string | null
+    bookedDateId: string | null
     status: $Enums.BookingStatus | null
     totalPrice: number | null
     createdAt: Date | null
@@ -4372,8 +4401,7 @@ export namespace Prisma {
     id: number
     userId: number
     apartmentId: number
-    startDate: number
-    endDate: number
+    bookedDateId: number
     status: number
     totalPrice: number
     createdAt: number
@@ -4394,8 +4422,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     apartmentId?: true
-    startDate?: true
-    endDate?: true
+    bookedDateId?: true
     status?: true
     totalPrice?: true
     createdAt?: true
@@ -4406,8 +4433,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     apartmentId?: true
-    startDate?: true
-    endDate?: true
+    bookedDateId?: true
     status?: true
     totalPrice?: true
     createdAt?: true
@@ -4418,8 +4444,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     apartmentId?: true
-    startDate?: true
-    endDate?: true
+    bookedDateId?: true
     status?: true
     totalPrice?: true
     createdAt?: true
@@ -4517,8 +4542,7 @@ export namespace Prisma {
     id: string
     userId: string
     apartmentId: string
-    startDate: string
-    endDate: string
+    bookedDateId: string | null
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt: Date
@@ -4548,68 +4572,70 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     apartmentId?: boolean
-    startDate?: boolean
-    endDate?: boolean
+    bookedDateId?: boolean
     status?: boolean
     totalPrice?: boolean
     createdAt?: boolean
     deleted?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
+    bookedDates?: boolean | Booking$bookedDatesArgs<ExtArgs>
   }, ExtArgs["result"]["booking"]>
 
   export type BookingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     apartmentId?: boolean
-    startDate?: boolean
-    endDate?: boolean
+    bookedDateId?: boolean
     status?: boolean
     totalPrice?: boolean
     createdAt?: boolean
     deleted?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
+    bookedDates?: boolean | Booking$bookedDatesArgs<ExtArgs>
   }, ExtArgs["result"]["booking"]>
 
   export type BookingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     apartmentId?: boolean
-    startDate?: boolean
-    endDate?: boolean
+    bookedDateId?: boolean
     status?: boolean
     totalPrice?: boolean
     createdAt?: boolean
     deleted?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
+    bookedDates?: boolean | Booking$bookedDatesArgs<ExtArgs>
   }, ExtArgs["result"]["booking"]>
 
   export type BookingSelectScalar = {
     id?: boolean
     userId?: boolean
     apartmentId?: boolean
-    startDate?: boolean
-    endDate?: boolean
+    bookedDateId?: boolean
     status?: boolean
     totalPrice?: boolean
     createdAt?: boolean
     deleted?: boolean
   }
 
-  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "apartmentId" | "startDate" | "endDate" | "status" | "totalPrice" | "createdAt" | "deleted", ExtArgs["result"]["booking"]>
+  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "apartmentId" | "bookedDateId" | "status" | "totalPrice" | "createdAt" | "deleted", ExtArgs["result"]["booking"]>
   export type BookingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
+    bookedDates?: boolean | Booking$bookedDatesArgs<ExtArgs>
   }
   export type BookingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
+    bookedDates?: boolean | Booking$bookedDatesArgs<ExtArgs>
   }
   export type BookingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
+    bookedDates?: boolean | Booking$bookedDatesArgs<ExtArgs>
   }
 
   export type $BookingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4617,13 +4643,13 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       apartment: Prisma.$ApartmentPayload<ExtArgs>
+      bookedDates: Prisma.$BookedDatePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
       apartmentId: string
-      startDate: string
-      endDate: string
+      bookedDateId: string | null
       status: $Enums.BookingStatus
       totalPrice: number
       createdAt: Date
@@ -5024,6 +5050,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     apartment<T extends ApartmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ApartmentDefaultArgs<ExtArgs>>): Prisma__ApartmentClient<$Result.GetResult<Prisma.$ApartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    bookedDates<T extends Booking$bookedDatesArgs<ExtArgs> = {}>(args?: Subset<T, Booking$bookedDatesArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5056,8 +5083,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Booking", 'String'>
     readonly userId: FieldRef<"Booking", 'String'>
     readonly apartmentId: FieldRef<"Booking", 'String'>
-    readonly startDate: FieldRef<"Booking", 'String'>
-    readonly endDate: FieldRef<"Booking", 'String'>
+    readonly bookedDateId: FieldRef<"Booking", 'String'>
     readonly status: FieldRef<"Booking", 'BookingStatus'>
     readonly totalPrice: FieldRef<"Booking", 'Float'>
     readonly createdAt: FieldRef<"Booking", 'DateTime'>
@@ -5458,6 +5484,25 @@ export namespace Prisma {
   }
 
   /**
+   * Booking.bookedDates
+   */
+  export type Booking$bookedDatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookedDate
+     */
+    select?: BookedDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookedDate
+     */
+    omit?: BookedDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookedDateInclude<ExtArgs> | null
+    where?: BookedDateWhereInput
+  }
+
+  /**
    * Booking without action
    */
   export type BookingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5473,6 +5518,1094 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: BookingInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BookedDate
+   */
+
+  export type AggregateBookedDate = {
+    _count: BookedDateCountAggregateOutputType | null
+    _min: BookedDateMinAggregateOutputType | null
+    _max: BookedDateMaxAggregateOutputType | null
+  }
+
+  export type BookedDateMinAggregateOutputType = {
+    id: string | null
+    startDate: Date | null
+    endDate: Date | null
+    apartmentId: string | null
+    deleted: boolean | null
+  }
+
+  export type BookedDateMaxAggregateOutputType = {
+    id: string | null
+    startDate: Date | null
+    endDate: Date | null
+    apartmentId: string | null
+    deleted: boolean | null
+  }
+
+  export type BookedDateCountAggregateOutputType = {
+    id: number
+    startDate: number
+    endDate: number
+    apartmentId: number
+    deleted: number
+    _all: number
+  }
+
+
+  export type BookedDateMinAggregateInputType = {
+    id?: true
+    startDate?: true
+    endDate?: true
+    apartmentId?: true
+    deleted?: true
+  }
+
+  export type BookedDateMaxAggregateInputType = {
+    id?: true
+    startDate?: true
+    endDate?: true
+    apartmentId?: true
+    deleted?: true
+  }
+
+  export type BookedDateCountAggregateInputType = {
+    id?: true
+    startDate?: true
+    endDate?: true
+    apartmentId?: true
+    deleted?: true
+    _all?: true
+  }
+
+  export type BookedDateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BookedDate to aggregate.
+     */
+    where?: BookedDateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BookedDates to fetch.
+     */
+    orderBy?: BookedDateOrderByWithRelationInput | BookedDateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BookedDateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BookedDates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BookedDates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BookedDates
+    **/
+    _count?: true | BookedDateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BookedDateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BookedDateMaxAggregateInputType
+  }
+
+  export type GetBookedDateAggregateType<T extends BookedDateAggregateArgs> = {
+        [P in keyof T & keyof AggregateBookedDate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBookedDate[P]>
+      : GetScalarType<T[P], AggregateBookedDate[P]>
+  }
+
+
+
+
+  export type BookedDateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BookedDateWhereInput
+    orderBy?: BookedDateOrderByWithAggregationInput | BookedDateOrderByWithAggregationInput[]
+    by: BookedDateScalarFieldEnum[] | BookedDateScalarFieldEnum
+    having?: BookedDateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BookedDateCountAggregateInputType | true
+    _min?: BookedDateMinAggregateInputType
+    _max?: BookedDateMaxAggregateInputType
+  }
+
+  export type BookedDateGroupByOutputType = {
+    id: string
+    startDate: Date
+    endDate: Date
+    apartmentId: string
+    deleted: boolean
+    _count: BookedDateCountAggregateOutputType | null
+    _min: BookedDateMinAggregateOutputType | null
+    _max: BookedDateMaxAggregateOutputType | null
+  }
+
+  type GetBookedDateGroupByPayload<T extends BookedDateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BookedDateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BookedDateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BookedDateGroupByOutputType[P]>
+            : GetScalarType<T[P], BookedDateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BookedDateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    apartmentId?: boolean
+    deleted?: boolean
+    apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
+    booking?: boolean | BookedDate$bookingArgs<ExtArgs>
+    _count?: boolean | BookedDateCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bookedDate"]>
+
+  export type BookedDateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    apartmentId?: boolean
+    deleted?: boolean
+    apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bookedDate"]>
+
+  export type BookedDateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    apartmentId?: boolean
+    deleted?: boolean
+    apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bookedDate"]>
+
+  export type BookedDateSelectScalar = {
+    id?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    apartmentId?: boolean
+    deleted?: boolean
+  }
+
+  export type BookedDateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "startDate" | "endDate" | "apartmentId" | "deleted", ExtArgs["result"]["bookedDate"]>
+  export type BookedDateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
+    booking?: boolean | BookedDate$bookingArgs<ExtArgs>
+    _count?: boolean | BookedDateCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type BookedDateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
+  }
+  export type BookedDateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
+  }
+
+  export type $BookedDatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BookedDate"
+    objects: {
+      apartment: Prisma.$ApartmentPayload<ExtArgs>
+      booking: Prisma.$BookingPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      startDate: Date
+      endDate: Date
+      apartmentId: string
+      deleted: boolean
+    }, ExtArgs["result"]["bookedDate"]>
+    composites: {}
+  }
+
+  type BookedDateGetPayload<S extends boolean | null | undefined | BookedDateDefaultArgs> = $Result.GetResult<Prisma.$BookedDatePayload, S>
+
+  type BookedDateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BookedDateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BookedDateCountAggregateInputType | true
+    }
+
+  export interface BookedDateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BookedDate'], meta: { name: 'BookedDate' } }
+    /**
+     * Find zero or one BookedDate that matches the filter.
+     * @param {BookedDateFindUniqueArgs} args - Arguments to find a BookedDate
+     * @example
+     * // Get one BookedDate
+     * const bookedDate = await prisma.bookedDate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BookedDateFindUniqueArgs>(args: SelectSubset<T, BookedDateFindUniqueArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BookedDate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BookedDateFindUniqueOrThrowArgs} args - Arguments to find a BookedDate
+     * @example
+     * // Get one BookedDate
+     * const bookedDate = await prisma.bookedDate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BookedDateFindUniqueOrThrowArgs>(args: SelectSubset<T, BookedDateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BookedDate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookedDateFindFirstArgs} args - Arguments to find a BookedDate
+     * @example
+     * // Get one BookedDate
+     * const bookedDate = await prisma.bookedDate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BookedDateFindFirstArgs>(args?: SelectSubset<T, BookedDateFindFirstArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BookedDate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookedDateFindFirstOrThrowArgs} args - Arguments to find a BookedDate
+     * @example
+     * // Get one BookedDate
+     * const bookedDate = await prisma.bookedDate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BookedDateFindFirstOrThrowArgs>(args?: SelectSubset<T, BookedDateFindFirstOrThrowArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BookedDates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookedDateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BookedDates
+     * const bookedDates = await prisma.bookedDate.findMany()
+     * 
+     * // Get first 10 BookedDates
+     * const bookedDates = await prisma.bookedDate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bookedDateWithIdOnly = await prisma.bookedDate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BookedDateFindManyArgs>(args?: SelectSubset<T, BookedDateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BookedDate.
+     * @param {BookedDateCreateArgs} args - Arguments to create a BookedDate.
+     * @example
+     * // Create one BookedDate
+     * const BookedDate = await prisma.bookedDate.create({
+     *   data: {
+     *     // ... data to create a BookedDate
+     *   }
+     * })
+     * 
+     */
+    create<T extends BookedDateCreateArgs>(args: SelectSubset<T, BookedDateCreateArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BookedDates.
+     * @param {BookedDateCreateManyArgs} args - Arguments to create many BookedDates.
+     * @example
+     * // Create many BookedDates
+     * const bookedDate = await prisma.bookedDate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BookedDateCreateManyArgs>(args?: SelectSubset<T, BookedDateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BookedDates and returns the data saved in the database.
+     * @param {BookedDateCreateManyAndReturnArgs} args - Arguments to create many BookedDates.
+     * @example
+     * // Create many BookedDates
+     * const bookedDate = await prisma.bookedDate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BookedDates and only return the `id`
+     * const bookedDateWithIdOnly = await prisma.bookedDate.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BookedDateCreateManyAndReturnArgs>(args?: SelectSubset<T, BookedDateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BookedDate.
+     * @param {BookedDateDeleteArgs} args - Arguments to delete one BookedDate.
+     * @example
+     * // Delete one BookedDate
+     * const BookedDate = await prisma.bookedDate.delete({
+     *   where: {
+     *     // ... filter to delete one BookedDate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BookedDateDeleteArgs>(args: SelectSubset<T, BookedDateDeleteArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BookedDate.
+     * @param {BookedDateUpdateArgs} args - Arguments to update one BookedDate.
+     * @example
+     * // Update one BookedDate
+     * const bookedDate = await prisma.bookedDate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BookedDateUpdateArgs>(args: SelectSubset<T, BookedDateUpdateArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BookedDates.
+     * @param {BookedDateDeleteManyArgs} args - Arguments to filter BookedDates to delete.
+     * @example
+     * // Delete a few BookedDates
+     * const { count } = await prisma.bookedDate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BookedDateDeleteManyArgs>(args?: SelectSubset<T, BookedDateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BookedDates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookedDateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BookedDates
+     * const bookedDate = await prisma.bookedDate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BookedDateUpdateManyArgs>(args: SelectSubset<T, BookedDateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BookedDates and returns the data updated in the database.
+     * @param {BookedDateUpdateManyAndReturnArgs} args - Arguments to update many BookedDates.
+     * @example
+     * // Update many BookedDates
+     * const bookedDate = await prisma.bookedDate.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BookedDates and only return the `id`
+     * const bookedDateWithIdOnly = await prisma.bookedDate.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BookedDateUpdateManyAndReturnArgs>(args: SelectSubset<T, BookedDateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BookedDate.
+     * @param {BookedDateUpsertArgs} args - Arguments to update or create a BookedDate.
+     * @example
+     * // Update or create a BookedDate
+     * const bookedDate = await prisma.bookedDate.upsert({
+     *   create: {
+     *     // ... data to create a BookedDate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BookedDate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BookedDateUpsertArgs>(args: SelectSubset<T, BookedDateUpsertArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BookedDates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookedDateCountArgs} args - Arguments to filter BookedDates to count.
+     * @example
+     * // Count the number of BookedDates
+     * const count = await prisma.bookedDate.count({
+     *   where: {
+     *     // ... the filter for the BookedDates we want to count
+     *   }
+     * })
+    **/
+    count<T extends BookedDateCountArgs>(
+      args?: Subset<T, BookedDateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BookedDateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BookedDate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookedDateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BookedDateAggregateArgs>(args: Subset<T, BookedDateAggregateArgs>): Prisma.PrismaPromise<GetBookedDateAggregateType<T>>
+
+    /**
+     * Group by BookedDate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookedDateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BookedDateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BookedDateGroupByArgs['orderBy'] }
+        : { orderBy?: BookedDateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BookedDateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBookedDateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BookedDate model
+   */
+  readonly fields: BookedDateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BookedDate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BookedDateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    apartment<T extends ApartmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ApartmentDefaultArgs<ExtArgs>>): Prisma__ApartmentClient<$Result.GetResult<Prisma.$ApartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    booking<T extends BookedDate$bookingArgs<ExtArgs> = {}>(args?: Subset<T, BookedDate$bookingArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BookedDate model
+   */
+  interface BookedDateFieldRefs {
+    readonly id: FieldRef<"BookedDate", 'String'>
+    readonly startDate: FieldRef<"BookedDate", 'DateTime'>
+    readonly endDate: FieldRef<"BookedDate", 'DateTime'>
+    readonly apartmentId: FieldRef<"BookedDate", 'String'>
+    readonly deleted: FieldRef<"BookedDate", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BookedDate findUnique
+   */
+  export type BookedDateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookedDate
+     */
+    select?: BookedDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookedDate
+     */
+    omit?: BookedDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookedDateInclude<ExtArgs> | null
+    /**
+     * Filter, which BookedDate to fetch.
+     */
+    where: BookedDateWhereUniqueInput
+  }
+
+  /**
+   * BookedDate findUniqueOrThrow
+   */
+  export type BookedDateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookedDate
+     */
+    select?: BookedDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookedDate
+     */
+    omit?: BookedDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookedDateInclude<ExtArgs> | null
+    /**
+     * Filter, which BookedDate to fetch.
+     */
+    where: BookedDateWhereUniqueInput
+  }
+
+  /**
+   * BookedDate findFirst
+   */
+  export type BookedDateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookedDate
+     */
+    select?: BookedDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookedDate
+     */
+    omit?: BookedDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookedDateInclude<ExtArgs> | null
+    /**
+     * Filter, which BookedDate to fetch.
+     */
+    where?: BookedDateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BookedDates to fetch.
+     */
+    orderBy?: BookedDateOrderByWithRelationInput | BookedDateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BookedDates.
+     */
+    cursor?: BookedDateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BookedDates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BookedDates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BookedDates.
+     */
+    distinct?: BookedDateScalarFieldEnum | BookedDateScalarFieldEnum[]
+  }
+
+  /**
+   * BookedDate findFirstOrThrow
+   */
+  export type BookedDateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookedDate
+     */
+    select?: BookedDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookedDate
+     */
+    omit?: BookedDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookedDateInclude<ExtArgs> | null
+    /**
+     * Filter, which BookedDate to fetch.
+     */
+    where?: BookedDateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BookedDates to fetch.
+     */
+    orderBy?: BookedDateOrderByWithRelationInput | BookedDateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BookedDates.
+     */
+    cursor?: BookedDateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BookedDates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BookedDates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BookedDates.
+     */
+    distinct?: BookedDateScalarFieldEnum | BookedDateScalarFieldEnum[]
+  }
+
+  /**
+   * BookedDate findMany
+   */
+  export type BookedDateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookedDate
+     */
+    select?: BookedDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookedDate
+     */
+    omit?: BookedDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookedDateInclude<ExtArgs> | null
+    /**
+     * Filter, which BookedDates to fetch.
+     */
+    where?: BookedDateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BookedDates to fetch.
+     */
+    orderBy?: BookedDateOrderByWithRelationInput | BookedDateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BookedDates.
+     */
+    cursor?: BookedDateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BookedDates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BookedDates.
+     */
+    skip?: number
+    distinct?: BookedDateScalarFieldEnum | BookedDateScalarFieldEnum[]
+  }
+
+  /**
+   * BookedDate create
+   */
+  export type BookedDateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookedDate
+     */
+    select?: BookedDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookedDate
+     */
+    omit?: BookedDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookedDateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BookedDate.
+     */
+    data: XOR<BookedDateCreateInput, BookedDateUncheckedCreateInput>
+  }
+
+  /**
+   * BookedDate createMany
+   */
+  export type BookedDateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BookedDates.
+     */
+    data: BookedDateCreateManyInput | BookedDateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BookedDate createManyAndReturn
+   */
+  export type BookedDateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookedDate
+     */
+    select?: BookedDateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookedDate
+     */
+    omit?: BookedDateOmit<ExtArgs> | null
+    /**
+     * The data used to create many BookedDates.
+     */
+    data: BookedDateCreateManyInput | BookedDateCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookedDateIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BookedDate update
+   */
+  export type BookedDateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookedDate
+     */
+    select?: BookedDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookedDate
+     */
+    omit?: BookedDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookedDateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BookedDate.
+     */
+    data: XOR<BookedDateUpdateInput, BookedDateUncheckedUpdateInput>
+    /**
+     * Choose, which BookedDate to update.
+     */
+    where: BookedDateWhereUniqueInput
+  }
+
+  /**
+   * BookedDate updateMany
+   */
+  export type BookedDateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BookedDates.
+     */
+    data: XOR<BookedDateUpdateManyMutationInput, BookedDateUncheckedUpdateManyInput>
+    /**
+     * Filter which BookedDates to update
+     */
+    where?: BookedDateWhereInput
+    /**
+     * Limit how many BookedDates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BookedDate updateManyAndReturn
+   */
+  export type BookedDateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookedDate
+     */
+    select?: BookedDateSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookedDate
+     */
+    omit?: BookedDateOmit<ExtArgs> | null
+    /**
+     * The data used to update BookedDates.
+     */
+    data: XOR<BookedDateUpdateManyMutationInput, BookedDateUncheckedUpdateManyInput>
+    /**
+     * Filter which BookedDates to update
+     */
+    where?: BookedDateWhereInput
+    /**
+     * Limit how many BookedDates to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookedDateIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BookedDate upsert
+   */
+  export type BookedDateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookedDate
+     */
+    select?: BookedDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookedDate
+     */
+    omit?: BookedDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookedDateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BookedDate to update in case it exists.
+     */
+    where: BookedDateWhereUniqueInput
+    /**
+     * In case the BookedDate found by the `where` argument doesn't exist, create a new BookedDate with this data.
+     */
+    create: XOR<BookedDateCreateInput, BookedDateUncheckedCreateInput>
+    /**
+     * In case the BookedDate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BookedDateUpdateInput, BookedDateUncheckedUpdateInput>
+  }
+
+  /**
+   * BookedDate delete
+   */
+  export type BookedDateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookedDate
+     */
+    select?: BookedDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookedDate
+     */
+    omit?: BookedDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookedDateInclude<ExtArgs> | null
+    /**
+     * Filter which BookedDate to delete.
+     */
+    where: BookedDateWhereUniqueInput
+  }
+
+  /**
+   * BookedDate deleteMany
+   */
+  export type BookedDateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BookedDates to delete
+     */
+    where?: BookedDateWhereInput
+    /**
+     * Limit how many BookedDates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BookedDate.booking
+   */
+  export type BookedDate$bookingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingInclude<ExtArgs> | null
+    where?: BookingWhereInput
+    orderBy?: BookingOrderByWithRelationInput | BookingOrderByWithRelationInput[]
+    cursor?: BookingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BookingScalarFieldEnum | BookingScalarFieldEnum[]
+  }
+
+  /**
+   * BookedDate without action
+   */
+  export type BookedDateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookedDate
+     */
+    select?: BookedDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookedDate
+     */
+    omit?: BookedDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookedDateInclude<ExtArgs> | null
   }
 
 
@@ -6599,1064 +7732,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ReviewInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model BookedDate
-   */
-
-  export type AggregateBookedDate = {
-    _count: BookedDateCountAggregateOutputType | null
-    _min: BookedDateMinAggregateOutputType | null
-    _max: BookedDateMaxAggregateOutputType | null
-  }
-
-  export type BookedDateMinAggregateOutputType = {
-    id: string | null
-    startDate: Date | null
-    endDate: Date | null
-    apartmentId: string | null
-    deleted: boolean | null
-  }
-
-  export type BookedDateMaxAggregateOutputType = {
-    id: string | null
-    startDate: Date | null
-    endDate: Date | null
-    apartmentId: string | null
-    deleted: boolean | null
-  }
-
-  export type BookedDateCountAggregateOutputType = {
-    id: number
-    startDate: number
-    endDate: number
-    apartmentId: number
-    deleted: number
-    _all: number
-  }
-
-
-  export type BookedDateMinAggregateInputType = {
-    id?: true
-    startDate?: true
-    endDate?: true
-    apartmentId?: true
-    deleted?: true
-  }
-
-  export type BookedDateMaxAggregateInputType = {
-    id?: true
-    startDate?: true
-    endDate?: true
-    apartmentId?: true
-    deleted?: true
-  }
-
-  export type BookedDateCountAggregateInputType = {
-    id?: true
-    startDate?: true
-    endDate?: true
-    apartmentId?: true
-    deleted?: true
-    _all?: true
-  }
-
-  export type BookedDateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which BookedDate to aggregate.
-     */
-    where?: BookedDateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BookedDates to fetch.
-     */
-    orderBy?: BookedDateOrderByWithRelationInput | BookedDateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: BookedDateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BookedDates from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BookedDates.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned BookedDates
-    **/
-    _count?: true | BookedDateCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: BookedDateMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: BookedDateMaxAggregateInputType
-  }
-
-  export type GetBookedDateAggregateType<T extends BookedDateAggregateArgs> = {
-        [P in keyof T & keyof AggregateBookedDate]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateBookedDate[P]>
-      : GetScalarType<T[P], AggregateBookedDate[P]>
-  }
-
-
-
-
-  export type BookedDateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BookedDateWhereInput
-    orderBy?: BookedDateOrderByWithAggregationInput | BookedDateOrderByWithAggregationInput[]
-    by: BookedDateScalarFieldEnum[] | BookedDateScalarFieldEnum
-    having?: BookedDateScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: BookedDateCountAggregateInputType | true
-    _min?: BookedDateMinAggregateInputType
-    _max?: BookedDateMaxAggregateInputType
-  }
-
-  export type BookedDateGroupByOutputType = {
-    id: string
-    startDate: Date
-    endDate: Date
-    apartmentId: string
-    deleted: boolean
-    _count: BookedDateCountAggregateOutputType | null
-    _min: BookedDateMinAggregateOutputType | null
-    _max: BookedDateMaxAggregateOutputType | null
-  }
-
-  type GetBookedDateGroupByPayload<T extends BookedDateGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<BookedDateGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof BookedDateGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], BookedDateGroupByOutputType[P]>
-            : GetScalarType<T[P], BookedDateGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type BookedDateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    startDate?: boolean
-    endDate?: boolean
-    apartmentId?: boolean
-    deleted?: boolean
-    apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["bookedDate"]>
-
-  export type BookedDateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    startDate?: boolean
-    endDate?: boolean
-    apartmentId?: boolean
-    deleted?: boolean
-    apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["bookedDate"]>
-
-  export type BookedDateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    startDate?: boolean
-    endDate?: boolean
-    apartmentId?: boolean
-    deleted?: boolean
-    apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["bookedDate"]>
-
-  export type BookedDateSelectScalar = {
-    id?: boolean
-    startDate?: boolean
-    endDate?: boolean
-    apartmentId?: boolean
-    deleted?: boolean
-  }
-
-  export type BookedDateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "startDate" | "endDate" | "apartmentId" | "deleted", ExtArgs["result"]["bookedDate"]>
-  export type BookedDateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
-  }
-  export type BookedDateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
-  }
-  export type BookedDateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    apartment?: boolean | ApartmentDefaultArgs<ExtArgs>
-  }
-
-  export type $BookedDatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "BookedDate"
-    objects: {
-      apartment: Prisma.$ApartmentPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      startDate: Date
-      endDate: Date
-      apartmentId: string
-      deleted: boolean
-    }, ExtArgs["result"]["bookedDate"]>
-    composites: {}
-  }
-
-  type BookedDateGetPayload<S extends boolean | null | undefined | BookedDateDefaultArgs> = $Result.GetResult<Prisma.$BookedDatePayload, S>
-
-  type BookedDateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<BookedDateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: BookedDateCountAggregateInputType | true
-    }
-
-  export interface BookedDateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BookedDate'], meta: { name: 'BookedDate' } }
-    /**
-     * Find zero or one BookedDate that matches the filter.
-     * @param {BookedDateFindUniqueArgs} args - Arguments to find a BookedDate
-     * @example
-     * // Get one BookedDate
-     * const bookedDate = await prisma.bookedDate.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends BookedDateFindUniqueArgs>(args: SelectSubset<T, BookedDateFindUniqueArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one BookedDate that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {BookedDateFindUniqueOrThrowArgs} args - Arguments to find a BookedDate
-     * @example
-     * // Get one BookedDate
-     * const bookedDate = await prisma.bookedDate.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends BookedDateFindUniqueOrThrowArgs>(args: SelectSubset<T, BookedDateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first BookedDate that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BookedDateFindFirstArgs} args - Arguments to find a BookedDate
-     * @example
-     * // Get one BookedDate
-     * const bookedDate = await prisma.bookedDate.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends BookedDateFindFirstArgs>(args?: SelectSubset<T, BookedDateFindFirstArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first BookedDate that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BookedDateFindFirstOrThrowArgs} args - Arguments to find a BookedDate
-     * @example
-     * // Get one BookedDate
-     * const bookedDate = await prisma.bookedDate.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends BookedDateFindFirstOrThrowArgs>(args?: SelectSubset<T, BookedDateFindFirstOrThrowArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more BookedDates that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BookedDateFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all BookedDates
-     * const bookedDates = await prisma.bookedDate.findMany()
-     * 
-     * // Get first 10 BookedDates
-     * const bookedDates = await prisma.bookedDate.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const bookedDateWithIdOnly = await prisma.bookedDate.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends BookedDateFindManyArgs>(args?: SelectSubset<T, BookedDateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a BookedDate.
-     * @param {BookedDateCreateArgs} args - Arguments to create a BookedDate.
-     * @example
-     * // Create one BookedDate
-     * const BookedDate = await prisma.bookedDate.create({
-     *   data: {
-     *     // ... data to create a BookedDate
-     *   }
-     * })
-     * 
-     */
-    create<T extends BookedDateCreateArgs>(args: SelectSubset<T, BookedDateCreateArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many BookedDates.
-     * @param {BookedDateCreateManyArgs} args - Arguments to create many BookedDates.
-     * @example
-     * // Create many BookedDates
-     * const bookedDate = await prisma.bookedDate.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends BookedDateCreateManyArgs>(args?: SelectSubset<T, BookedDateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many BookedDates and returns the data saved in the database.
-     * @param {BookedDateCreateManyAndReturnArgs} args - Arguments to create many BookedDates.
-     * @example
-     * // Create many BookedDates
-     * const bookedDate = await prisma.bookedDate.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many BookedDates and only return the `id`
-     * const bookedDateWithIdOnly = await prisma.bookedDate.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends BookedDateCreateManyAndReturnArgs>(args?: SelectSubset<T, BookedDateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a BookedDate.
-     * @param {BookedDateDeleteArgs} args - Arguments to delete one BookedDate.
-     * @example
-     * // Delete one BookedDate
-     * const BookedDate = await prisma.bookedDate.delete({
-     *   where: {
-     *     // ... filter to delete one BookedDate
-     *   }
-     * })
-     * 
-     */
-    delete<T extends BookedDateDeleteArgs>(args: SelectSubset<T, BookedDateDeleteArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one BookedDate.
-     * @param {BookedDateUpdateArgs} args - Arguments to update one BookedDate.
-     * @example
-     * // Update one BookedDate
-     * const bookedDate = await prisma.bookedDate.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends BookedDateUpdateArgs>(args: SelectSubset<T, BookedDateUpdateArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more BookedDates.
-     * @param {BookedDateDeleteManyArgs} args - Arguments to filter BookedDates to delete.
-     * @example
-     * // Delete a few BookedDates
-     * const { count } = await prisma.bookedDate.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends BookedDateDeleteManyArgs>(args?: SelectSubset<T, BookedDateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more BookedDates.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BookedDateUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many BookedDates
-     * const bookedDate = await prisma.bookedDate.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends BookedDateUpdateManyArgs>(args: SelectSubset<T, BookedDateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more BookedDates and returns the data updated in the database.
-     * @param {BookedDateUpdateManyAndReturnArgs} args - Arguments to update many BookedDates.
-     * @example
-     * // Update many BookedDates
-     * const bookedDate = await prisma.bookedDate.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more BookedDates and only return the `id`
-     * const bookedDateWithIdOnly = await prisma.bookedDate.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends BookedDateUpdateManyAndReturnArgs>(args: SelectSubset<T, BookedDateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one BookedDate.
-     * @param {BookedDateUpsertArgs} args - Arguments to update or create a BookedDate.
-     * @example
-     * // Update or create a BookedDate
-     * const bookedDate = await prisma.bookedDate.upsert({
-     *   create: {
-     *     // ... data to create a BookedDate
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the BookedDate we want to update
-     *   }
-     * })
-     */
-    upsert<T extends BookedDateUpsertArgs>(args: SelectSubset<T, BookedDateUpsertArgs<ExtArgs>>): Prisma__BookedDateClient<$Result.GetResult<Prisma.$BookedDatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of BookedDates.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BookedDateCountArgs} args - Arguments to filter BookedDates to count.
-     * @example
-     * // Count the number of BookedDates
-     * const count = await prisma.bookedDate.count({
-     *   where: {
-     *     // ... the filter for the BookedDates we want to count
-     *   }
-     * })
-    **/
-    count<T extends BookedDateCountArgs>(
-      args?: Subset<T, BookedDateCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], BookedDateCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a BookedDate.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BookedDateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends BookedDateAggregateArgs>(args: Subset<T, BookedDateAggregateArgs>): Prisma.PrismaPromise<GetBookedDateAggregateType<T>>
-
-    /**
-     * Group by BookedDate.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BookedDateGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends BookedDateGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: BookedDateGroupByArgs['orderBy'] }
-        : { orderBy?: BookedDateGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, BookedDateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBookedDateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the BookedDate model
-   */
-  readonly fields: BookedDateFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for BookedDate.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__BookedDateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    apartment<T extends ApartmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ApartmentDefaultArgs<ExtArgs>>): Prisma__ApartmentClient<$Result.GetResult<Prisma.$ApartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the BookedDate model
-   */
-  interface BookedDateFieldRefs {
-    readonly id: FieldRef<"BookedDate", 'String'>
-    readonly startDate: FieldRef<"BookedDate", 'DateTime'>
-    readonly endDate: FieldRef<"BookedDate", 'DateTime'>
-    readonly apartmentId: FieldRef<"BookedDate", 'String'>
-    readonly deleted: FieldRef<"BookedDate", 'Boolean'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * BookedDate findUnique
-   */
-  export type BookedDateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookedDate
-     */
-    select?: BookedDateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookedDate
-     */
-    omit?: BookedDateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookedDateInclude<ExtArgs> | null
-    /**
-     * Filter, which BookedDate to fetch.
-     */
-    where: BookedDateWhereUniqueInput
-  }
-
-  /**
-   * BookedDate findUniqueOrThrow
-   */
-  export type BookedDateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookedDate
-     */
-    select?: BookedDateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookedDate
-     */
-    omit?: BookedDateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookedDateInclude<ExtArgs> | null
-    /**
-     * Filter, which BookedDate to fetch.
-     */
-    where: BookedDateWhereUniqueInput
-  }
-
-  /**
-   * BookedDate findFirst
-   */
-  export type BookedDateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookedDate
-     */
-    select?: BookedDateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookedDate
-     */
-    omit?: BookedDateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookedDateInclude<ExtArgs> | null
-    /**
-     * Filter, which BookedDate to fetch.
-     */
-    where?: BookedDateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BookedDates to fetch.
-     */
-    orderBy?: BookedDateOrderByWithRelationInput | BookedDateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for BookedDates.
-     */
-    cursor?: BookedDateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BookedDates from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BookedDates.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of BookedDates.
-     */
-    distinct?: BookedDateScalarFieldEnum | BookedDateScalarFieldEnum[]
-  }
-
-  /**
-   * BookedDate findFirstOrThrow
-   */
-  export type BookedDateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookedDate
-     */
-    select?: BookedDateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookedDate
-     */
-    omit?: BookedDateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookedDateInclude<ExtArgs> | null
-    /**
-     * Filter, which BookedDate to fetch.
-     */
-    where?: BookedDateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BookedDates to fetch.
-     */
-    orderBy?: BookedDateOrderByWithRelationInput | BookedDateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for BookedDates.
-     */
-    cursor?: BookedDateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BookedDates from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BookedDates.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of BookedDates.
-     */
-    distinct?: BookedDateScalarFieldEnum | BookedDateScalarFieldEnum[]
-  }
-
-  /**
-   * BookedDate findMany
-   */
-  export type BookedDateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookedDate
-     */
-    select?: BookedDateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookedDate
-     */
-    omit?: BookedDateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookedDateInclude<ExtArgs> | null
-    /**
-     * Filter, which BookedDates to fetch.
-     */
-    where?: BookedDateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BookedDates to fetch.
-     */
-    orderBy?: BookedDateOrderByWithRelationInput | BookedDateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing BookedDates.
-     */
-    cursor?: BookedDateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BookedDates from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BookedDates.
-     */
-    skip?: number
-    distinct?: BookedDateScalarFieldEnum | BookedDateScalarFieldEnum[]
-  }
-
-  /**
-   * BookedDate create
-   */
-  export type BookedDateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookedDate
-     */
-    select?: BookedDateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookedDate
-     */
-    omit?: BookedDateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookedDateInclude<ExtArgs> | null
-    /**
-     * The data needed to create a BookedDate.
-     */
-    data: XOR<BookedDateCreateInput, BookedDateUncheckedCreateInput>
-  }
-
-  /**
-   * BookedDate createMany
-   */
-  export type BookedDateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many BookedDates.
-     */
-    data: BookedDateCreateManyInput | BookedDateCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * BookedDate createManyAndReturn
-   */
-  export type BookedDateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookedDate
-     */
-    select?: BookedDateSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookedDate
-     */
-    omit?: BookedDateOmit<ExtArgs> | null
-    /**
-     * The data used to create many BookedDates.
-     */
-    data: BookedDateCreateManyInput | BookedDateCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookedDateIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * BookedDate update
-   */
-  export type BookedDateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookedDate
-     */
-    select?: BookedDateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookedDate
-     */
-    omit?: BookedDateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookedDateInclude<ExtArgs> | null
-    /**
-     * The data needed to update a BookedDate.
-     */
-    data: XOR<BookedDateUpdateInput, BookedDateUncheckedUpdateInput>
-    /**
-     * Choose, which BookedDate to update.
-     */
-    where: BookedDateWhereUniqueInput
-  }
-
-  /**
-   * BookedDate updateMany
-   */
-  export type BookedDateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update BookedDates.
-     */
-    data: XOR<BookedDateUpdateManyMutationInput, BookedDateUncheckedUpdateManyInput>
-    /**
-     * Filter which BookedDates to update
-     */
-    where?: BookedDateWhereInput
-    /**
-     * Limit how many BookedDates to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * BookedDate updateManyAndReturn
-   */
-  export type BookedDateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookedDate
-     */
-    select?: BookedDateSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookedDate
-     */
-    omit?: BookedDateOmit<ExtArgs> | null
-    /**
-     * The data used to update BookedDates.
-     */
-    data: XOR<BookedDateUpdateManyMutationInput, BookedDateUncheckedUpdateManyInput>
-    /**
-     * Filter which BookedDates to update
-     */
-    where?: BookedDateWhereInput
-    /**
-     * Limit how many BookedDates to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookedDateIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * BookedDate upsert
-   */
-  export type BookedDateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookedDate
-     */
-    select?: BookedDateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookedDate
-     */
-    omit?: BookedDateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookedDateInclude<ExtArgs> | null
-    /**
-     * The filter to search for the BookedDate to update in case it exists.
-     */
-    where: BookedDateWhereUniqueInput
-    /**
-     * In case the BookedDate found by the `where` argument doesn't exist, create a new BookedDate with this data.
-     */
-    create: XOR<BookedDateCreateInput, BookedDateUncheckedCreateInput>
-    /**
-     * In case the BookedDate was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<BookedDateUpdateInput, BookedDateUncheckedUpdateInput>
-  }
-
-  /**
-   * BookedDate delete
-   */
-  export type BookedDateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookedDate
-     */
-    select?: BookedDateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookedDate
-     */
-    omit?: BookedDateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookedDateInclude<ExtArgs> | null
-    /**
-     * Filter which BookedDate to delete.
-     */
-    where: BookedDateWhereUniqueInput
-  }
-
-  /**
-   * BookedDate deleteMany
-   */
-  export type BookedDateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which BookedDates to delete
-     */
-    where?: BookedDateWhereInput
-    /**
-     * Limit how many BookedDates to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * BookedDate without action
-   */
-  export type BookedDateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookedDate
-     */
-    select?: BookedDateSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookedDate
-     */
-    omit?: BookedDateOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookedDateInclude<ExtArgs> | null
   }
 
 
@@ -10765,8 +10840,7 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     apartmentId: 'apartmentId',
-    startDate: 'startDate',
-    endDate: 'endDate',
+    bookedDateId: 'bookedDateId',
     status: 'status',
     totalPrice: 'totalPrice',
     createdAt: 'createdAt',
@@ -10774,6 +10848,17 @@ export namespace Prisma {
   };
 
   export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
+
+
+  export const BookedDateScalarFieldEnum: {
+    id: 'id',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    apartmentId: 'apartmentId',
+    deleted: 'deleted'
+  };
+
+  export type BookedDateScalarFieldEnum = (typeof BookedDateScalarFieldEnum)[keyof typeof BookedDateScalarFieldEnum]
 
 
   export const ReviewScalarFieldEnum: {
@@ -10787,17 +10872,6 @@ export namespace Prisma {
   };
 
   export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
-
-
-  export const BookedDateScalarFieldEnum: {
-    id: 'id',
-    startDate: 'startDate',
-    endDate: 'endDate',
-    apartmentId: 'apartmentId',
-    deleted: 'deleted'
-  };
-
-  export type BookedDateScalarFieldEnum = (typeof BookedDateScalarFieldEnum)[keyof typeof BookedDateScalarFieldEnum]
 
 
   export const ContactScalarFieldEnum: {
@@ -11214,28 +11288,28 @@ export namespace Prisma {
     id?: StringFilter<"Booking"> | string
     userId?: StringFilter<"Booking"> | string
     apartmentId?: StringFilter<"Booking"> | string
-    startDate?: StringFilter<"Booking"> | string
-    endDate?: StringFilter<"Booking"> | string
+    bookedDateId?: StringNullableFilter<"Booking"> | string | null
     status?: EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
     totalPrice?: FloatFilter<"Booking"> | number
     createdAt?: DateTimeFilter<"Booking"> | Date | string
     deleted?: BoolFilter<"Booking"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     apartment?: XOR<ApartmentScalarRelationFilter, ApartmentWhereInput>
+    bookedDates?: XOR<BookedDateNullableScalarRelationFilter, BookedDateWhereInput> | null
   }
 
   export type BookingOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
     apartmentId?: SortOrder
-    startDate?: SortOrder
-    endDate?: SortOrder
+    bookedDateId?: SortOrderInput | SortOrder
     status?: SortOrder
     totalPrice?: SortOrder
     createdAt?: SortOrder
     deleted?: SortOrder
     user?: UserOrderByWithRelationInput
     apartment?: ApartmentOrderByWithRelationInput
+    bookedDates?: BookedDateOrderByWithRelationInput
   }
 
   export type BookingWhereUniqueInput = Prisma.AtLeast<{
@@ -11245,22 +11319,21 @@ export namespace Prisma {
     NOT?: BookingWhereInput | BookingWhereInput[]
     userId?: StringFilter<"Booking"> | string
     apartmentId?: StringFilter<"Booking"> | string
-    startDate?: StringFilter<"Booking"> | string
-    endDate?: StringFilter<"Booking"> | string
+    bookedDateId?: StringNullableFilter<"Booking"> | string | null
     status?: EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
     totalPrice?: FloatFilter<"Booking"> | number
     createdAt?: DateTimeFilter<"Booking"> | Date | string
     deleted?: BoolFilter<"Booking"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     apartment?: XOR<ApartmentScalarRelationFilter, ApartmentWhereInput>
+    bookedDates?: XOR<BookedDateNullableScalarRelationFilter, BookedDateWhereInput> | null
   }, "id">
 
   export type BookingOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
     apartmentId?: SortOrder
-    startDate?: SortOrder
-    endDate?: SortOrder
+    bookedDateId?: SortOrderInput | SortOrder
     status?: SortOrder
     totalPrice?: SortOrder
     createdAt?: SortOrder
@@ -11279,12 +11352,69 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Booking"> | string
     userId?: StringWithAggregatesFilter<"Booking"> | string
     apartmentId?: StringWithAggregatesFilter<"Booking"> | string
-    startDate?: StringWithAggregatesFilter<"Booking"> | string
-    endDate?: StringWithAggregatesFilter<"Booking"> | string
+    bookedDateId?: StringNullableWithAggregatesFilter<"Booking"> | string | null
     status?: EnumBookingStatusWithAggregatesFilter<"Booking"> | $Enums.BookingStatus
     totalPrice?: FloatWithAggregatesFilter<"Booking"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
     deleted?: BoolWithAggregatesFilter<"Booking"> | boolean
+  }
+
+  export type BookedDateWhereInput = {
+    AND?: BookedDateWhereInput | BookedDateWhereInput[]
+    OR?: BookedDateWhereInput[]
+    NOT?: BookedDateWhereInput | BookedDateWhereInput[]
+    id?: StringFilter<"BookedDate"> | string
+    startDate?: DateTimeFilter<"BookedDate"> | Date | string
+    endDate?: DateTimeFilter<"BookedDate"> | Date | string
+    apartmentId?: StringFilter<"BookedDate"> | string
+    deleted?: BoolFilter<"BookedDate"> | boolean
+    apartment?: XOR<ApartmentScalarRelationFilter, ApartmentWhereInput>
+    booking?: BookingListRelationFilter
+  }
+
+  export type BookedDateOrderByWithRelationInput = {
+    id?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    apartmentId?: SortOrder
+    deleted?: SortOrder
+    apartment?: ApartmentOrderByWithRelationInput
+    booking?: BookingOrderByRelationAggregateInput
+  }
+
+  export type BookedDateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: BookedDateWhereInput | BookedDateWhereInput[]
+    OR?: BookedDateWhereInput[]
+    NOT?: BookedDateWhereInput | BookedDateWhereInput[]
+    startDate?: DateTimeFilter<"BookedDate"> | Date | string
+    endDate?: DateTimeFilter<"BookedDate"> | Date | string
+    apartmentId?: StringFilter<"BookedDate"> | string
+    deleted?: BoolFilter<"BookedDate"> | boolean
+    apartment?: XOR<ApartmentScalarRelationFilter, ApartmentWhereInput>
+    booking?: BookingListRelationFilter
+  }, "id">
+
+  export type BookedDateOrderByWithAggregationInput = {
+    id?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    apartmentId?: SortOrder
+    deleted?: SortOrder
+    _count?: BookedDateCountOrderByAggregateInput
+    _max?: BookedDateMaxOrderByAggregateInput
+    _min?: BookedDateMinOrderByAggregateInput
+  }
+
+  export type BookedDateScalarWhereWithAggregatesInput = {
+    AND?: BookedDateScalarWhereWithAggregatesInput | BookedDateScalarWhereWithAggregatesInput[]
+    OR?: BookedDateScalarWhereWithAggregatesInput[]
+    NOT?: BookedDateScalarWhereWithAggregatesInput | BookedDateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BookedDate"> | string
+    startDate?: DateTimeWithAggregatesFilter<"BookedDate"> | Date | string
+    endDate?: DateTimeWithAggregatesFilter<"BookedDate"> | Date | string
+    apartmentId?: StringWithAggregatesFilter<"BookedDate"> | string
+    deleted?: BoolWithAggregatesFilter<"BookedDate"> | boolean
   }
 
   export type ReviewWhereInput = {
@@ -11355,61 +11485,6 @@ export namespace Prisma {
     comment?: StringWithAggregatesFilter<"Review"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Review"> | Date | string
     deleted?: BoolWithAggregatesFilter<"Review"> | boolean
-  }
-
-  export type BookedDateWhereInput = {
-    AND?: BookedDateWhereInput | BookedDateWhereInput[]
-    OR?: BookedDateWhereInput[]
-    NOT?: BookedDateWhereInput | BookedDateWhereInput[]
-    id?: StringFilter<"BookedDate"> | string
-    startDate?: DateTimeFilter<"BookedDate"> | Date | string
-    endDate?: DateTimeFilter<"BookedDate"> | Date | string
-    apartmentId?: StringFilter<"BookedDate"> | string
-    deleted?: BoolFilter<"BookedDate"> | boolean
-    apartment?: XOR<ApartmentScalarRelationFilter, ApartmentWhereInput>
-  }
-
-  export type BookedDateOrderByWithRelationInput = {
-    id?: SortOrder
-    startDate?: SortOrder
-    endDate?: SortOrder
-    apartmentId?: SortOrder
-    deleted?: SortOrder
-    apartment?: ApartmentOrderByWithRelationInput
-  }
-
-  export type BookedDateWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: BookedDateWhereInput | BookedDateWhereInput[]
-    OR?: BookedDateWhereInput[]
-    NOT?: BookedDateWhereInput | BookedDateWhereInput[]
-    startDate?: DateTimeFilter<"BookedDate"> | Date | string
-    endDate?: DateTimeFilter<"BookedDate"> | Date | string
-    apartmentId?: StringFilter<"BookedDate"> | string
-    deleted?: BoolFilter<"BookedDate"> | boolean
-    apartment?: XOR<ApartmentScalarRelationFilter, ApartmentWhereInput>
-  }, "id">
-
-  export type BookedDateOrderByWithAggregationInput = {
-    id?: SortOrder
-    startDate?: SortOrder
-    endDate?: SortOrder
-    apartmentId?: SortOrder
-    deleted?: SortOrder
-    _count?: BookedDateCountOrderByAggregateInput
-    _max?: BookedDateMaxOrderByAggregateInput
-    _min?: BookedDateMinOrderByAggregateInput
-  }
-
-  export type BookedDateScalarWhereWithAggregatesInput = {
-    AND?: BookedDateScalarWhereWithAggregatesInput | BookedDateScalarWhereWithAggregatesInput[]
-    OR?: BookedDateScalarWhereWithAggregatesInput[]
-    NOT?: BookedDateScalarWhereWithAggregatesInput | BookedDateScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"BookedDate"> | string
-    startDate?: DateTimeWithAggregatesFilter<"BookedDate"> | Date | string
-    endDate?: DateTimeWithAggregatesFilter<"BookedDate"> | Date | string
-    apartmentId?: StringWithAggregatesFilter<"BookedDate"> | string
-    deleted?: BoolWithAggregatesFilter<"BookedDate"> | boolean
   }
 
   export type ContactWhereInput = {
@@ -11865,22 +11940,20 @@ export namespace Prisma {
 
   export type BookingCreateInput = {
     id?: string
-    startDate: string
-    endDate: string
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
     deleted?: boolean
     user: UserCreateNestedOneWithoutBookingsInput
     apartment: ApartmentCreateNestedOneWithoutBookingsInput
+    bookedDates?: BookedDateCreateNestedOneWithoutBookingInput
   }
 
   export type BookingUncheckedCreateInput = {
     id?: string
     userId: string
     apartmentId: string
-    startDate: string
-    endDate: string
+    bookedDateId?: string | null
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
@@ -11889,22 +11962,20 @@ export namespace Prisma {
 
   export type BookingUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    startDate?: StringFieldUpdateOperationsInput | string
-    endDate?: StringFieldUpdateOperationsInput | string
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutBookingsNestedInput
     apartment?: ApartmentUpdateOneRequiredWithoutBookingsNestedInput
+    bookedDates?: BookedDateUpdateOneWithoutBookingNestedInput
   }
 
   export type BookingUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     apartmentId?: StringFieldUpdateOperationsInput | string
-    startDate?: StringFieldUpdateOperationsInput | string
-    endDate?: StringFieldUpdateOperationsInput | string
+    bookedDateId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11915,8 +11986,7 @@ export namespace Prisma {
     id?: string
     userId: string
     apartmentId: string
-    startDate: string
-    endDate: string
+    bookedDateId?: string | null
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
@@ -11925,8 +11995,6 @@ export namespace Prisma {
 
   export type BookingUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    startDate?: StringFieldUpdateOperationsInput | string
-    endDate?: StringFieldUpdateOperationsInput | string
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11937,11 +12005,69 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     apartmentId?: StringFieldUpdateOperationsInput | string
-    startDate?: StringFieldUpdateOperationsInput | string
-    endDate?: StringFieldUpdateOperationsInput | string
+    bookedDateId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type BookedDateCreateInput = {
+    id?: string
+    startDate: Date | string
+    endDate: Date | string
+    deleted?: boolean
+    apartment: ApartmentCreateNestedOneWithoutBookedDatesInput
+    booking?: BookingCreateNestedManyWithoutBookedDatesInput
+  }
+
+  export type BookedDateUncheckedCreateInput = {
+    id?: string
+    startDate: Date | string
+    endDate: Date | string
+    apartmentId: string
+    deleted?: boolean
+    booking?: BookingUncheckedCreateNestedManyWithoutBookedDatesInput
+  }
+
+  export type BookedDateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    apartment?: ApartmentUpdateOneRequiredWithoutBookedDatesNestedInput
+    booking?: BookingUpdateManyWithoutBookedDatesNestedInput
+  }
+
+  export type BookedDateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    apartmentId?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    booking?: BookingUncheckedUpdateManyWithoutBookedDatesNestedInput
+  }
+
+  export type BookedDateCreateManyInput = {
+    id?: string
+    startDate: Date | string
+    endDate: Date | string
+    apartmentId: string
+    deleted?: boolean
+  }
+
+  export type BookedDateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type BookedDateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    apartmentId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -12010,61 +12136,6 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     comment?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type BookedDateCreateInput = {
-    id?: string
-    startDate: Date | string
-    endDate: Date | string
-    deleted?: boolean
-    apartment: ApartmentCreateNestedOneWithoutBookedDatesInput
-  }
-
-  export type BookedDateUncheckedCreateInput = {
-    id?: string
-    startDate: Date | string
-    endDate: Date | string
-    apartmentId: string
-    deleted?: boolean
-  }
-
-  export type BookedDateUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    deleted?: BoolFieldUpdateOperationsInput | boolean
-    apartment?: ApartmentUpdateOneRequiredWithoutBookedDatesNestedInput
-  }
-
-  export type BookedDateUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    apartmentId?: StringFieldUpdateOperationsInput | string
-    deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type BookedDateCreateManyInput = {
-    id?: string
-    startDate: Date | string
-    endDate: Date | string
-    apartmentId: string
-    deleted?: boolean
-  }
-
-  export type BookedDateUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type BookedDateUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    apartmentId?: StringFieldUpdateOperationsInput | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -12669,12 +12740,16 @@ export namespace Prisma {
     isNot?: ApartmentWhereInput
   }
 
+  export type BookedDateNullableScalarRelationFilter = {
+    is?: BookedDateWhereInput | null
+    isNot?: BookedDateWhereInput | null
+  }
+
   export type BookingCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     apartmentId?: SortOrder
-    startDate?: SortOrder
-    endDate?: SortOrder
+    bookedDateId?: SortOrder
     status?: SortOrder
     totalPrice?: SortOrder
     createdAt?: SortOrder
@@ -12689,8 +12764,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     apartmentId?: SortOrder
-    startDate?: SortOrder
-    endDate?: SortOrder
+    bookedDateId?: SortOrder
     status?: SortOrder
     totalPrice?: SortOrder
     createdAt?: SortOrder
@@ -12701,8 +12775,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     apartmentId?: SortOrder
-    startDate?: SortOrder
-    endDate?: SortOrder
+    bookedDateId?: SortOrder
     status?: SortOrder
     totalPrice?: SortOrder
     createdAt?: SortOrder
@@ -12721,6 +12794,30 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumBookingStatusFilter<$PrismaModel>
     _max?: NestedEnumBookingStatusFilter<$PrismaModel>
+  }
+
+  export type BookedDateCountOrderByAggregateInput = {
+    id?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    apartmentId?: SortOrder
+    deleted?: SortOrder
+  }
+
+  export type BookedDateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    apartmentId?: SortOrder
+    deleted?: SortOrder
+  }
+
+  export type BookedDateMinOrderByAggregateInput = {
+    id?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    apartmentId?: SortOrder
+    deleted?: SortOrder
   }
 
   export type ReviewCountOrderByAggregateInput = {
@@ -12759,30 +12856,6 @@ export namespace Prisma {
 
   export type ReviewSumOrderByAggregateInput = {
     rating?: SortOrder
-  }
-
-  export type BookedDateCountOrderByAggregateInput = {
-    id?: SortOrder
-    startDate?: SortOrder
-    endDate?: SortOrder
-    apartmentId?: SortOrder
-    deleted?: SortOrder
-  }
-
-  export type BookedDateMaxOrderByAggregateInput = {
-    id?: SortOrder
-    startDate?: SortOrder
-    endDate?: SortOrder
-    apartmentId?: SortOrder
-    deleted?: SortOrder
-  }
-
-  export type BookedDateMinOrderByAggregateInput = {
-    id?: SortOrder
-    startDate?: SortOrder
-    endDate?: SortOrder
-    apartmentId?: SortOrder
-    deleted?: SortOrder
   }
 
   export type ContactCountOrderByAggregateInput = {
@@ -13296,6 +13369,12 @@ export namespace Prisma {
     connect?: ApartmentWhereUniqueInput
   }
 
+  export type BookedDateCreateNestedOneWithoutBookingInput = {
+    create?: XOR<BookedDateCreateWithoutBookingInput, BookedDateUncheckedCreateWithoutBookingInput>
+    connectOrCreate?: BookedDateCreateOrConnectWithoutBookingInput
+    connect?: BookedDateWhereUniqueInput
+  }
+
   export type EnumBookingStatusFieldUpdateOperationsInput = {
     set?: $Enums.BookingStatus
   }
@@ -13314,6 +13393,72 @@ export namespace Prisma {
     upsert?: ApartmentUpsertWithoutBookingsInput
     connect?: ApartmentWhereUniqueInput
     update?: XOR<XOR<ApartmentUpdateToOneWithWhereWithoutBookingsInput, ApartmentUpdateWithoutBookingsInput>, ApartmentUncheckedUpdateWithoutBookingsInput>
+  }
+
+  export type BookedDateUpdateOneWithoutBookingNestedInput = {
+    create?: XOR<BookedDateCreateWithoutBookingInput, BookedDateUncheckedCreateWithoutBookingInput>
+    connectOrCreate?: BookedDateCreateOrConnectWithoutBookingInput
+    upsert?: BookedDateUpsertWithoutBookingInput
+    disconnect?: BookedDateWhereInput | boolean
+    delete?: BookedDateWhereInput | boolean
+    connect?: BookedDateWhereUniqueInput
+    update?: XOR<XOR<BookedDateUpdateToOneWithWhereWithoutBookingInput, BookedDateUpdateWithoutBookingInput>, BookedDateUncheckedUpdateWithoutBookingInput>
+  }
+
+  export type ApartmentCreateNestedOneWithoutBookedDatesInput = {
+    create?: XOR<ApartmentCreateWithoutBookedDatesInput, ApartmentUncheckedCreateWithoutBookedDatesInput>
+    connectOrCreate?: ApartmentCreateOrConnectWithoutBookedDatesInput
+    connect?: ApartmentWhereUniqueInput
+  }
+
+  export type BookingCreateNestedManyWithoutBookedDatesInput = {
+    create?: XOR<BookingCreateWithoutBookedDatesInput, BookingUncheckedCreateWithoutBookedDatesInput> | BookingCreateWithoutBookedDatesInput[] | BookingUncheckedCreateWithoutBookedDatesInput[]
+    connectOrCreate?: BookingCreateOrConnectWithoutBookedDatesInput | BookingCreateOrConnectWithoutBookedDatesInput[]
+    createMany?: BookingCreateManyBookedDatesInputEnvelope
+    connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+  }
+
+  export type BookingUncheckedCreateNestedManyWithoutBookedDatesInput = {
+    create?: XOR<BookingCreateWithoutBookedDatesInput, BookingUncheckedCreateWithoutBookedDatesInput> | BookingCreateWithoutBookedDatesInput[] | BookingUncheckedCreateWithoutBookedDatesInput[]
+    connectOrCreate?: BookingCreateOrConnectWithoutBookedDatesInput | BookingCreateOrConnectWithoutBookedDatesInput[]
+    createMany?: BookingCreateManyBookedDatesInputEnvelope
+    connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+  }
+
+  export type ApartmentUpdateOneRequiredWithoutBookedDatesNestedInput = {
+    create?: XOR<ApartmentCreateWithoutBookedDatesInput, ApartmentUncheckedCreateWithoutBookedDatesInput>
+    connectOrCreate?: ApartmentCreateOrConnectWithoutBookedDatesInput
+    upsert?: ApartmentUpsertWithoutBookedDatesInput
+    connect?: ApartmentWhereUniqueInput
+    update?: XOR<XOR<ApartmentUpdateToOneWithWhereWithoutBookedDatesInput, ApartmentUpdateWithoutBookedDatesInput>, ApartmentUncheckedUpdateWithoutBookedDatesInput>
+  }
+
+  export type BookingUpdateManyWithoutBookedDatesNestedInput = {
+    create?: XOR<BookingCreateWithoutBookedDatesInput, BookingUncheckedCreateWithoutBookedDatesInput> | BookingCreateWithoutBookedDatesInput[] | BookingUncheckedCreateWithoutBookedDatesInput[]
+    connectOrCreate?: BookingCreateOrConnectWithoutBookedDatesInput | BookingCreateOrConnectWithoutBookedDatesInput[]
+    upsert?: BookingUpsertWithWhereUniqueWithoutBookedDatesInput | BookingUpsertWithWhereUniqueWithoutBookedDatesInput[]
+    createMany?: BookingCreateManyBookedDatesInputEnvelope
+    set?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    disconnect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    delete?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    update?: BookingUpdateWithWhereUniqueWithoutBookedDatesInput | BookingUpdateWithWhereUniqueWithoutBookedDatesInput[]
+    updateMany?: BookingUpdateManyWithWhereWithoutBookedDatesInput | BookingUpdateManyWithWhereWithoutBookedDatesInput[]
+    deleteMany?: BookingScalarWhereInput | BookingScalarWhereInput[]
+  }
+
+  export type BookingUncheckedUpdateManyWithoutBookedDatesNestedInput = {
+    create?: XOR<BookingCreateWithoutBookedDatesInput, BookingUncheckedCreateWithoutBookedDatesInput> | BookingCreateWithoutBookedDatesInput[] | BookingUncheckedCreateWithoutBookedDatesInput[]
+    connectOrCreate?: BookingCreateOrConnectWithoutBookedDatesInput | BookingCreateOrConnectWithoutBookedDatesInput[]
+    upsert?: BookingUpsertWithWhereUniqueWithoutBookedDatesInput | BookingUpsertWithWhereUniqueWithoutBookedDatesInput[]
+    createMany?: BookingCreateManyBookedDatesInputEnvelope
+    set?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    disconnect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    delete?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+    update?: BookingUpdateWithWhereUniqueWithoutBookedDatesInput | BookingUpdateWithWhereUniqueWithoutBookedDatesInput[]
+    updateMany?: BookingUpdateManyWithWhereWithoutBookedDatesInput | BookingUpdateManyWithWhereWithoutBookedDatesInput[]
+    deleteMany?: BookingScalarWhereInput | BookingScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutReviewsInput = {
@@ -13342,20 +13487,6 @@ export namespace Prisma {
     upsert?: ApartmentUpsertWithoutReviewsInput
     connect?: ApartmentWhereUniqueInput
     update?: XOR<XOR<ApartmentUpdateToOneWithWhereWithoutReviewsInput, ApartmentUpdateWithoutReviewsInput>, ApartmentUncheckedUpdateWithoutReviewsInput>
-  }
-
-  export type ApartmentCreateNestedOneWithoutBookedDatesInput = {
-    create?: XOR<ApartmentCreateWithoutBookedDatesInput, ApartmentUncheckedCreateWithoutBookedDatesInput>
-    connectOrCreate?: ApartmentCreateOrConnectWithoutBookedDatesInput
-    connect?: ApartmentWhereUniqueInput
-  }
-
-  export type ApartmentUpdateOneRequiredWithoutBookedDatesNestedInput = {
-    create?: XOR<ApartmentCreateWithoutBookedDatesInput, ApartmentUncheckedCreateWithoutBookedDatesInput>
-    connectOrCreate?: ApartmentCreateOrConnectWithoutBookedDatesInput
-    upsert?: ApartmentUpsertWithoutBookedDatesInput
-    connect?: ApartmentWhereUniqueInput
-    update?: XOR<XOR<ApartmentUpdateToOneWithWhereWithoutBookedDatesInput, ApartmentUpdateWithoutBookedDatesInput>, ApartmentUncheckedUpdateWithoutBookedDatesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -13648,20 +13779,18 @@ export namespace Prisma {
 
   export type BookingCreateWithoutUserInput = {
     id?: string
-    startDate: string
-    endDate: string
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
     deleted?: boolean
     apartment: ApartmentCreateNestedOneWithoutBookingsInput
+    bookedDates?: BookedDateCreateNestedOneWithoutBookingInput
   }
 
   export type BookingUncheckedCreateWithoutUserInput = {
     id?: string
     apartmentId: string
-    startDate: string
-    endDate: string
+    bookedDateId?: string | null
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
@@ -13818,8 +13947,7 @@ export namespace Prisma {
     id?: StringFilter<"Booking"> | string
     userId?: StringFilter<"Booking"> | string
     apartmentId?: StringFilter<"Booking"> | string
-    startDate?: StringFilter<"Booking"> | string
-    endDate?: StringFilter<"Booking"> | string
+    bookedDateId?: StringNullableFilter<"Booking"> | string | null
     status?: EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
     totalPrice?: FloatFilter<"Booking"> | number
     createdAt?: DateTimeFilter<"Booking"> | Date | string
@@ -13876,6 +14004,7 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     deleted?: boolean
+    booking?: BookingCreateNestedManyWithoutBookedDatesInput
   }
 
   export type BookedDateUncheckedCreateWithoutApartmentInput = {
@@ -13883,6 +14012,7 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     deleted?: boolean
+    booking?: BookingUncheckedCreateNestedManyWithoutBookedDatesInput
   }
 
   export type BookedDateCreateOrConnectWithoutApartmentInput = {
@@ -13972,20 +14102,18 @@ export namespace Prisma {
 
   export type BookingCreateWithoutApartmentInput = {
     id?: string
-    startDate: string
-    endDate: string
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
     deleted?: boolean
     user: UserCreateNestedOneWithoutBookingsInput
+    bookedDates?: BookedDateCreateNestedOneWithoutBookingInput
   }
 
   export type BookingUncheckedCreateWithoutApartmentInput = {
     id?: string
     userId: string
-    startDate: string
-    endDate: string
+    bookedDateId?: string | null
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
@@ -14292,6 +14420,27 @@ export namespace Prisma {
     create: XOR<ApartmentCreateWithoutBookingsInput, ApartmentUncheckedCreateWithoutBookingsInput>
   }
 
+  export type BookedDateCreateWithoutBookingInput = {
+    id?: string
+    startDate: Date | string
+    endDate: Date | string
+    deleted?: boolean
+    apartment: ApartmentCreateNestedOneWithoutBookedDatesInput
+  }
+
+  export type BookedDateUncheckedCreateWithoutBookingInput = {
+    id?: string
+    startDate: Date | string
+    endDate: Date | string
+    apartmentId: string
+    deleted?: boolean
+  }
+
+  export type BookedDateCreateOrConnectWithoutBookingInput = {
+    where: BookedDateWhereUniqueInput
+    create: XOR<BookedDateCreateWithoutBookingInput, BookedDateUncheckedCreateWithoutBookingInput>
+  }
+
   export type UserUpsertWithoutBookingsInput = {
     update: XOR<UserUpdateWithoutBookingsInput, UserUncheckedUpdateWithoutBookingsInput>
     create: XOR<UserCreateWithoutBookingsInput, UserUncheckedCreateWithoutBookingsInput>
@@ -14396,6 +14545,179 @@ export namespace Prisma {
     bookedDates?: BookedDateUncheckedUpdateManyWithoutApartmentNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutApartmentNestedInput
     wishlistedBy?: UserUncheckedUpdateManyWithoutWishlistNestedInput
+  }
+
+  export type BookedDateUpsertWithoutBookingInput = {
+    update: XOR<BookedDateUpdateWithoutBookingInput, BookedDateUncheckedUpdateWithoutBookingInput>
+    create: XOR<BookedDateCreateWithoutBookingInput, BookedDateUncheckedCreateWithoutBookingInput>
+    where?: BookedDateWhereInput
+  }
+
+  export type BookedDateUpdateToOneWithWhereWithoutBookingInput = {
+    where?: BookedDateWhereInput
+    data: XOR<BookedDateUpdateWithoutBookingInput, BookedDateUncheckedUpdateWithoutBookingInput>
+  }
+
+  export type BookedDateUpdateWithoutBookingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    apartment?: ApartmentUpdateOneRequiredWithoutBookedDatesNestedInput
+  }
+
+  export type BookedDateUncheckedUpdateWithoutBookingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    apartmentId?: StringFieldUpdateOperationsInput | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ApartmentCreateWithoutBookedDatesInput = {
+    id?: string
+    title: string
+    type: $Enums.ApartmentType
+    location: string
+    pricePerNight: number
+    coverImage: string
+    images?: ApartmentCreateimagesInput | string[]
+    description: string
+    features?: ApartmentCreatefeaturesInput | string[]
+    rules?: ApartmentCreaterulesInput | string[]
+    createdAt?: Date | string
+    avgRating?: number
+    deleted?: boolean
+    rentalCount?: number
+    host: UserCreateNestedOneWithoutApartmentsInput
+    reviews?: ReviewCreateNestedManyWithoutApartmentInput
+    bookings?: BookingCreateNestedManyWithoutApartmentInput
+    wishlistedBy?: UserCreateNestedManyWithoutWishlistInput
+  }
+
+  export type ApartmentUncheckedCreateWithoutBookedDatesInput = {
+    id?: string
+    title: string
+    type: $Enums.ApartmentType
+    location: string
+    pricePerNight: number
+    coverImage: string
+    images?: ApartmentCreateimagesInput | string[]
+    description: string
+    features?: ApartmentCreatefeaturesInput | string[]
+    rules?: ApartmentCreaterulesInput | string[]
+    createdAt?: Date | string
+    avgRating?: number
+    deleted?: boolean
+    rentalCount?: number
+    hostId: string
+    reviews?: ReviewUncheckedCreateNestedManyWithoutApartmentInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutApartmentInput
+    wishlistedBy?: UserUncheckedCreateNestedManyWithoutWishlistInput
+  }
+
+  export type ApartmentCreateOrConnectWithoutBookedDatesInput = {
+    where: ApartmentWhereUniqueInput
+    create: XOR<ApartmentCreateWithoutBookedDatesInput, ApartmentUncheckedCreateWithoutBookedDatesInput>
+  }
+
+  export type BookingCreateWithoutBookedDatesInput = {
+    id?: string
+    status: $Enums.BookingStatus
+    totalPrice: number
+    createdAt?: Date | string
+    deleted?: boolean
+    user: UserCreateNestedOneWithoutBookingsInput
+    apartment: ApartmentCreateNestedOneWithoutBookingsInput
+  }
+
+  export type BookingUncheckedCreateWithoutBookedDatesInput = {
+    id?: string
+    userId: string
+    apartmentId: string
+    status: $Enums.BookingStatus
+    totalPrice: number
+    createdAt?: Date | string
+    deleted?: boolean
+  }
+
+  export type BookingCreateOrConnectWithoutBookedDatesInput = {
+    where: BookingWhereUniqueInput
+    create: XOR<BookingCreateWithoutBookedDatesInput, BookingUncheckedCreateWithoutBookedDatesInput>
+  }
+
+  export type BookingCreateManyBookedDatesInputEnvelope = {
+    data: BookingCreateManyBookedDatesInput | BookingCreateManyBookedDatesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ApartmentUpsertWithoutBookedDatesInput = {
+    update: XOR<ApartmentUpdateWithoutBookedDatesInput, ApartmentUncheckedUpdateWithoutBookedDatesInput>
+    create: XOR<ApartmentCreateWithoutBookedDatesInput, ApartmentUncheckedCreateWithoutBookedDatesInput>
+    where?: ApartmentWhereInput
+  }
+
+  export type ApartmentUpdateToOneWithWhereWithoutBookedDatesInput = {
+    where?: ApartmentWhereInput
+    data: XOR<ApartmentUpdateWithoutBookedDatesInput, ApartmentUncheckedUpdateWithoutBookedDatesInput>
+  }
+
+  export type ApartmentUpdateWithoutBookedDatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumApartmentTypeFieldUpdateOperationsInput | $Enums.ApartmentType
+    location?: StringFieldUpdateOperationsInput | string
+    pricePerNight?: FloatFieldUpdateOperationsInput | number
+    coverImage?: StringFieldUpdateOperationsInput | string
+    images?: ApartmentUpdateimagesInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
+    features?: ApartmentUpdatefeaturesInput | string[]
+    rules?: ApartmentUpdaterulesInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    avgRating?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
+    host?: UserUpdateOneRequiredWithoutApartmentsNestedInput
+    reviews?: ReviewUpdateManyWithoutApartmentNestedInput
+    bookings?: BookingUpdateManyWithoutApartmentNestedInput
+    wishlistedBy?: UserUpdateManyWithoutWishlistNestedInput
+  }
+
+  export type ApartmentUncheckedUpdateWithoutBookedDatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumApartmentTypeFieldUpdateOperationsInput | $Enums.ApartmentType
+    location?: StringFieldUpdateOperationsInput | string
+    pricePerNight?: FloatFieldUpdateOperationsInput | number
+    coverImage?: StringFieldUpdateOperationsInput | string
+    images?: ApartmentUpdateimagesInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
+    features?: ApartmentUpdatefeaturesInput | string[]
+    rules?: ApartmentUpdaterulesInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    avgRating?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    rentalCount?: IntFieldUpdateOperationsInput | number
+    hostId?: StringFieldUpdateOperationsInput | string
+    reviews?: ReviewUncheckedUpdateManyWithoutApartmentNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutApartmentNestedInput
+    wishlistedBy?: UserUncheckedUpdateManyWithoutWishlistNestedInput
+  }
+
+  export type BookingUpsertWithWhereUniqueWithoutBookedDatesInput = {
+    where: BookingWhereUniqueInput
+    update: XOR<BookingUpdateWithoutBookedDatesInput, BookingUncheckedUpdateWithoutBookedDatesInput>
+    create: XOR<BookingCreateWithoutBookedDatesInput, BookingUncheckedCreateWithoutBookedDatesInput>
+  }
+
+  export type BookingUpdateWithWhereUniqueWithoutBookedDatesInput = {
+    where: BookingWhereUniqueInput
+    data: XOR<BookingUpdateWithoutBookedDatesInput, BookingUncheckedUpdateWithoutBookedDatesInput>
+  }
+
+  export type BookingUpdateManyWithWhereWithoutBookedDatesInput = {
+    where: BookingScalarWhereInput
+    data: XOR<BookingUpdateManyMutationInput, BookingUncheckedUpdateManyWithoutBookedDatesInput>
   }
 
   export type UserCreateWithoutReviewsInput = {
@@ -14598,111 +14920,10 @@ export namespace Prisma {
     wishlistedBy?: UserUncheckedUpdateManyWithoutWishlistNestedInput
   }
 
-  export type ApartmentCreateWithoutBookedDatesInput = {
-    id?: string
-    title: string
-    type: $Enums.ApartmentType
-    location: string
-    pricePerNight: number
-    coverImage: string
-    images?: ApartmentCreateimagesInput | string[]
-    description: string
-    features?: ApartmentCreatefeaturesInput | string[]
-    rules?: ApartmentCreaterulesInput | string[]
-    createdAt?: Date | string
-    avgRating?: number
-    deleted?: boolean
-    rentalCount?: number
-    host: UserCreateNestedOneWithoutApartmentsInput
-    reviews?: ReviewCreateNestedManyWithoutApartmentInput
-    bookings?: BookingCreateNestedManyWithoutApartmentInput
-    wishlistedBy?: UserCreateNestedManyWithoutWishlistInput
-  }
-
-  export type ApartmentUncheckedCreateWithoutBookedDatesInput = {
-    id?: string
-    title: string
-    type: $Enums.ApartmentType
-    location: string
-    pricePerNight: number
-    coverImage: string
-    images?: ApartmentCreateimagesInput | string[]
-    description: string
-    features?: ApartmentCreatefeaturesInput | string[]
-    rules?: ApartmentCreaterulesInput | string[]
-    createdAt?: Date | string
-    avgRating?: number
-    deleted?: boolean
-    rentalCount?: number
-    hostId: string
-    reviews?: ReviewUncheckedCreateNestedManyWithoutApartmentInput
-    bookings?: BookingUncheckedCreateNestedManyWithoutApartmentInput
-    wishlistedBy?: UserUncheckedCreateNestedManyWithoutWishlistInput
-  }
-
-  export type ApartmentCreateOrConnectWithoutBookedDatesInput = {
-    where: ApartmentWhereUniqueInput
-    create: XOR<ApartmentCreateWithoutBookedDatesInput, ApartmentUncheckedCreateWithoutBookedDatesInput>
-  }
-
-  export type ApartmentUpsertWithoutBookedDatesInput = {
-    update: XOR<ApartmentUpdateWithoutBookedDatesInput, ApartmentUncheckedUpdateWithoutBookedDatesInput>
-    create: XOR<ApartmentCreateWithoutBookedDatesInput, ApartmentUncheckedCreateWithoutBookedDatesInput>
-    where?: ApartmentWhereInput
-  }
-
-  export type ApartmentUpdateToOneWithWhereWithoutBookedDatesInput = {
-    where?: ApartmentWhereInput
-    data: XOR<ApartmentUpdateWithoutBookedDatesInput, ApartmentUncheckedUpdateWithoutBookedDatesInput>
-  }
-
-  export type ApartmentUpdateWithoutBookedDatesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    type?: EnumApartmentTypeFieldUpdateOperationsInput | $Enums.ApartmentType
-    location?: StringFieldUpdateOperationsInput | string
-    pricePerNight?: FloatFieldUpdateOperationsInput | number
-    coverImage?: StringFieldUpdateOperationsInput | string
-    images?: ApartmentUpdateimagesInput | string[]
-    description?: StringFieldUpdateOperationsInput | string
-    features?: ApartmentUpdatefeaturesInput | string[]
-    rules?: ApartmentUpdaterulesInput | string[]
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    avgRating?: FloatFieldUpdateOperationsInput | number
-    deleted?: BoolFieldUpdateOperationsInput | boolean
-    rentalCount?: IntFieldUpdateOperationsInput | number
-    host?: UserUpdateOneRequiredWithoutApartmentsNestedInput
-    reviews?: ReviewUpdateManyWithoutApartmentNestedInput
-    bookings?: BookingUpdateManyWithoutApartmentNestedInput
-    wishlistedBy?: UserUpdateManyWithoutWishlistNestedInput
-  }
-
-  export type ApartmentUncheckedUpdateWithoutBookedDatesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    type?: EnumApartmentTypeFieldUpdateOperationsInput | $Enums.ApartmentType
-    location?: StringFieldUpdateOperationsInput | string
-    pricePerNight?: FloatFieldUpdateOperationsInput | number
-    coverImage?: StringFieldUpdateOperationsInput | string
-    images?: ApartmentUpdateimagesInput | string[]
-    description?: StringFieldUpdateOperationsInput | string
-    features?: ApartmentUpdatefeaturesInput | string[]
-    rules?: ApartmentUpdaterulesInput | string[]
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    avgRating?: FloatFieldUpdateOperationsInput | number
-    deleted?: BoolFieldUpdateOperationsInput | boolean
-    rentalCount?: IntFieldUpdateOperationsInput | number
-    hostId?: StringFieldUpdateOperationsInput | string
-    reviews?: ReviewUncheckedUpdateManyWithoutApartmentNestedInput
-    bookings?: BookingUncheckedUpdateManyWithoutApartmentNestedInput
-    wishlistedBy?: UserUncheckedUpdateManyWithoutWishlistNestedInput
-  }
-
   export type BookingCreateManyUserInput = {
     id?: string
     apartmentId: string
-    startDate: string
-    endDate: string
+    bookedDateId?: string | null
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
@@ -14797,20 +15018,18 @@ export namespace Prisma {
 
   export type BookingUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    startDate?: StringFieldUpdateOperationsInput | string
-    endDate?: StringFieldUpdateOperationsInput | string
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     apartment?: ApartmentUpdateOneRequiredWithoutBookingsNestedInput
+    bookedDates?: BookedDateUpdateOneWithoutBookingNestedInput
   }
 
   export type BookingUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     apartmentId?: StringFieldUpdateOperationsInput | string
-    startDate?: StringFieldUpdateOperationsInput | string
-    endDate?: StringFieldUpdateOperationsInput | string
+    bookedDateId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14820,8 +15039,7 @@ export namespace Prisma {
   export type BookingUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     apartmentId?: StringFieldUpdateOperationsInput | string
-    startDate?: StringFieldUpdateOperationsInput | string
-    endDate?: StringFieldUpdateOperationsInput | string
+    bookedDateId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14933,8 +15151,7 @@ export namespace Prisma {
   export type BookingCreateManyApartmentInput = {
     id?: string
     userId: string
-    startDate: string
-    endDate: string
+    bookedDateId?: string | null
     status: $Enums.BookingStatus
     totalPrice: number
     createdAt?: Date | string
@@ -14946,6 +15163,7 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    booking?: BookingUpdateManyWithoutBookedDatesNestedInput
   }
 
   export type BookedDateUncheckedUpdateWithoutApartmentInput = {
@@ -14953,6 +15171,7 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    booking?: BookingUncheckedUpdateManyWithoutBookedDatesNestedInput
   }
 
   export type BookedDateUncheckedUpdateManyWithoutApartmentInput = {
@@ -14991,20 +15210,18 @@ export namespace Prisma {
 
   export type BookingUpdateWithoutApartmentInput = {
     id?: StringFieldUpdateOperationsInput | string
-    startDate?: StringFieldUpdateOperationsInput | string
-    endDate?: StringFieldUpdateOperationsInput | string
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutBookingsNestedInput
+    bookedDates?: BookedDateUpdateOneWithoutBookingNestedInput
   }
 
   export type BookingUncheckedUpdateWithoutApartmentInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    startDate?: StringFieldUpdateOperationsInput | string
-    endDate?: StringFieldUpdateOperationsInput | string
+    bookedDateId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15014,8 +15231,7 @@ export namespace Prisma {
   export type BookingUncheckedUpdateManyWithoutApartmentInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    startDate?: StringFieldUpdateOperationsInput | string
-    endDate?: StringFieldUpdateOperationsInput | string
+    bookedDateId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     totalPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15079,6 +15295,46 @@ export namespace Prisma {
     banDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type BookingCreateManyBookedDatesInput = {
+    id?: string
+    userId: string
+    apartmentId: string
+    status: $Enums.BookingStatus
+    totalPrice: number
+    createdAt?: Date | string
+    deleted?: boolean
+  }
+
+  export type BookingUpdateWithoutBookedDatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutBookingsNestedInput
+    apartment?: ApartmentUpdateOneRequiredWithoutBookingsNestedInput
+  }
+
+  export type BookingUncheckedUpdateWithoutBookedDatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    apartmentId?: StringFieldUpdateOperationsInput | string
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type BookingUncheckedUpdateManyWithoutBookedDatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    apartmentId?: StringFieldUpdateOperationsInput | string
+    status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
