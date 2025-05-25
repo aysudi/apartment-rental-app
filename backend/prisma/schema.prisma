@@ -33,6 +33,13 @@ enum ApartmentType {
   penthouse
   duplex
   studio
+  bungalow
+  loft
+  house
+  farmhouse
+  resort
+  tinyhome
+  mansion
 }
 
 enum Role {

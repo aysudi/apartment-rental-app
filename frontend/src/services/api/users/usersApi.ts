@@ -28,6 +28,7 @@ async function getOneUser(userId: string) {
 async function getUserByEmail(email: string) {
   try {
     const response = await instance.get(`${endpoints.users}?email=${email}`);
+    console.log(response);
     return response.data || null;
   } catch (error) {
     console.error(`Error fetching user by email`, error);
@@ -70,14 +71,8 @@ async function login(credentials: { email: string; password: string }) {
 // Register new user
 async function register(userData: RegisteredUser) {
   try {
-    const duplicateEmail = await getUserByEmail(userData.email);
-    if (duplicateEmail) {
-      return {
-        message: "duplicate email",
-        data: null,
-      };
-    }
     const response = await instance.post(endpoints.users, userData);
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error("Error registering user:", error);
@@ -146,6 +141,7 @@ async function postUser(userData: RegisteredUser) {
 const authController = {
   getAllUsers,
   getOneUser,
+  getUserByEmail,
   login,
   register,
   deleteUser,

@@ -1,10 +1,25 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import ApartmentsSearchSortFilter from "../FindApartments/ApartmentsSearchSortFilter";
+import type { Apartment } from "@/types/type";
 
-const ApartmentsSkeleton = () => {
+type Props = {
+  setFilteredData: React.Dispatch<React.SetStateAction<Apartment[] | null>>;
+  apartments: Apartment[];
+};
+
+const ApartmentsSkeleton = ({ setFilteredData, apartments }: Props) => {
   return (
-    <div className="w-[90%] mx-auto py-[6.1rem] flex flex-col gap-4">
-      <h1 className="font-bold text-3xl">Apartments</h1>
-      <div className="grid grid-cols-5 gap-3">
+    <div className="w-full max-w-7xl mx-auto pt-[7rem] pb-16 px-4 sm:px-6 lg:px-8">
+      <h1 className="font-bold text-3xl text-center mb-6">Find Your Stay</h1>
+
+      <ApartmentsSearchSortFilter
+        setFilteredData={setFilteredData}
+        apartments={apartments}
+      />
+
+      <h1 className="font-bold text-2xl mb-4 mt-10">Apartments</h1>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-4">
         {[...Array(20)].map((_, idx) => (
           <div key={idx} className="flex flex-col gap-3">
             <div className="h-[18rem]">
