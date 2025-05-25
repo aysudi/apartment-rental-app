@@ -29,8 +29,10 @@ const ApartmentDetails = () => {
     (review) => review.apartmentId == apartment.id
   );
 
+  console.log(apartment);
+
   return (
-    <div className="flex flex-col mb-[3rem] gap-10 pt-[6.1rem] w-full max-w-7xl mx-auto h-full">
+    <div className="min-h-[80vh] flex flex-col mb-[3rem] gap-10 pt-[6.1rem] w-full max-w-7xl mx-auto h-full">
       {/* Image Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-[35rem]">
         <div className="sm:h-[35rem] overflow-hidden rounded-xl">
@@ -73,7 +75,7 @@ const ApartmentDetails = () => {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-6 justify-between w-full">
-        <div className="flex flex-col gap-6 w-full lg:w-[calc(100%-18rem)]">
+        <div className="flex flex-col gap-10 w-full lg:w-[calc(100%-18rem)]">
           <div className="flex flex-col gap-2">
             <h2 className="text-3xl font-bold">{apartment.title}</h2>
             <div className="flex gap-2 items-center">
@@ -102,10 +104,10 @@ const ApartmentDetails = () => {
           </div>
 
           {/* Host */}
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-4">
             <h3 className="text-2xl font-bold">Host</h3>
             <div className="flex gap-4 items-center">
-              <div className="w-[5rem] h-[4.5rem]">
+              <div className="w-[4.5rem]">
                 <img
                   className="h-full w-full object-cover rounded-[50%]"
                   src={apartment.host.profileImage}

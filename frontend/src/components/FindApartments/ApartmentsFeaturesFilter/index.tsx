@@ -1,9 +1,16 @@
+import type { Apartment } from "@/types/type";
+
 type Props = {
   setFeatures: React.Dispatch<React.SetStateAction<string[]>>;
   features: string[];
+  apartments: Apartment[];
 };
 
-const ApartmentsFeaturesFilter = ({ setFeatures, features }: Props) => {
+const ApartmentsFeaturesFilter = ({
+  apartments,
+  setFeatures,
+  features,
+}: Props) => {
   const toggleFeature = (feature: string) => {
     setFeatures((prev) =>
       prev.includes(feature)
@@ -12,7 +19,9 @@ const ApartmentsFeaturesFilter = ({ setFeatures, features }: Props) => {
     );
   };
 
-  const allFeatures = ["Wi-Fi", "Pool", "Kitchen", "AC", "Parking"];
+  const allFeatures = Array.from(
+    new Set(apartments?.flatMap((apt) => apt.features))
+  );
 
   return (
     <div className="mt-6">
@@ -24,7 +33,7 @@ const ApartmentsFeaturesFilter = ({ setFeatures, features }: Props) => {
           <button
             key={f}
             onClick={() => toggleFeature(f)}
-            className={`px-3 py-1 text-sm rounded-full border transition ${
+            className={`px-3 py-1 text-sm rounded-full border transition cursor-pointer hover:bg-[#ff9a1ee0] hover:text-white ${
               features.includes(f)
                 ? "bg-[#FF9A1E] text-white border-transparent"
                 : "bg-gray-100 text-gray-800 border-gray-300"

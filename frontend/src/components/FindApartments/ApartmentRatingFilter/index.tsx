@@ -16,7 +16,7 @@ const ApartmentRatingFilter = ({ minRating, setMinRating }: Props) => {
         max="5"
         value={minRating}
         onChange={(e) => setMinRating(e.target.value)}
-        className="mt-1 w-full border px-3 py-2 rounded-md text-sm"
+        className="mt-1 w-full border px-3 py-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#FF9A1E]"
       />
     </div>
   );
