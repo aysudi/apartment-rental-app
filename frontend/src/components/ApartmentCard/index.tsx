@@ -28,7 +28,7 @@ const ApartmentCard = ({ apartment, idx }: Props) => {
       className="flex flex-col gap-3 bg-white rounded-lg shadow-lg overflow-hidden"
     >
       <div className="relative">
-        <div className="h-[18rem] w-full">
+        <div className="md:h-[13rem] h-[18rem] lg:h-[18rem] w-full">
           <img
             className="w-full h-full object-cover rounded-t-lg"
             src={apartment.coverImage}
