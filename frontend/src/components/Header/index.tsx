@@ -128,7 +128,7 @@ const Header = () => {
               ) : (
                 <>
                   <NavLink
-                    to={"/wishlist"}
+                    to={"/login"}
                     className={({ isActive }) =>
                       `py-2 flex items-center gap-2 px-2 hover:bg-[#f18502] hover:text-white rounded-md ${
                         isActive ? "bg-[#f18502] text-white" : ""
@@ -139,7 +139,7 @@ const Header = () => {
                     Log In
                   </NavLink>
                   <NavLink
-                    to={"/become-host"}
+                    to={"/register"}
                     className={({ isActive }) =>
                       `py-2 flex items-center gap-2 px-2 hover:bg-[#f18502] hover:text-white rounded-md ${
                         isActive ? "bg-[#f18502] text-white" : ""
