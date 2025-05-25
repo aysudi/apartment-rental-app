@@ -31,6 +31,7 @@ const Header = () => {
         <div className="hidden md:flex items-center gap-4">
           <NavLink
             to={"/"}
+            onClick={() => setOpenedMenu(false)}
             className={({ isActive }) =>
               `py-3 flex items-center gap-2 px-4 text-white hover:bg-[#f18502] rounded-md ${
                 isActive ? "bg-[#f18502]" : ""
@@ -42,6 +43,7 @@ const Header = () => {
           </NavLink>
           <NavLink
             to={"/apartments"}
+            onClick={() => setOpenedMenu(false)}
             className={({ isActive }) =>
               `py-3 flex items-center gap-2 px-4 text-white hover:bg-[#f18502] rounded-md ${
                 isActive ? "bg-[#f18502]" : ""
@@ -53,6 +55,7 @@ const Header = () => {
           </NavLink>
           <NavLink
             to={"/about"}
+            onClick={() => setOpenedMenu(false)}
             className={({ isActive }) =>
               `py-3 flex items-center gap-2 px-4 text-white hover:bg-[#f18502] rounded-md ${
                 isActive ? "bg-[#f18502]" : ""
@@ -64,6 +67,7 @@ const Header = () => {
           </NavLink>
           <NavLink
             to={"/contact"}
+            onClick={() => setOpenedMenu(false)}
             className={({ isActive }) =>
               `py-3 flex items-center gap-2 px-4 text-white hover:bg-[#f18502] rounded-md ${
                 isActive ? "bg-[#f18502]" : ""
@@ -92,6 +96,7 @@ const Header = () => {
                 <>
                   <NavLink
                     to={"/wishlist"}
+                    onClick={() => setOpenedMenu(false)}
                     className={({ isActive }) =>
                       `py-2 flex items-center gap-2 px-2 hover:bg-[#f18502] hover:text-white rounded-md ${
                         isActive ? "bg-[#f18502] text-white" : ""
@@ -103,6 +108,7 @@ const Header = () => {
                   </NavLink>
                   <NavLink
                     to={"/become-host"}
+                    onClick={() => setOpenedMenu(false)}
                     className={({ isActive }) =>
                       `py-2 flex items-center gap-2 px-2 hover:bg-[#f18502] hover:text-white rounded-md ${
                         isActive ? "bg-[#f18502] text-white" : ""
@@ -114,7 +120,10 @@ const Header = () => {
                   </NavLink>
                   <NavLink
                     to={"/login"}
-                    onClick={logout}
+                    onClick={() => {
+                      logout();
+                      setOpenedMenu(false);
+                    }}
                     className={({ isActive }) =>
                       `py-2 flex items-center gap-2 px-2 hover:bg-[#f18502] hover:text-white rounded-md ${
                         isActive ? "bg-[#f18502] text-white" : ""
@@ -129,6 +138,7 @@ const Header = () => {
                 <>
                   <NavLink
                     to={"/login"}
+                    onClick={() => setOpenedMenu(false)}
                     className={({ isActive }) =>
                       `py-2 flex items-center gap-2 px-2 hover:bg-[#f18502] hover:text-white rounded-md ${
                         isActive ? "bg-[#f18502] text-white" : ""
@@ -140,6 +150,7 @@ const Header = () => {
                   </NavLink>
                   <NavLink
                     to={"/register"}
+                    onClick={() => setOpenedMenu(false)}
                     className={({ isActive }) =>
                       `py-2 flex items-center gap-2 px-2 hover:bg-[#f18502] hover:text-white rounded-md ${
                         isActive ? "bg-[#f18502] text-white" : ""

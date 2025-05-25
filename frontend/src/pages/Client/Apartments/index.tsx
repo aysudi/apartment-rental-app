@@ -17,7 +17,7 @@ const Apartments = () => {
       <h1 className="font-bold text-3xl text-center mb-6">
         Find Your Perfect Apartment
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-4">
         {apartments &&
           apartments.map((apartment: Apartment, idx: number) => (
             <ApartmentCard key={idx} idx={idx} apartment={apartment} />
