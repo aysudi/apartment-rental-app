@@ -7,6 +7,7 @@ import type { Review } from "@/types/type";
 import useFetchReviews from "@/hooks/useFetchReviews";
 import { formatMonthYear } from "@/utils/formatMonthYear";
 import { FaStar } from "react-icons/fa";
+import ApartmentImageSlider from "@/components/ApartmentSlider";
 
 const ApartmentDetails = () => {
   const { id } = useParams();
@@ -30,11 +31,17 @@ const ApartmentDetails = () => {
   );
 
   console.log(apartment);
+  const images = [
+    "https://portozante.com/wp-content/uploads/2023/06/greece-5-star-luxury-two-bedroom-private-villla-with-pool-royal-infinity-spa-villa-with-heated-pool-porto-zante-villas-and-spa-zakynthos-island-1367x911.webp",
+    "http://lxry.travel/images/528/a3f137ae2a65377b6aa32d2b1f22bf08.jpg",
+    "https://www.ibizavilla.com/wp-content/uploads/2024/02/villa-Vadella_ibiza_Villa-1_1024x768.jpg",
+  ];
 
   return (
     <div className="min-h-[80vh] flex flex-col mb-[3rem] gap-10 pt-[6.1rem] w-full max-w-7xl mx-auto h-full">
       {/* Image Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-[35rem]">
+      <ApartmentImageSlider images={images} />
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-[35rem]">
         <div className="sm:h-[35rem] overflow-hidden rounded-xl">
           <img
             className="w-full h-full object-cover"
@@ -72,7 +79,7 @@ const ApartmentDetails = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="flex flex-col lg:flex-row gap-6 justify-between w-full">
         <div className="flex flex-col gap-10 w-full lg:w-[calc(100%-18rem)]">
