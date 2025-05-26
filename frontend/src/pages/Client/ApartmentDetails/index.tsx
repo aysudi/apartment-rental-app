@@ -30,7 +30,6 @@ const ApartmentDetails = () => {
     (review) => review.apartmentId == apartment.id
   );
 
-  console.log(apartment);
   const images = [
     "https://portozante.com/wp-content/uploads/2023/06/greece-5-star-luxury-two-bedroom-private-villla-with-pool-royal-infinity-spa-villa-with-heated-pool-porto-zante-villas-and-spa-zakynthos-island-1367x911.webp",
     "http://lxry.travel/images/528/a3f137ae2a65377b6aa32d2b1f22bf08.jpg",
@@ -38,51 +37,14 @@ const ApartmentDetails = () => {
   ];
 
   return (
-    <div className="min-h-[80vh] flex flex-col mb-[3rem] gap-10 pt-[6.1rem] w-full max-w-7xl mx-auto h-full">
+    <div className="min-h-screen flex flex-col gap-10 pt-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Image Section */}
       <ApartmentImageSlider images={images} />
-      {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-[35rem]">
-        <div className="sm:h-[35rem] overflow-hidden rounded-xl">
-          <img
-            className="w-full h-full object-cover"
-            src="https://portozante.com/wp-content/uploads/2023/06/greece-5-star-luxury-two-bedroom-private-villla-with-pool-royal-infinity-spa-villa-with-heated-pool-porto-zante-villas-and-spa-zakynthos-island-1367x911.webp"
-            alt="Apartment"
-          />
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 grid-rows-1 sm:grid-rows-2  gap-2 h-[35rem]">
-          <div className="overflow-hidden rounded-xl">
-            <img
-              className="w-full h-full object-cover"
-              src="http://lxry.travel/images/528/a3f137ae2a65377b6aa32d2b1f22bf08.jpg"
-              alt="Apartment"
-            />
-          </div>
-          <div className="overflow-hidden rounded-xl">
-            <img
-              className="w-full h-full object-cover"
-              src="https://static.wixstatic.com/media/865cf4_02880cd84a5d4884b6cd6847e337505b~mv2.jpg/v1/fill/w_640,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/865cf4_02880cd84a5d4884b6cd6847e337505b~mv2.jpg"
-              alt="Apartment"
-            />
-          </div>
-          <div className="overflow-hidden rounded-xl">
-            <img
-              className="w-full h-full object-cover"
-              src="https://www.ibizavilla.com/wp-content/uploads/2024/02/villa-Vadella_ibiza_Villa-1_1024x768.jpg"
-              alt="Apartment"
-            />
-          </div>
-          <div className="overflow-hidden rounded-xl">
-            <img
-              className="w-full h-full object-cover"
-              src="https://www.luxuryvillasibiza.net/wp-content/uploads/2024/03/Discover-our-villas-with-pool-in-Ibiza-1.webp"
-              alt="Apartment"
-            />
-          </div>
-        </div>
-      </div> */}
 
-      <div className="flex flex-col lg:flex-row gap-6 justify-between w-full">
-        <div className="flex flex-col gap-10 w-full lg:w-[calc(100%-18rem)]">
+      {/* Content and Booking */}
+      <div className="flex flex-col lg:flex-row gap-10">
+        {/* Left side content */}
+        <div className="flex flex-col gap-10 w-full lg:w-[65%]">
           <div className="flex flex-col gap-2">
             <h2 className="text-3xl font-bold">{apartment.title}</h2>
             <div className="flex gap-2 items-center">
@@ -90,33 +52,28 @@ const ApartmentDetails = () => {
               <span>{apartment.location}</span>
             </div>
             <div className="flex flex-wrap gap-2 mt-2">
-              {apartment.features &&
-                apartment.features.map((feature, idx) => {
-                  return (
-                    <span
-                      key={idx}
-                      className="px-4 py-1 bg-[#FF9A1E] text-white text-sm font-bold rounded-2xl"
-                    >
-                      {feature}
-                    </span>
-                  );
-                })}
+              {apartment.features?.map((feature, idx) => (
+                <span
+                  key={idx}
+                  className="px-4 py-1 bg-[#FF9A1E] text-white text-sm font-bold rounded-2xl"
+                >
+                  {feature}
+                </span>
+              ))}
             </div>
           </div>
 
-          {/* Description */}
           <div className="flex flex-col gap-2">
             <h3 className="text-2xl font-bold">Description</h3>
             <p>{apartment.description}</p>
           </div>
 
-          {/* Host */}
           <div className="flex flex-col gap-4">
             <h3 className="text-2xl font-bold">Host</h3>
             <div className="flex gap-4 items-center">
-              <div className="w-[4.5rem]">
+              <div className="w-[4.5rem] h-[4.5rem]">
                 <img
-                  className="h-full w-full object-cover rounded-[50%]"
+                  className="h-full w-full object-cover rounded-full"
                   src={apartment.host.profileImage}
                   alt="Host"
                 />
@@ -125,77 +82,67 @@ const ApartmentDetails = () => {
                 <h4 className="font-semibold text-lg">
                   {apartment.host.firstName} {apartment.host.lastName}
                 </h4>
-                <p className="text-gray-500 text-md">
+                <p className="text-gray-500 text-sm">
                   Host since {formatMonthYear(apartment.host.createdAt)}
                 </p>
               </div>
             </div>
           </div>
 
-          {/* House Rules */}
           <div className="flex flex-col gap-2">
-            <h3 className="text-2xl font-bold">House rules</h3>
+            <h3 className="text-2xl font-bold">House Rules</h3>
             <div className="flex flex-col gap-2">
-              {apartment.rules &&
-                apartment.rules.map((rule, idx) => {
-                  return (
-                    <div key={idx} className="flex gap-2 items-center">
-                      <Check
-                        strokeWidth={3}
-                        className="text-green-600"
-                        size={17}
-                      />
-                      <span>{rule}</span>
-                    </div>
-                  );
-                })}
+              {apartment.rules?.map((rule, idx) => (
+                <div key={idx} className="flex gap-2 items-center">
+                  <Check strokeWidth={3} className="text-green-600" size={17} />
+                  <span>{rule}</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Reviews */}
           <div className="flex flex-col gap-2">
             <h3 className="text-2xl font-bold">Reviews</h3>
             <div>
               {apartment.avgRating} |{" "}
-              {apartment?.reviews?.length > 0
-                ? apartment?.reviews?.length
-                : "0"}{" "}
+              {apartment?.reviews?.length > 0 ? apartment.reviews.length : "0"}{" "}
               reviews
             </div>
             <div className="flex flex-col gap-4 mt-4">
-              {validReviews &&
-                validReviews.map((review: Review, idx: number) => {
-                  return (
-                    <div key={idx} className="flex flex-col gap-3">
-                      <div className="flex gap-4 items-center">
-                        <div className="h-[3.5rem] ">
-                          <img
-                            className="h-full w-full object-cover rounded-full"
-                            src={review?.user.profileImage}
-                            alt="Reviewer"
-                          />
-                        </div>
-                        <div>
-                          <h3 className="font-bold text-lg">
-                            {review.user.firstName} {review.user.lastName}
-                          </h3>
-                          <p className="text-gray-500 text-sm">
-                            {formatMonthYear(review.user.createdAt)}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <FaStar color="#F59E0B" size={20} />
-                        <p className="text-gray-600 mt-1">{review.comment}</p>
-                      </div>
+              {validReviews?.map((review: Review, idx: number) => (
+                <div key={idx} className="flex flex-col gap-3">
+                  <div className="flex gap-4 items-center">
+                    <div className="h-14 w-14">
+                      <img
+                        className="h-full w-full object-cover rounded-full"
+                        src={review?.user.profileImage}
+                        alt="Reviewer"
+                      />
                     </div>
-                  );
-                })}
+                    <div>
+                      <h3 className="font-bold text-lg">
+                        {review.user.firstName} {review.user.lastName}
+                      </h3>
+                      <p className="text-gray-500 text-sm">
+                        {formatMonthYear(review.user.createdAt)}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <FaStar color="#F59E0B" size={20} />
+                    <p className="text-gray-600">{review.comment}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        <BookApartment apartment={apartment} />
+        {/* Booking component */}
+        <div className="w-full h-full lg:w-[35%] mb-8 flex flex-col gap-4 text-center lg:text-start">
+          <h2 className="text-3xl font-bold">Book Apartment</h2>
+          <BookApartment apartment={apartment} />
+        </div>
       </div>
     </div>
   );
