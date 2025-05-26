@@ -9,6 +9,7 @@ import Wishlist from "../pages/Client/Wishlist";
 import Login from "../pages/Common/Login";
 import Register from "../pages/Common/Register";
 import About from "@/pages/Client/About";
+import EditProfile from "@/pages/Client/EditProfile";
 
 const ROUTES = [
   //client
@@ -36,6 +37,10 @@ const ROUTES = [
       {
         path: "user",
         element: <UserProfile />,
+      },
+      {
+        path: "edit-profile",
+        element: <EditProfile />,
       },
       {
         path: "contact",

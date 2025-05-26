@@ -60,6 +60,7 @@ export type User = {
   isBanned: boolean;
   deleted: boolean;
   createdAt: string;
+  reviews: string[];
 };
 
 export type RegisteredUser = {
