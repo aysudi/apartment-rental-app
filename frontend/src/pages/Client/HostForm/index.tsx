@@ -3,6 +3,9 @@ import { useFormik } from "formik";
 import { useState } from "react";
 
 const HostForm = () => {
+  const [isCoverImgUrl, setIsCoverImgUrl] = useState(false);
+  const [isImagesUrl, setIsImagesUrl] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -12,10 +15,23 @@ const HostForm = () => {
       description: "",
       features: [],
       rules: [],
+      coverImage: "",
       images: [],
     },
-    onSubmit: (values) => {
-      console.log("Form submitted", values);
+    onSubmit: async (values) => {
+      const apartmentData = {
+        title: values.title,
+        type: values.type,
+        location: values.location,
+        pricePerNight: parseFloat(values.pricePerNight),
+        description: values.description,
+        features: values.features,
+        rules: values.rules,
+        coverImage: values.coverImage,
+        images: values.images,
+        hostId: "current_user_id", // Assuming hostId is assigned here
+      };
+      console.log(apartmentData);
     },
     validationSchema: addApartmentSchema,
   });
@@ -40,6 +56,28 @@ const HostForm = () => {
     }
   };
 
+  const allTypes = [
+    "island",
+    "apartment",
+    "villa",
+    "pool",
+    "treehouse",
+    "castle",
+    "cabin",
+    "cottage",
+    "townhouse",
+    "penthouse",
+    "duplex",
+    "studio",
+    "bungalow",
+    "loft",
+    "house",
+    "farmhouse",
+    "resort",
+    "tinyhome",
+    "mansion",
+  ];
+
   return (
     <div className="min-h-screen bg-[#F7F7F7] pt-[7.5rem] pb-16 px-6 sm:px-12 lg:px-24">
       <div className="max-w-3xl mx-auto bg-white p-10 rounded-2xl shadow-xl border-2 border-[#FF9A1E] overflow-hidden">
@@ -50,8 +88,8 @@ const HostForm = () => {
         </div>
 
         <form onSubmit={formik.handleSubmit} className="space-y-6">
-          {/* Apartment Title */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Apartment Title and Location */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div className="relative">
               <label
                 htmlFor="title"
@@ -109,9 +147,8 @@ const HostForm = () => {
             </div>
           </div>
 
-          {/* Apartment Type and Price Per Night in Two Columns */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Apartment Type */}
+          {/* Apartment Type and Price Per Night */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div className="relative">
               <label
                 htmlFor="type"
@@ -132,10 +169,15 @@ const HostForm = () => {
                 }`}
               >
                 <option value="">Select type</option>
-                <option value="Studio">Studio</option>
-                <option value="1-Bedroom">1-Bedroom</option>
-                <option value="2-Bedroom">2-Bedroom</option>
-                <option value="Penthouse">Penthouse</option>
+                {allTypes.map((type, idx) => {
+                  const formattedType =
+                    type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
+                  return (
+                    <option key={idx} value={type}>
+                      {formattedType}
+                    </option>
+                  );
+                })}
               </select>
               {formik.touched.type && formik.errors.type && (
                 <div className="text-red-500 text-sm mt-2 ml-1">
@@ -144,7 +186,6 @@ const HostForm = () => {
               )}
             </div>
 
-            {/* Price Per Night */}
             <div className="relative">
               <label
                 htmlFor="pricePerNight"
@@ -172,6 +213,34 @@ const HostForm = () => {
                 </div>
               )}
             </div>
+          </div>
+
+          {/* Description */}
+          <div className="relative">
+            <label
+              htmlFor="description"
+              className="block text-xl font-semibold text-gray-800 mb-3"
+            >
+              Apartment Description
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              value={formik.values.description}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              className={`w-full p-4 border-2 rounded-lg shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF9A1E] ${
+                formik.touched.description && formik.errors.description
+                  ? "border-red-500"
+                  : "border-gray-300"
+              }`}
+              placeholder="Enter apartment description"
+            />
+            {formik.touched.description && formik.errors.description && (
+              <div className="text-red-500 text-sm mt-2 ml-1">
+                {formik.errors.description}
+              </div>
+            )}
           </div>
 
           {/* Features */}
@@ -258,27 +327,151 @@ const HostForm = () => {
             </div>
           </div>
 
-          {/* Upload Images */}
+          {/* Cover Image */}
+          <div className="relative">
+            <label
+              htmlFor="coverImage"
+              className="block text-xl font-semibold text-gray-800 mb-1"
+            >
+              Cover Image
+            </label>
+            <div className="flex gap-1 sm:gap-4 mb-3 flex-col sm:flex-row">
+              <button
+                type="button"
+                onClick={() => setIsCoverImgUrl(false)}
+                className={`${
+                  !isCoverImgUrl ? "bg-[#FF9A1E]" : "bg-gray-300"
+                } text-white py-2 px-6 rounded-full mt-2 cursor-pointer`}
+              >
+                Upload File
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsCoverImgUrl(true)}
+                className={`${
+                  isCoverImgUrl ? "bg-[#FF9A1E]" : "bg-gray-300"
+                } text-white py-2 px-6 rounded-full mt-2 cursor-pointer`}
+              >
+                Provide URL
+              </button>
+            </div>
+
+            {isCoverImgUrl ? (
+              <input
+                type="text"
+                id="coverImage"
+                name="coverImage"
+                value={formik.values.coverImage || ""}
+                onChange={(e) =>
+                  formik.setFieldValue("coverImage", e.target.value)
+                }
+                onBlur={formik.handleBlur}
+                className={`w-full p-4 border-2 rounded-lg shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF9A1E] ${
+                  formik.touched.coverImage && formik.errors.coverImage
+                    ? "border-red-500"
+                    : "border-gray-300"
+                }`}
+                placeholder="Enter image URL"
+              />
+            ) : (
+              <input
+                type="file"
+                id="coverImage"
+                name="coverImage"
+                onChange={(e) => {
+                  if (e.target.files) {
+                    formik.setFieldValue(
+                      "coverImage",
+                      URL.createObjectURL(e.target.files[0])
+                    );
+                  }
+                }}
+                onBlur={formik.handleBlur}
+                className={`w-full p-4 border-2 rounded-lg shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF9A1E] ${
+                  formik.touched.coverImage && formik.errors.coverImage
+                    ? "border-red-500"
+                    : "border-gray-300"
+                }`}
+              />
+            )}
+            {formik.touched.coverImage && formik.errors.coverImage && (
+              <div className="text-red-500 text-sm mt-2 ml-1">
+                {formik.errors.coverImage}
+              </div>
+            )}
+          </div>
+
+          {/* Images */}
           <div className="relative">
             <label
               htmlFor="images"
-              className="block text-xl font-semibold text-gray-800 mb-3"
+              className="block text-xl font-semibold text-gray-800 mb-1"
             >
-              Upload Images
+              Images
             </label>
-            <input
-              type="file"
-              id="images"
-              name="images"
-              multiple
-              onChange={(e) => formik.setFieldValue("images", e.target.files)}
-              onBlur={formik.handleBlur}
-              className={`w-full p-4 border-2 rounded-lg shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF9A1E] ${
-                formik.touched.images && formik.errors.images
-                  ? "border-red-500"
-                  : "border-gray-300"
-              }`}
-            />
+
+            <div className="flex gap-1 sm:gap-4 mb-3 flex-col sm:flex-row">
+              <button
+                type="button"
+                onClick={() => setIsImagesUrl(false)}
+                className={`${
+                  !isImagesUrl ? "bg-[#FF9A1E]" : "bg-gray-300"
+                } text-white py-2 px-6 rounded-full mt-2 cursor-pointer`}
+              >
+                Upload File
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsImagesUrl(true)}
+                className={`${
+                  isImagesUrl ? "bg-[#FF9A1E]" : "bg-gray-300"
+                } text-white py-2 px-6 rounded-full mt-2 cursor-pointer`}
+              >
+                Provide URL
+              </button>
+            </div>
+
+            {isImagesUrl ? (
+              <input
+                type="text"
+                id="images"
+                name="images"
+                value={formik.values.images[0] || ""}
+                onChange={(e) =>
+                  formik.setFieldValue("images", [e.target.value])
+                }
+                onBlur={formik.handleBlur}
+                className={`w-full p-4 border-2 rounded-lg shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF9A1E] ${
+                  formik.touched.images && formik.errors.images
+                    ? "border-red-500"
+                    : "border-gray-300"
+                }`}
+                placeholder="Enter image URL"
+              />
+            ) : (
+              <input
+                type="file"
+                id="images"
+                name="images"
+                multiple
+                onChange={(e) => {
+                  if (e.target.files) {
+                    formik.setFieldValue(
+                      "images",
+                      Array.from(e.target.files).map((file) =>
+                        URL.createObjectURL(file)
+                      )
+                    );
+                  }
+                }}
+                onBlur={formik.handleBlur}
+                className={`w-full p-4 border-2 rounded-lg shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-[#FF9A1E] ${
+                  formik.touched.images && formik.errors.images
+                    ? "border-red-500"
+                    : "border-gray-300"
+                }`}
+              />
+            )}
             {formik.touched.images && formik.errors.images && (
               <div className="text-red-500 text-sm mt-2 ml-1">
                 {formik.errors.images}

@@ -9,6 +9,7 @@ const addApartmentSchema = Yup.object({
     .positive()
     .min(1),
   description: Yup.string().required("Description is required"),
+  coverImage: Yup.string().required("Cover image is required"),
   images: Yup.array().min(1, "At least one image is required"),
 });
 
