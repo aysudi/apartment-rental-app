@@ -20,7 +20,7 @@ export async function GET(req: Request) {
     if (id) {
       const booking = await prisma.booking.findUnique({
         where: { id },
-        include: { user: true, apartment: true },
+        include: { user: true, apartment: true, bookedDates: true },
       });
 
       if (!booking) {
@@ -33,7 +33,7 @@ export async function GET(req: Request) {
     }
 
     const bookings = await prisma.booking.findMany({
-      include: { user: true, apartment: true },
+      include: { user: true, apartment: true, bookedDates: true },
     });
 
     const res = NextResponse.json(bookings, { status: 200 });
@@ -65,6 +65,7 @@ export async function POST(req: Request) {
         bookedDates: { connect: { id: bookedDateId } },
         status: "pending",
       },
+      include: { apartment: true, user: true, bookedDates: true },
     });
 
     const res = NextResponse.json(newBooking, { status: 201 });

@@ -1,14 +1,3 @@
-// export type BookedDate = {
-//   id: string;
-//   fullName: string;
-//   email: string;
-//   subject: string;
-//   message: string;
-//   isRead: boolean;
-//   submittedAt: Date;
-//   deleted: boolean;
-// };
-
 export type Apartment = {
   id: string;
   title: string;
@@ -61,6 +50,7 @@ export type User = {
   deleted: boolean;
   createdAt: string;
   reviews: string[];
+  bookings: Booking[];
 };
 
 export type RegisteredUser = {
@@ -74,8 +64,11 @@ export type RegisteredUser = {
 export type Booking = {
   userId: string;
   apartmentId: string;
+  apartment: Apartment;
   bookedDateId: string;
   totalPrice: number;
+  createdAt: Date;
+  bookedDates: BookedDate;
 };
 
 export type Review = {
