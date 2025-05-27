@@ -12,7 +12,7 @@ const BecomeHost = () => {
           place in Baku
         </p>
         <Link
-          to="/become-a-host/start"
+          to="/become-host-start"
           className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 text-lg"
         >
           Get started
@@ -77,7 +77,7 @@ const BecomeHost = () => {
           It’s easy to get started—and we’ll be there every step of the way.
         </p>
         <Link
-          to="/become-a-host/start"
+          to="/become-host-start"
           className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 text-lg"
         >
           Start hosting
