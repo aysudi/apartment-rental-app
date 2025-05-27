@@ -10,6 +10,7 @@ import Login from "../pages/Common/Login";
 import Register from "../pages/Common/Register";
 import About from "@/pages/Client/About";
 import EditProfile from "@/pages/Client/EditProfile";
+import HostForm from "@/pages/Client/HostForm";
 
 const ROUTES = [
   //client
@@ -65,6 +66,10 @@ const ROUTES = [
       {
         path: "/become-host",
         element: <BecomeHost />,
+      },
+      {
+        path: "become-host-start",
+        element: <HostForm />,
       },
     ],
   },
