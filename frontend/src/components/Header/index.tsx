@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 import logo from "../../assets/images/header-logo.jpeg";
 import {
   House,
@@ -13,13 +13,44 @@ import {
   DoorOpen,
   BookOpen,
   UserRoundPen,
+  ChartColumnBig,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
 
+// Type for NavItem props
+interface NavItemProps {
+  to: string;
+  icon: React.ComponentType<{ size: number }>; // Type for icon component
+  onClick?: () => void;
+  children: React.ReactNode;
+}
+
+const NavItem: React.FC<NavItemProps> = ({
+  to,
+  icon: Icon,
+  onClick,
+  children,
+}) => (
+  <NavLink
+    to={to}
+    onClick={onClick}
+    className={({ isActive }) =>
+      `py-3 flex items-center gap-2 px-3 hover:bg-[#f18502] hover:text-white rounded-md ${
+        isActive ? "bg-[#f18502] text-white" : ""
+      }`
+    }
+  >
+    <Icon size={20} />
+    {children}
+  </NavLink>
+);
+
 const Header = () => {
   const { user, logout } = useAuth();
   const [openedMenu, setOpenedMenu] = useState(false);
+
+  const toggleMenu = () => setOpenedMenu((prev) => !prev);
 
   return (
     <header className="bg-[#FF9A1E] fixed w-full z-50">
@@ -29,59 +60,23 @@ const Header = () => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-4">
-          <NavLink
-            to={"/"}
-            onClick={() => setOpenedMenu(false)}
-            className={({ isActive }) =>
-              `py-3 flex items-center gap-2 px-4 text-white hover:bg-[#f18502] rounded-md ${
-                isActive ? "bg-[#f18502]" : ""
-              }`
-            }
-          >
-            <House size={20} />
+        <div className="hidden md:flex items-center gap-4 text-white">
+          <NavItem to="/" icon={House}>
             Home
-          </NavLink>
-          <NavLink
-            to={"/apartments"}
-            onClick={() => setOpenedMenu(false)}
-            className={({ isActive }) =>
-              `py-3 flex items-center gap-2 px-4 text-white hover:bg-[#f18502] rounded-md ${
-                isActive ? "bg-[#f18502]" : ""
-              }`
-            }
-          >
-            <Hotel size={20} />
+          </NavItem>
+          <NavItem to="/apartments" icon={Hotel}>
             Apartments
-          </NavLink>
-          <NavLink
-            to={"/about"}
-            onClick={() => setOpenedMenu(false)}
-            className={({ isActive }) =>
-              `py-3 flex items-center gap-2 px-4 text-white hover:bg-[#f18502] rounded-md ${
-                isActive ? "bg-[#f18502]" : ""
-              }`
-            }
-          >
-            <BookOpen size={20} />
+          </NavItem>
+          <NavItem to="/about" icon={BookOpen}>
             About
-          </NavLink>
-          <NavLink
-            to={"/contact"}
-            onClick={() => setOpenedMenu(false)}
-            className={({ isActive }) =>
-              `py-3 flex items-center gap-2 px-4 text-white hover:bg-[#f18502] rounded-md ${
-                isActive ? "bg-[#f18502]" : ""
-              }`
-            }
-          >
-            <BookUser size={20} />
+          </NavItem>
+          <NavItem to="/contact" icon={BookUser}>
             Contact
-          </NavLink>
+          </NavItem>
 
-          <div className=" flex items-center relative">
+          <div className="relative flex items-center">
             <div
-              onClick={() => setOpenedMenu(!openedMenu)}
+              onClick={toggleMenu}
               className="border py-2 px-3 rounded-2xl flex gap-2 justify-center items-center text-white hover:bg-white hover:text-[#FF9A1E] cursor-pointer"
             >
               <AlignJustify size={20} />
@@ -95,86 +90,39 @@ const Header = () => {
             >
               {user ? (
                 <>
-                  <NavLink
-                    to={"/wishlist"}
-                    onClick={() => setOpenedMenu(false)}
-                    className={({ isActive }) =>
-                      `py-2 flex items-center gap-2 px-2 hover:bg-[#f18502] hover:text-white rounded-md ${
-                        isActive ? "bg-[#f18502] text-white" : ""
-                      }`
-                    }
-                  >
-                    <Heart size={20} />
+                  <NavItem to="/wishlist" icon={Heart}>
                     Wishlist
-                  </NavLink>
-                  <NavLink
-                    to={"/become-host"}
-                    onClick={() => setOpenedMenu(false)}
-                    className={({ isActive }) =>
-                      `py-2 flex items-center gap-2 px-2 hover:bg-[#f18502] hover:text-white rounded-md ${
-                        isActive ? "bg-[#f18502] text-white" : ""
-                      }`
-                    }
-                  >
-                    <DoorOpen size={20} />
+                  </NavItem>
+                  <NavItem to="/become-host" icon={DoorOpen}>
                     Become Host
-                  </NavLink>
-                  <NavLink
-                    to={"/user"}
-                    onClick={() => {
-                      setOpenedMenu(false);
-                    }}
-                    className={({ isActive }) =>
-                      `py-2 flex items-center gap-2 px-2 hover:bg-[#f18502] hover:text-white rounded-md ${
-                        isActive ? "bg-[#f18502] text-white" : ""
-                      }`
-                    }
-                  >
-                    <UserRoundPen size={20} />
+                  </NavItem>
+                  <NavItem to="/user" icon={UserRoundPen}>
                     Profile
-                  </NavLink>
-                  <NavLink
-                    to={"/login"}
+                  </NavItem>
+                  <NavItem
+                    to="/login"
+                    icon={LogOut}
                     onClick={() => {
                       logout();
-                      setOpenedMenu(false);
+                      toggleMenu();
                     }}
-                    className={({ isActive }) =>
-                      `py-2 flex items-center gap-2 px-2 hover:bg-[#f18502] hover:text-white rounded-md ${
-                        isActive ? "bg-[#f18502] text-white" : ""
-                      }`
-                    }
                   >
-                    <LogOut size={20} />
                     Log Out
-                  </NavLink>
+                  </NavItem>
+                  {user.role === "host" && (
+                    <NavItem to="/host" icon={ChartColumnBig}>
+                      Dashboard
+                    </NavItem>
+                  )}
                 </>
               ) : (
                 <>
-                  <NavLink
-                    to={"/login"}
-                    onClick={() => setOpenedMenu(false)}
-                    className={({ isActive }) =>
-                      `py-2 flex items-center gap-2 px-2 hover:bg-[#f18502] hover:text-white rounded-md ${
-                        isActive ? "bg-[#f18502] text-white" : ""
-                      }`
-                    }
-                  >
-                    <LogIn size={20} />
+                  <NavItem to="/login" icon={LogIn}>
                     Log In
-                  </NavLink>
-                  <NavLink
-                    to={"/register"}
-                    onClick={() => setOpenedMenu(false)}
-                    className={({ isActive }) =>
-                      `py-2 flex items-center gap-2 px-2 hover:bg-[#f18502] hover:text-white rounded-md ${
-                        isActive ? "bg-[#f18502] text-white" : ""
-                      }`
-                    }
-                  >
-                    <UserPlus size={20} />
+                  </NavItem>
+                  <NavItem to="/register" icon={UserPlus}>
                     Sign Up
-                  </NavLink>
+                  </NavItem>
                 </>
               )}
             </div>
@@ -183,7 +131,7 @@ const Header = () => {
 
         {/* Mobile Sidebar */}
         <div
-          onClick={() => setOpenedMenu(!openedMenu)}
+          onClick={toggleMenu}
           className="md:hidden border py-2 px-3 rounded-2xl flex gap-2 justify-center items-center text-white hover:bg-white hover:text-[#FF9A1E] cursor-pointer"
         >
           <AlignJustify size={20} />
@@ -194,7 +142,7 @@ const Header = () => {
           className={`${
             openedMenu ? "translate-x-0" : "-translate-x-full"
           } fixed inset-0 bg-opacity-50 z-40 transition-transform ease-in-out duration-300 md:hidden`}
-          onClick={() => setOpenedMenu(false)}
+          onClick={toggleMenu}
         ></div>
 
         <div
@@ -211,7 +159,7 @@ const Header = () => {
               />
             </div>
             <button
-              onClick={() => setOpenedMenu(false)}
+              onClick={toggleMenu}
               className="text-black text-xl hover:text-[#FF9A1E]"
             >
               X
@@ -219,137 +167,49 @@ const Header = () => {
           </div>
 
           <div className="mt-6 flex flex-col gap-1">
-            <NavLink
-              to={"/"}
-              onClick={() => setOpenedMenu(false)}
-              className={({ isActive }) =>
-                `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
-                  isActive ? "bg-[#f18502] text-white" : ""
-                }`
-              }
-            >
-              <House size={20} />
+            <NavItem to="/" icon={House}>
               Home
-            </NavLink>
-            <NavLink
-              to={"/apartments"}
-              onClick={() => setOpenedMenu(false)}
-              className={({ isActive }) =>
-                `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
-                  isActive ? "bg-[#f18502] text-white" : ""
-                }`
-              }
-            >
-              <Hotel size={20} />
+            </NavItem>
+            <NavItem to="/apartments" icon={Hotel}>
               Apartments
-            </NavLink>
-            <NavLink
-              to={"/about"}
-              onClick={() => setOpenedMenu(false)}
-              className={({ isActive }) =>
-                `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
-                  isActive ? "bg-[#f18502] text-white" : ""
-                }`
-              }
-            >
-              <BookOpen size={20} />
+            </NavItem>
+            <NavItem to="/about" icon={BookOpen}>
               About
-            </NavLink>
-            <NavLink
-              to={"/contact"}
-              onClick={() => setOpenedMenu(false)}
-              className={({ isActive }) =>
-                `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
-                  isActive ? "bg-[#f18502] text-white" : ""
-                }`
-              }
-            >
-              <BookUser size={20} />
+            </NavItem>
+            <NavItem to="/contact" icon={BookUser}>
               Contact
-            </NavLink>
+            </NavItem>
 
             {user ? (
               <>
-                <NavLink
-                  to={"/wishlist"}
-                  onClick={() => setOpenedMenu(false)}
-                  className={({ isActive }) =>
-                    `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
-                      isActive ? "bg-[#f18502] text-white" : ""
-                    }`
-                  }
-                >
-                  <Heart size={20} />
+                <NavItem to="/wishlist" icon={Heart}>
                   Wishlist
-                </NavLink>
-                <NavLink
-                  to={"/become-host"}
-                  onClick={() => setOpenedMenu(false)}
-                  className={({ isActive }) =>
-                    `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
-                      isActive ? "bg-[#f18502] text-white" : ""
-                    }`
-                  }
-                >
-                  <DoorOpen size={20} />
+                </NavItem>
+                <NavItem to="/become-host" icon={DoorOpen}>
                   Become Host
-                </NavLink>
-                <NavLink
-                  to={"/user"}
-                  onClick={() => {
-                    setOpenedMenu(false);
-                  }}
-                  className={({ isActive }) =>
-                    `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
-                      isActive ? "bg-[#f18502] text-white" : ""
-                    }`
-                  }
-                >
-                  <UserRoundPen size={20} />
+                </NavItem>
+                <NavItem to="/user" icon={UserRoundPen}>
                   Profile
-                </NavLink>
-                <NavLink
-                  to={"/login"}
+                </NavItem>
+                <NavItem
+                  to="/login"
+                  icon={LogOut}
                   onClick={() => {
-                    setOpenedMenu(false);
                     logout();
+                    toggleMenu();
                   }}
-                  className={({ isActive }) =>
-                    `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
-                      isActive ? "bg-[#f18502] text-white" : ""
-                    }`
-                  }
                 >
-                  <LogOut size={20} />
                   Log Out
-                </NavLink>
+                </NavItem>
               </>
             ) : (
               <>
-                <NavLink
-                  to={"/register"}
-                  onClick={() => setOpenedMenu(false)}
-                  className={({ isActive }) =>
-                    `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
-                      isActive ? "bg-[#f18502] text-white" : ""
-                    }`
-                  }
-                >
-                  <UserPlus size={20} />
+                <NavItem to="/register" icon={UserPlus}>
                   Sign Up
-                </NavLink>
-                <NavLink
-                  to={"/login"}
-                  onClick={() => setOpenedMenu(false)}
-                  className={({ isActive }) =>
-                    `px-4 flex items-center gap-3 py-3 text-lg text-black hover:bg-[#FF9A1E] rounded-md ${
-                      isActive ? "bg-[#f18502] text-white" : ""
-                    }`
-                  }
-                >
-                  <LogIn size={20} />
+                </NavItem>
+                <NavItem to="/login" icon={LogIn}>
                   Log In
-                </NavLink>
+                </NavItem>
               </>
             )}
           </div>
