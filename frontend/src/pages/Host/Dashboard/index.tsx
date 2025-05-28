@@ -130,12 +130,15 @@ const HostDashboard: React.FC = () => {
               fill="#FF9A1E"
               paddingAngle={5}
             >
-              {pieChartData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={["#FF9A1E", "#36A2EB", "#FF6384"][index]}
-                />
-              ))}
+              {pieChartData.map((entry, index) => {
+                console.log(entry);
+                return (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={["#FF9A1E", "#36A2EB", "#FF6384"][index]}
+                  />
+                );
+              })}
             </Pie>
           </PieChart>
         </ResponsiveContainer>
