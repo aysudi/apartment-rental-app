@@ -18,10 +18,9 @@ import {
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
 
-// Type for NavItem props
 interface NavItemProps {
   to: string;
-  icon: React.ComponentType<{ size: number }>; // Type for icon component
+  icon: React.ComponentType<{ size: number }>;
   onClick?: () => void;
   children: React.ReactNode;
 }
@@ -99,6 +98,11 @@ const Header = () => {
                   <NavItem to="/user" icon={UserRoundPen}>
                     Profile
                   </NavItem>
+                  {user.role === "host" && (
+                    <NavItem to="/host/dashboard" icon={ChartColumnBig}>
+                      Dashboard
+                    </NavItem>
+                  )}
                   <NavItem
                     to="/login"
                     icon={LogOut}
@@ -109,11 +113,6 @@ const Header = () => {
                   >
                     Log Out
                   </NavItem>
-                  {user.role === "host" && (
-                    <NavItem to="/host" icon={ChartColumnBig}>
-                      Dashboard
-                    </NavItem>
-                  )}
                 </>
               ) : (
                 <>
@@ -191,6 +190,11 @@ const Header = () => {
                 <NavItem to="/user" icon={UserRoundPen}>
                   Profile
                 </NavItem>
+                {user.role == "host" && (
+                  <NavItem to="/host/dashboard" icon={ChartColumnBig}>
+                    Dashboard
+                  </NavItem>
+                )}
                 <NavItem
                   to="/login"
                   icon={LogOut}

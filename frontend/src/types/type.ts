@@ -67,6 +67,7 @@ export type Booking = {
   totalPrice: number;
   createdAt: Date;
   bookedDates: BookedDate;
+  user: User;
 };
 
 export type Review = {

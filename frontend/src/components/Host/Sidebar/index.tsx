@@ -1,11 +1,24 @@
-import { NavLink } from "react-router-dom";
-import { House, Hotel, Calendar, MessageCircle, Star } from "lucide-react";
+import { NavLink, useNavigate } from "react-router-dom";
+import {
+  House,
+  Hotel,
+  Calendar,
+  MessageCircle,
+  Star,
+  LogOut,
+} from "lucide-react";
 
 const HostSidebar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/");
+  };
+
   return (
     <div className="h-full">
       <div
-        className={` h-full bg-white shadow-md z-50 transform transition-transform ease-in-out duration-300`}
+        className={`h-full bg-white shadow-md z-50 transform transition-transform ease-in-out duration-300`}
       >
         <div className="flex justify-between items-center p-4 bg-[#FF9A1E] text-white">
           <h2 className="text-xl font-bold">Host Dashboard</h2>
@@ -71,6 +84,17 @@ const HostSidebar = () => {
             <Star size={20} />
             Reviews
           </NavLink>
+        </div>
+
+        {/* Log Out Button at the bottom */}
+        <div className="absolute bottom-4 w-full px-4">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 py-2 px-4 text-lg text-black hover:bg-[#FF9A1E] hover:text-white rounded-md w-auto cursor-pointer"
+          >
+            <LogOut size={20} />
+            Log Out
+          </button>
         </div>
       </div>
     </div>
