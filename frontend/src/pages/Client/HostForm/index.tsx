@@ -9,6 +9,7 @@ import TypePrice from "@/components/Host/AddApartment/TypePrice";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useAuth } from "@/context/AuthContext";
 import apartmentsController from "@/services/api/apartments/apartmentsApi";
+import authController from "@/services/api/users/usersApi";
 import addApartmentSchema from "@/validation/addApartmentSchema";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router";
@@ -44,6 +45,7 @@ const HostForm = () => {
         values.rules
       );
       const req = await apartmentsController.postApartment(apartmentData);
+      await authController.updateUser(user!.id, { role: "host" });
       actions.resetForm();
       Swal.fire({
         title: "Successfully added!",

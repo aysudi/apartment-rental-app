@@ -16,7 +16,11 @@ const AboutMe = ({ user }: Props) => {
           <h1 className="text-4xl font-bold">
             {user?.firstName} {user?.lastName}
           </h1>
-          <p className="text-lg text-gray-500">Guest</p>
+          <p className="text-lg text-gray-500 mt-1">
+            {user &&
+              user?.role.charAt(0).toUpperCase() +
+                user?.role.slice(1).toLowerCase()}
+          </p>
         </div>
       </div>
 

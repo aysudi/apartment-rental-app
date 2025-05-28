@@ -11,6 +11,11 @@ import Register from "../pages/Common/Register";
 import About from "@/pages/Client/About";
 import EditProfile from "@/pages/Client/EditProfile";
 import HostForm from "@/pages/Client/HostForm";
+import HostLayout from "@/layout/Host";
+import HostDashboard from "@/pages/Host/Dashboard";
+import HostApartments from "@/pages/Host/Apartments";
+import HostBookings from "@/pages/Host/Bookings";
+import HostReviews from "@/pages/Host/Reviews";
 
 const ROUTES = [
   //client
@@ -70,6 +75,28 @@ const ROUTES = [
       {
         path: "become-host-start",
         element: <HostForm />,
+      },
+    ],
+  },
+  {
+    path: "/host",
+    element: <HostLayout />,
+    children: [
+      {
+        path: "dashboard",
+        element: <HostDashboard />,
+      },
+      {
+        path: "apartments",
+        element: <HostApartments />,
+      },
+      {
+        path: "bookings",
+        element: <HostBookings />,
+      },
+      {
+        path: "reviews",
+        element: <HostReviews />,
       },
     ],
   },
