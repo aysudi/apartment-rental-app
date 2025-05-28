@@ -30,16 +30,13 @@ const ApartmentDetails = () => {
     (review) => review.apartmentId == apartment.id
   );
 
-  const images = [
-    "https://portozante.com/wp-content/uploads/2023/06/greece-5-star-luxury-two-bedroom-private-villla-with-pool-royal-infinity-spa-villa-with-heated-pool-porto-zante-villas-and-spa-zakynthos-island-1367x911.webp",
-    "http://lxry.travel/images/528/a3f137ae2a65377b6aa32d2b1f22bf08.jpg",
-    "https://www.ibizavilla.com/wp-content/uploads/2024/02/villa-Vadella_ibiza_Villa-1_1024x768.jpg",
-  ];
-
   return (
     <div className="min-h-screen flex flex-col gap-10 pt-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Image Section */}
-      <ApartmentImageSlider images={images} />
+      <ApartmentImageSlider
+        images={apartment.images}
+        coverImg={apartment.coverImage}
+      />
 
       {/* Content and Booking */}
       <div className="flex flex-col lg:flex-row gap-10">
