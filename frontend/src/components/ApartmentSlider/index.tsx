@@ -5,14 +5,16 @@ import "swiper/css";
 
 type Props = {
   images: string[];
+  coverImg: string;
 };
 
-const ApartmentImageSlider = ({ images }: Props) => {
+const ApartmentImageSlider = ({ images, coverImg }: Props) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+
+  const allImages = [coverImg, ...images.filter((img) => img !== coverImg)];
 
   return (
     <div className="w-full max-w-7xl mx-auto my-4">
-      {/* Main slider */}
       <Swiper
         loop
         zoom
@@ -21,20 +23,19 @@ const ApartmentImageSlider = ({ images }: Props) => {
         modules={[Zoom, Navigation, Thumbs]}
         className="rounded-xl overflow-hidden shadow-md"
       >
-        {images.map((img, idx) => (
+        {allImages.map((img, idx) => (
           <SwiperSlide key={idx}>
             <div className="swiper-zoom-container">
               <img
                 src={img}
                 alt={`Apartment image ${idx + 1}`}
-                className="w-full h-[240px] sm:h-[320px] md:h-[400px] lg:h-[500px] object-cover"
+                className="w-full h-[240px] sm:h-[320px] md:h-[400px] lg:h-[670px] object-cover"
               />
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
-      {/* Thumbnails */}
       <Swiper
         onSwiper={setThumbsSwiper}
         spaceBetween={10}
@@ -48,12 +49,12 @@ const ApartmentImageSlider = ({ images }: Props) => {
         modules={[Thumbs]}
         className="mt-4"
       >
-        {images.map((img, idx) => (
+        {allImages.map((img, idx) => (
           <SwiperSlide key={idx}>
             <img
               src={img}
               alt={`Thumb ${idx + 1}`}
-              className="h-20 sm:h-24 w-full object-cover rounded-md border-2 hover:border-[#FF9A1E] transition duration-200 cursor-pointer"
+              className="h-20 sm:h-30 w-full object-cover rounded-md border-2 hover:border-[#FF9A1E] transition duration-200 cursor-pointer"
             />
           </SwiperSlide>
         ))}
