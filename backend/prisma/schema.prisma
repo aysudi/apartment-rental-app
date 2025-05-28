@@ -91,8 +91,8 @@ model Apartment {
   host          User         @relation("HostApartments", fields: [hostId], references: [id])
   hostId        String
 
-  reviews       Review[]
-  bookings      Booking[]
+  reviews       Review[] @relation("ApartmentReviews")
+  bookings      Booking[] @relation("ApartmentBookings")
   wishlistedBy  User[]       @relation("UserWishlist")
 }
 
@@ -100,7 +100,7 @@ model Booking {
   id            String      @id @default(uuid())
   user          User        @relation("UserBookings", fields: [userId], references: [id])
   userId        String
-  apartment     Apartment   @relation(fields: [apartmentId], references: [id])
+  apartment     Apartment   @relation("ApartmentBookings", fields: [apartmentId], references: [id])
   apartmentId   String
   bookedDates   BookedDate?  @relation("BookingDates", fields: [bookedDateId], references: [id])
   bookedDateId  String?    
@@ -124,7 +124,7 @@ model Review {
   id           String    @id @default(uuid())
   user         User      @relation("UserReviews", fields: [userId], references: [id])
   userId       String
-  apartment    Apartment @relation(fields: [apartmentId], references: [id])
+  apartment    Apartment @relation("ApartmentReviews", fields: [apartmentId], references: [id])
   apartmentId  String
   rating       Int       @default(0) @db.SmallInt
   comment      String

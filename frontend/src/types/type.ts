@@ -30,9 +30,7 @@ export type NewApartment = {
   description: string;
   features: string[];
   rules: string[];
-  bookedDates: BookedDate;
-  createdAt: Date;
-  entrepreneurId: string;
+  hostId: string;
 };
 
 export type User = {

@@ -16,7 +16,13 @@ export async function GET(req: Request) {
     if (id) {
       const apartment = await prisma.apartment.findUnique({
         where: { id },
-        include: { host: true, wishlistedBy: true },
+        include: {
+          host: true,
+          wishlistedBy: true,
+          bookings: true,
+          reviews: true,
+          bookedDates: true,
+        },
       });
 
       if (!apartment) {
@@ -29,7 +35,13 @@ export async function GET(req: Request) {
     }
 
     const apartments = await prisma.apartment.findMany({
-      include: { host: true, wishlistedBy: true },
+      include: {
+        host: true,
+        wishlistedBy: true,
+        bookings: true,
+        reviews: true,
+        bookedDates: true,
+      },
     });
 
     const res = NextResponse.json(apartments, { status: 200 });
@@ -58,12 +70,8 @@ export async function POST(req: Request) {
       images,
       features,
       rules,
-      bookedDates,
       avgRating,
       rentalCount,
-      reviews,
-      bookings,
-      wishlistedBy,
       hostId,
     } = body;
 
@@ -71,19 +79,15 @@ export async function POST(req: Request) {
       !type ||
       !title ||
       !location ||
-      !pricePerNight ||
+      pricePerNight === undefined ||
       !description ||
       !coverImage ||
-      !images ||
-      !features ||
-      !rules ||
-      !bookedDates ||
-      !avgRating ||
-      !rentalCount ||
-      !reviews ||
-      !bookings ||
-      !wishlistedBy ||
-      !hostId
+      !hostId ||
+      !Array.isArray(images) ||
+      !Array.isArray(features) ||
+      !Array.isArray(rules) ||
+      avgRating === undefined ||
+      rentalCount === undefined
     ) {
       return setCorsHeaders(
         NextResponse.json({ error: "Missing required fields" }, { status: 400 })
@@ -92,22 +96,25 @@ export async function POST(req: Request) {
 
     const newApartment = await prisma.apartment.create({
       data: {
-        type,
         title,
+        type,
         location,
         pricePerNight,
         description,
         coverImage,
         images,
+        hostId,
         features,
         rules,
-        bookedDates,
         avgRating,
         rentalCount,
-        reviews,
-        bookings,
-        wishlistedBy,
-        hostId,
+      },
+      include: {
+        host: true,
+        wishlistedBy: true,
+        bookings: true,
+        reviews: true,
+        bookedDates: true,
       },
     });
 
