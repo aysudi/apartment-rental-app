@@ -89,13 +89,31 @@ const Header = () => {
             >
               {user ? (
                 <>
-                  <NavItem to="/wishlist" icon={Heart}>
+                  <NavItem
+                    onClick={() => {
+                      setOpenedMenu(false);
+                    }}
+                    to="/wishlist"
+                    icon={Heart}
+                  >
                     Wishlist
                   </NavItem>
-                  <NavItem to="/become-host" icon={DoorOpen}>
+                  <NavItem
+                    onClick={() => {
+                      setOpenedMenu(false);
+                    }}
+                    to="/become-host"
+                    icon={DoorOpen}
+                  >
                     Become Host
                   </NavItem>
-                  <NavItem to="/user" icon={UserRoundPen}>
+                  <NavItem
+                    onClick={() => {
+                      setOpenedMenu(false);
+                    }}
+                    to="/user"
+                    icon={UserRoundPen}
+                  >
                     Profile
                   </NavItem>
                   {user.role === "host" && (
@@ -116,10 +134,22 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <NavItem to="/login" icon={LogIn}>
+                  <NavItem
+                    onClick={() => {
+                      setOpenedMenu(false);
+                    }}
+                    to="/login"
+                    icon={LogIn}
+                  >
                     Log In
                   </NavItem>
-                  <NavItem to="/register" icon={UserPlus}>
+                  <NavItem
+                    onClick={() => {
+                      setOpenedMenu(false);
+                    }}
+                    to="/register"
+                    icon={UserPlus}
+                  >
                     Sign Up
                   </NavItem>
                 </>
