@@ -58,7 +58,7 @@ const AboutMe = ({ user }: Props) => {
           yours to help other hosts and guests get to know you.
         </p>
         <Link
-          to={"/edit-profile"}
+          to={`/edit-profile`}
           className="bg-[#FF9A1E] w-[5.5rem] mt-2 flex items-center justify-center text-white py-2 px-8 rounded-lg text-lg cursor-pointer hover:opacity-85"
         >
           Edit
