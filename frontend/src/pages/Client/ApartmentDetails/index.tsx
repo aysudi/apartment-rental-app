@@ -32,15 +32,12 @@ const ApartmentDetails = () => {
 
   return (
     <div className="min-h-screen flex flex-col gap-10 pt-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      {/* Image Section */}
       <ApartmentImageSlider
         images={apartment.images}
         coverImg={apartment.coverImage}
       />
 
-      {/* Content and Booking */}
       <div className="flex flex-col lg:flex-row gap-10">
-        {/* Left side content */}
         <div className="flex flex-col gap-10 w-full lg:w-[65%]">
           <div className="flex flex-col gap-2">
             <h2 className="text-3xl font-bold">{apartment.title}</h2>
@@ -135,7 +132,6 @@ const ApartmentDetails = () => {
           </div>
         </div>
 
-        {/* Booking component */}
         <div className="w-full h-full lg:w-[35%] mb-8 flex flex-col gap-4 text-center lg:text-start">
           <h2 className="text-3xl font-bold">Book Apartment</h2>
           <BookApartment apartment={apartment} />
