@@ -13,8 +13,6 @@ const SliderComponent = () => {
 
   if (loading) return <LoadingSpinner />;
 
-  console.log(apartments);
-
   return (
     <div
       className="swiper-container"

@@ -15,7 +15,6 @@ import HostLayout from "@/layout/Host";
 import HostDashboard from "@/pages/Host/Dashboard";
 import HostApartments from "@/pages/Host/Apartments";
 import HostBookings from "@/pages/Host/Bookings";
-import HostReviews from "@/pages/Host/Reviews";
 import PrivateRoute from "@/routes/PrivateRoute";
 import HostRoute from "./HostRoute";
 import AddApartment from "@/pages/Host/AddApartment";
@@ -133,14 +132,6 @@ const ROUTES = [
         element: (
           <HostRoute>
             <HostBookings />
-          </HostRoute>
-        ),
-      },
-      {
-        path: "reviews",
-        element: (
-          <HostRoute>
-            <HostReviews />
           </HostRoute>
         ),
       },

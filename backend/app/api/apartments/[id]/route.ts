@@ -93,3 +93,43 @@ export async function PATCH(
     return setCorsHeaders(res);
   }
 }
+
+export async function DELETE(
+  _req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const { id } = params;
+
+    const existingApartment = await prisma.apartment.findUnique({
+      where: { id },
+    });
+
+    if (!existingApartment) {
+      return setCorsHeaders(
+        NextResponse.json({ error: "Apartment not found" }, { status: 404 })
+      );
+    }
+
+    await prisma.apartment.delete({
+      where: { id },
+    });
+
+    return setCorsHeaders(
+      NextResponse.json(
+        { message: "Apartment deleted successfully" },
+        { status: 200 }
+      )
+    );
+  } catch (error) {
+    return setCorsHeaders(
+      NextResponse.json(
+        {
+          error: "Failed to delete apartment",
+          details: error instanceof Error ? error.message : "Unknown error",
+        },
+        { status: 500 }
+      )
+    );
+  }
+}

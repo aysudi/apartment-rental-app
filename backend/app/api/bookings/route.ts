@@ -14,24 +14,6 @@ const setCorsHeaders = (res: NextResponse) => {
 // GET
 export async function GET(req: Request) {
   try {
-    const { searchParams } = new URL(req.url);
-    const id = searchParams.get("id");
-
-    if (id) {
-      const booking = await prisma.booking.findUnique({
-        where: { id },
-        include: { user: true, apartment: true, bookedDates: true },
-      });
-
-      if (!booking) {
-        return setCorsHeaders(
-          NextResponse.json({ error: "Booking not found" }, { status: 404 })
-        );
-      }
-
-      return setCorsHeaders(NextResponse.json(booking, { status: 200 }));
-    }
-
     const bookings = await prisma.booking.findMany({
       include: { user: true, apartment: true, bookedDates: true },
     });

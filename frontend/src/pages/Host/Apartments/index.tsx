@@ -5,7 +5,8 @@ import { FaEye, FaEdit, FaTrashAlt } from "react-icons/fa";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useAuth } from "@/context/AuthContext";
 import EditApartmentModal from "@/components/EditApartment";
-// import EditApartmentModal from "@/components/EditApartmentModal";
+import apartmentsController from "@/services/api/apartments/apartmentsApi";
+import Swal from "sweetalert2";
 
 const HostApartmentsPage: React.FC = () => {
   const { apartments: allApartments, loading } = useFetchApartments();
@@ -27,7 +28,35 @@ const HostApartmentsPage: React.FC = () => {
   };
 
   const handleDelete = (apartmentId: string) => {
-    console.log(apartmentId);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await apartmentsController.deleteApartment(apartmentId);
+          setApartmentsState((prev) =>
+            prev.filter((apartment) => apartment.id !== apartmentId)
+          );
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your apartment has been deleted.",
+            icon: "success",
+          });
+        } catch (error) {
+          Swal.fire({
+            title: "Error!",
+            text: "Something went wrong while deleting.",
+            icon: "error",
+          });
+        }
+      }
+    });
   };
 
   if (loading || userLoading) return <LoadingSpinner />;
