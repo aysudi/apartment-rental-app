@@ -42,7 +42,7 @@ async function deleteApartment(apartmentId: string) {
 // Update apartment data by ID
 async function updateApartment(apartmentId: string, apartmentData: any) {
   try {
-    const response = await instance.put(
+    const response = await instance.patch(
       `${endpoints.apartments}/${apartmentId}`,
       apartmentData
     );

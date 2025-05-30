@@ -1,9 +1,18 @@
+import LoadingSpinner from "@/components/LoadingSpinner";
+import useFetchReviews from "@/hooks/useFetchReviews";
 import type { User } from "@/types/type";
 import { Link } from "react-router";
 
 type Props = { user: User | null };
 
 const AboutMe = ({ user }: Props) => {
+  const { reviews, loading } = useFetchReviews();
+
+  if (loading) return <LoadingSpinner />;
+
+  const validReviews = reviews.filter((review) => review?.userId == user?.id);
+  console.log(validReviews);
+
   return (
     <>
       <h1 className="text-3xl font-semibold">About Me</h1>
@@ -68,11 +77,54 @@ const AboutMe = ({ user }: Props) => {
       {/* Reviews Section */}
       <div className="mt-12">
         <h3 className="text-2xl font-semibold">Reviews I’ve written</h3>
+
         <div className="border-t border-gray-200 mt-4 mb-4">
-          {user?.reviews.length == 0 ? (
-            <span className="text-gray-600 pt-12">No reviews yet</span>
+          {user?.reviews.length === 0 ? (
+            <span className="text-gray-600 pt-12 block">No reviews yet</span>
           ) : (
-            <></>
+            <div className="grid grid-cols-1 gap-4">
+              {validReviews.map((review) => (
+                <div
+                  key={review.id}
+                  className="border rounded-lg p-4 shadow-sm bg-white hover:shadow-md transition"
+                >
+                  <div className="flex justify-between items-center mb-2">
+                    <div className="flex flex-col">
+                      <span className="text-sm text-gray-500">
+                        Reviewed apartment
+                      </span>
+                      <span className="text-lg font-medium text-orange-600">
+                        {review.apartment.title}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      {Array(5)
+                        .fill(0)
+                        .map((_, i) => (
+                          <svg
+                            key={i}
+                            className={`w-5 h-5 ${
+                              i < review.rating
+                                ? "text-yellow-400"
+                                : "text-gray-300"
+                            }`}
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.262 3.899a1 1 0 00.95.69h4.104c.969 0 1.371 1.24.588 1.81l-3.32 2.416a1 1 0 00-.364 1.118l1.263 3.899c.3.921-.755 1.688-1.538 1.118l-3.32-2.416a1 1 0 00-1.176 0l-3.32 2.416c-.783.57-1.838-.197-1.539-1.118l1.263-3.899a1 1 0 00-.364-1.118L2.35 9.326c-.783-.57-.38-1.81.588-1.81h4.105a1 1 0 00.949-.69l1.262-3.899z" />
+                          </svg>
+                        ))}
+                    </div>
+                  </div>
+
+                  <p className="text-gray-700 italic">“{review.comment}”</p>
+
+                  <div className="mt-2 text-sm text-gray-400">
+                    {new Date(review.createdAt).toLocaleDateString("en-GB")}
+                  </div>
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </div>

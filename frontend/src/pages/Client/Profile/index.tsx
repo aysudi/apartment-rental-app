@@ -2,7 +2,7 @@ import AboutMe from "@/components/Profile/AboutMe";
 import Trips from "@/components/Profile/Trips";
 import { useAuth } from "@/context/AuthContext";
 import useFetchBookings from "@/hooks/useFetchBookings";
-import { Luggage, EarthLock } from "lucide-react";
+import { Luggage } from "lucide-react";
 import { useState } from "react";
 
 const UserProfile = () => {
@@ -48,17 +48,6 @@ const UserProfile = () => {
             </div>
             <a href="#" className="text-xl hover:text-[#FF9A1E]">
               Past trips
-            </a>
-          </li>
-          <li
-            onClick={() => handleSectionChange("Connections")}
-            className="flex items-center gap-3 cursor-pointer"
-          >
-            <div className="bg-white p-3 rounded-full w-12 h-12 flex justify-center items-center shadow-lg">
-              <EarthLock className="w-12" />
-            </div>
-            <a href="#" className="text-xl hover:text-[#FF9A1E]">
-              Connections
             </a>
           </li>
         </ul>

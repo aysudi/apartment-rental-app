@@ -93,6 +93,17 @@ export type Review = {
   comment: string;
 };
 
+export type CreatedReview = {
+  id: string;
+  user: User;
+  userId: string;
+  apartment: Apartment;
+  apartmentId: string;
+  rating: number;
+  comment: string;
+  createdAt: Date;
+};
+
 export type PostedReview = {
   userId: string;
   apartmentId: string;
