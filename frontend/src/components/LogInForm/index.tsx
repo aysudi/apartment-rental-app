@@ -23,7 +23,7 @@ const LogInForm = () => {
         if (response.data.role == "admin") {
           navigate("/admin");
         } else {
-          navigate("/user");
+          navigate("/apartments");
         }
       }
       actions.resetForm();
@@ -57,7 +57,7 @@ const LogInForm = () => {
           onChange={loginFormik.handleChange}
           onBlur={loginFormik.handleBlur}
           name="password"
-          placeholder="********"
+          placeholder="* * * * * * * *"
           required
         />
         {loginFormik.errors.password && loginFormik.touched.password && (

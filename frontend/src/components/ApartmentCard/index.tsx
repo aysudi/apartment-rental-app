@@ -2,7 +2,8 @@ import { useAuth } from "@/context/AuthContext";
 import type { Apartment } from "@/types/type";
 import { Star, Heart } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { toast } from "sonner";
 
 type Props = {
   apartment: Apartment;
@@ -11,16 +12,47 @@ type Props = {
 
 const ApartmentCard = ({ apartment, idx }: Props) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
-  const [favorite, setFavorite] = useState<string[]>(
-    JSON.parse(localStorage.getItem("wishlist") || "[]")
-  );
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
-    localStorage.setItem("wishlist", JSON.stringify(favorite));
-  }, [favorite]);
+    const stored = localStorage.getItem("wishlist");
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          setFavorites(parsed);
+        }
+      } catch (err) {
+        console.error("Error parsing wishlist from localStorage", err);
+      }
+    }
+  }, []);
 
-  const isFavorite = favorite.includes(apartment.id);
+  const isFavorite = favorites.includes(apartment.id);
+
+  const toggleFavorite = () => {
+    if (!user) {
+      navigate("/login");
+      toast.error("Login to add the apartment to wishlist");
+      return;
+    }
+
+    const current = JSON.parse(
+      localStorage.getItem("wishlist") || "[]"
+    ) as string[];
+
+    let updated: string[];
+    if (current.includes(apartment.id)) {
+      updated = current.filter((id) => id !== apartment.id);
+    } else {
+      updated = [...current, apartment.id];
+    }
+
+    setFavorites(updated);
+    localStorage.setItem("wishlist", JSON.stringify(updated));
+  };
 
   return (
     <div
@@ -36,21 +68,7 @@ const ApartmentCard = ({ apartment, idx }: Props) => {
           />
         </div>
         <div
-          onClick={() => {
-            if (user) {
-              setFavorite((prevFavorites) => {
-                if (isFavorite) {
-                  return prevFavorites.filter(
-                    (id: string) => id !== apartment.id
-                  );
-                } else {
-                  return [...prevFavorites, apartment.id];
-                }
-              });
-            } else {
-              console.log("Please log in to add to wishlist.");
-            }
-          }}
+          onClick={toggleFavorite}
           className={`absolute top-4 right-4 flex justify-center items-center rounded-full p-2 cursor-pointer ${
             isFavorite ? "bg-red-500" : "bg-white"
           }`}
@@ -64,7 +82,7 @@ const ApartmentCard = ({ apartment, idx }: Props) => {
       <div className="p-4 flex flex-col gap-2">
         <Link
           to={`/apartment-details/${apartment.id}`}
-          className="font-semibold text-xl cursor-pointer hover:text-[#FF9A1E] hover:underline truncate"
+          className="font-medium text-lg cursor-pointer hover:underline truncate"
         >
           {apartment.title}
         </Link>

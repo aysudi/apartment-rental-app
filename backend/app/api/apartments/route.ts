@@ -10,30 +10,6 @@ export async function OPTIONS() {
 // GET Method
 export async function GET(req: Request) {
   try {
-    const { searchParams } = new URL(req.url);
-    const id = searchParams.get("id");
-
-    if (id) {
-      const apartment = await prisma.apartment.findUnique({
-        where: { id },
-        include: {
-          host: true,
-          wishlistedBy: true,
-          bookings: true,
-          reviews: true,
-          bookedDates: true,
-        },
-      });
-
-      if (!apartment) {
-        return setCorsHeaders(
-          NextResponse.json({ error: "Apartment not found" }, { status: 404 })
-        );
-      }
-
-      return setCorsHeaders(NextResponse.json(apartment, { status: 200 }));
-    }
-
     const apartments = await prisma.apartment.findMany({
       include: {
         host: true,

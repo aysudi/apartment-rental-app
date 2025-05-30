@@ -15,7 +15,7 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
-const HostForm = () => {
+const AddApartment = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
 
@@ -96,4 +96,4 @@ const HostForm = () => {
   );
 };
 
-export default HostForm;
+export default AddApartment;

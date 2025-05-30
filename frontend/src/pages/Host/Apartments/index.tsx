@@ -20,7 +20,7 @@ const HostApartmentsPage: React.FC = () => {
     <div className="px-6 py-16 space-y-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-[#FF9A1E]">Your Apartments</h1>
-        <Link to="/host/create-apartment">
+        <Link to="/host/add-apartment">
           <button className="bg-[#FF9A1E] text-white px-6 py-2 rounded-lg hover:bg-[#e88810] transition-colors duration-300 cursor-pointer">
             Add New Apartment
           </button>

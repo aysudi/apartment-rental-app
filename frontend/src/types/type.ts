@@ -17,6 +17,7 @@ export type Apartment = {
   deleted: boolean;
   reviews: Review[];
   bookings: string[];
+  wishlistedBy: User[];
   host: User;
 };
 
