@@ -1,28 +1,32 @@
 import useFetchApartments from "@/hooks/useFetchApartments";
 import { Link } from "react-router-dom";
 import { FaEye, FaEdit, FaTrashAlt } from "react-icons/fa";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import { useAuth } from "@/context/AuthContext";
 
 const HostApartmentsPage: React.FC = () => {
-  const { apartments } = useFetchApartments();
+  const { apartments: allApartments, loading } = useFetchApartments();
+  const { user, loading: userLoading } = useAuth();
+
+  if (loading || userLoading) return <LoadingSpinner />;
+
+  const apartments = allApartments?.filter((app) => app.host.id == user?.id);
 
   const handleDelete = (apartmentId: string) => {
-    // Call API to delete the apartment
     console.log(apartmentId);
   };
 
   return (
-    <div className="p-6 space-y-6">
-      {/* Page Header */}
+    <div className="px-6 py-16 space-y-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-[#FF9A1E]">Your Apartments</h1>
         <Link to="/host/create-apartment">
-          <button className="bg-[#FF9A1E] text-white px-6 py-2 rounded-lg hover:bg-[#e88810] transition-colors duration-300">
+          <button className="bg-[#FF9A1E] text-white px-6 py-2 rounded-lg hover:bg-[#e88810] transition-colors duration-300 cursor-pointer">
             Add New Apartment
           </button>
         </Link>
       </div>
 
-      {/* Apartments Table */}
       <div className="overflow-x-auto bg-white shadow-md rounded-lg">
         <table className="min-w-full table-auto text-left">
           <thead className="bg-[#FF9A1E] text-white">
@@ -64,7 +68,6 @@ const HostApartmentsPage: React.FC = () => {
                 </td>
                 <td className="py-4 px-6 text-sm">{apartment.rentalCount}</td>
                 <td className="py-4 px-6 flex space-x-2">
-                  {/* View Button */}
                   <Link
                     to={`/host/apartments/${apartment.id}`}
                     className="text-blue-500 hover:text-white hover:bg-blue-500 p-2 rounded-full transition-all duration-300"
@@ -73,7 +76,6 @@ const HostApartmentsPage: React.FC = () => {
                     <FaEye className="text-lg" />
                   </Link>
 
-                  {/* Edit Button */}
                   <Link
                     to={`/host/apartments/edit/${apartment.id}`}
                     className="text-yellow-500 hover:text-white hover:bg-yellow-500 p-2 rounded-full transition-all duration-300"
@@ -82,7 +84,6 @@ const HostApartmentsPage: React.FC = () => {
                     <FaEdit className="text-lg" />
                   </Link>
 
-                  {/* Delete Button */}
                   <button
                     onClick={() => handleDelete(apartment.id)}
                     className="text-red-500 hover:text-white hover:bg-red-500 p-2 rounded-full transition-all duration-300 cursor-pointer"

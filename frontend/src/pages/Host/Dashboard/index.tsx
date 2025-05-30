@@ -24,10 +24,10 @@ const HostDashboard: React.FC = () => {
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-[#FF9A1E]">Host Dashboard</h1>
         <div className="space-x-4">
-          <button className="bg-[#FF9A1E] text-white px-6 py-2 rounded-lg hover:bg-[#e88810]">
+          <button className="bg-[#FF9A1E] text-white px-6 py-2 rounded-lg hover:bg-[#e88810] cursor-pointer">
             Add New Apartment
           </button>
-          <button className="bg-[#36A2EB] text-white px-6 py-2 rounded-lg hover:bg-[#2e8fca]">
+          <button className="bg-[#36A2EB] text-white px-6 py-2 rounded-lg hover:bg-[#2e8fca] cursor-pointer">
             View Bookings
           </button>
         </div>
