@@ -18,6 +18,7 @@ import HostBookings from "@/pages/Host/Bookings";
 import HostReviews from "@/pages/Host/Reviews";
 import PrivateRoute from "@/routes/PrivateRoute";
 import HostRoute from "./HostRoute";
+import AddApartment from "@/pages/Host/AddApartment";
 
 const ROUTES = [
   //client
@@ -134,6 +135,14 @@ const ROUTES = [
         element: (
           <HostRoute>
             <HostReviews />
+          </HostRoute>
+        ),
+      },
+      {
+        path: "add-apartment",
+        element: (
+          <HostRoute>
+            <AddApartment />
           </HostRoute>
         ),
       },

@@ -17,7 +17,7 @@ async function getAllApartments() {
 async function getOneApartment(apartmentId: string) {
   try {
     const response = await instance.get(
-      `${endpoints.apartments}?id=${apartmentId}`
+      `${endpoints.apartments}/${apartmentId}`
     );
     return response.data;
   } catch (error) {
@@ -40,10 +40,7 @@ async function deleteApartment(apartmentId: string) {
 }
 
 // Update apartment data by ID
-async function updateApartment(
-  apartmentId: string,
-  apartmentData: NewApartment
-) {
+async function updateApartment(apartmentId: string, apartmentData: any) {
   try {
     const response = await instance.put(
       `${endpoints.apartments}/${apartmentId}`,
