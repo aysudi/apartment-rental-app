@@ -79,6 +79,7 @@ const AdminUsersPage = () => {
                     size="sm"
                     variant={user.isBanned ? "outline" : "destructive"}
                     onClick={() => handleBanToggle(user.id, user.isBanned)}
+                    className="cursor-pointer"
                   >
                     {user.isBanned ? (
                       <ShieldCheck className="w-4 h-4 mr-1" />

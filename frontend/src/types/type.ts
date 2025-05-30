@@ -71,6 +71,18 @@ export type Booking = {
   user: User;
 };
 
+export type CreatedBooking = {
+  id: string;
+  userId: string;
+  apartmentId: string;
+  totalPrice: number;
+  createdAt: string;
+  status: "pending" | "completed" | "cancelled";
+  user: User;
+  apartment: Apartment;
+  bookedDates: BookedDate;
+};
+
 export type Review = {
   id: string;
   user: User;

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import type { Booking } from "@/types/type";
+import type { CreatedBooking } from "@/types/type";
 import bookingsController from "@/services/api/bookings/bookingsApi";
 
 const useFetchBookings = () => {
-  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [bookings, setBookings] = useState<CreatedBooking[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
