@@ -21,7 +21,6 @@ const LogInForm = () => {
         toast.success(response.message);
         login(values);
         if (response.data.role == "admin") {
-          console.log(response);
           navigate("/admin/dashboard");
         } else {
           navigate("/apartments");
