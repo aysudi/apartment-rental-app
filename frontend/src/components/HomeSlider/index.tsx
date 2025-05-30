@@ -1,4 +1,3 @@
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Navigation } from "swiper/modules";
@@ -14,19 +13,36 @@ const SliderComponent = () => {
   if (loading) return <LoadingSpinner />;
 
   return (
-    <div
-      className="swiper-container"
-      style={{ position: "relative", width: "98%", margin: "auto" }}
-    >
+    <div className="relative w-full px-4 md:px-6 lg:px-10 xl:px-16 max-w-[1440px] mx-auto">
+      <div className="absolute top-1/2 left-0 transform -translate-y-1/2 z-10">
+        <div className="swiper-button-prev flex items-center justify-center bg-[#FF9A1E] text-white p-2 rounded-lg cursor-pointer">
+          <ChevronLeft />
+        </div>
+      </div>
+
       <Swiper
         modules={[Navigation]}
-        spaceBetween={30}
-        slidesPerView={4}
+        spaceBetween={20}
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+          },
+          640: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+          1280: {
+            slidesPerView: 4,
+          },
+        }}
         loop={true}
         navigation={{
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         }}
+        className="w-full"
       >
         {apartments &&
           apartments
@@ -37,61 +53,23 @@ const SliderComponent = () => {
                 onClick={() => {
                   navigate(`/apartment-details/${app.id}`);
                 }}
-                className="overflow-hidden rounded-2xl shadow-xl cursor-pointer"
+                className="overflow-hidden rounded-2xl shadow-xl cursor-pointer group"
               >
                 <div
-                  className="slide-content hover:scale-110 transition overflow-hidden"
-                  style={{
-                    backgroundImage: `url(${app.coverImage})`,
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                    height: "350px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
+                  className="w-full h-[250px] sm:h-[300px] md:h-[320px] lg:h-[340px] bg-center bg-cover bg-no-repeat transform group-hover:scale-105 transition-transform duration-300 rounded-xl"
+                  style={{ backgroundImage: `url(${app.coverImage})` }}
                 ></div>
               </SwiperSlide>
             ))}
       </Swiper>
 
-      <div className="swiper-button-prev shadow-2xl" style={prevButtonStyle}>
-        <ChevronLeft />
-      </div>
-      <div className="swiper-button-next shadow-2xl" style={nextButtonStyle}>
-        <ChevronRight />
+      <div className="absolute top-1/2 right-0 transform -translate-y-1/2 z-10">
+        <div className="swiper-button-next flex items-center justify-center bg-[#FF9A1E] text-white p-2 rounded-lg cursor-pointer">
+          <ChevronRight />
+        </div>
       </div>
     </div>
   );
-};
-
-const prevButtonStyle: React.CSSProperties = {
-  position: "absolute",
-  top: "50%",
-  left: "10px",
-  zIndex: 10,
-  backgroundColor: "#FF9A1E",
-  color: "#fff",
-  padding: "10px",
-  borderRadius: "5px",
-  cursor: "pointer",
-  fontSize: "16px",
-  transform: "translateY(-50%)",
-};
-
-const nextButtonStyle: React.CSSProperties = {
-  position: "absolute",
-  top: "50%",
-  right: "10px",
-  zIndex: 10,
-  backgroundColor: "#FF9A1E",
-  color: "#fff",
-  padding: "10px",
-  borderRadius: "5px",
-  cursor: "pointer",
-  fontSize: "16px",
-  transform: "translateY(-50%)",
 };
 
 export default SliderComponent;
