@@ -16,9 +16,7 @@ async function getAllBookings() {
 // Fetch one booking by ID
 async function getOneBooking(bookingId: string) {
   try {
-    const response = await instance.get(
-      `${endpoints.bookings}?id=${bookingId}`
-    );
+    const response = await instance.get(`${endpoints.bookings}/${bookingId}`);
     return response.data;
   } catch (error) {
     console.error(`Error fetching booking with ID ${bookingId}`, error);
@@ -40,9 +38,9 @@ async function deleteBooking(bookingId: string) {
 }
 
 // Update booking data by ID
-async function updateBooking(bookingId: string, bookingData: Booking) {
+async function updateBooking(bookingId: string, bookingData: any) {
   try {
-    const response = await instance.put(
+    const response = await instance.patch(
       `${endpoints.bookings}/${bookingId}`,
       bookingData
     );

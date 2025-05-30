@@ -77,7 +77,7 @@ export type CreatedBooking = {
   apartmentId: string;
   totalPrice: number;
   createdAt: string;
-  status: "pending" | "completed" | "cancelled";
+  status: "pending" | "confirmed" | "cancelled";
   user: User;
   apartment: Apartment;
   bookedDates: BookedDate;
