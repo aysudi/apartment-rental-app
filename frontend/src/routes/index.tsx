@@ -19,6 +19,12 @@ import HostReviews from "@/pages/Host/Reviews";
 import PrivateRoute from "@/routes/PrivateRoute";
 import HostRoute from "./HostRoute";
 import AddApartment from "@/pages/Host/AddApartment";
+import AdminRoute from "./AdminRoute";
+import AdminLayout from "@/layout/Admin";
+import AdminDashboard from "@/components/Admin/Dashboard";
+import AdminApartments from "@/components/Admin/Apartments";
+import AdminBookings from "@/components/Admin/Bookings";
+import AdminUsers from "@/components/Admin/Users";
 
 const ROUTES = [
   //client
@@ -144,6 +150,53 @@ const ROUTES = [
           <HostRoute>
             <AddApartment />
           </HostRoute>
+        ),
+      },
+    ],
+  },
+  //admin
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      {
+        path: "dashboard",
+        element: (
+          <AdminRoute>
+            <AdminDashboard />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "apartments",
+        element: (
+          <AdminRoute>
+            <AdminApartments />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "bookings",
+        element: (
+          <AdminRoute>
+            <AdminBookings />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "users",
+        element: (
+          <AdminRoute>
+            <AdminUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "add-apartment",
+        element: (
+          <AdminRoute>
+            <AddApartment />
+          </AdminRoute>
         ),
       },
     ],
