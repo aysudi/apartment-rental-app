@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import reviewsController from "@/services/api/reviews/reviewsApi";
+import type { CreatedReview } from "@/types/type";
 
 const useFetchReviews = () => {
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState<CreatedReview[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

@@ -1,20 +1,36 @@
+import { useState, useEffect } from "react";
 import useFetchApartments from "@/hooks/useFetchApartments";
 import { Link } from "react-router-dom";
 import { FaEye, FaEdit, FaTrashAlt } from "react-icons/fa";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useAuth } from "@/context/AuthContext";
+import EditApartmentModal from "@/components/EditApartment";
+// import EditApartmentModal from "@/components/EditApartmentModal";
 
 const HostApartmentsPage: React.FC = () => {
   const { apartments: allApartments, loading } = useFetchApartments();
   const { user, loading: userLoading } = useAuth();
 
-  if (loading || userLoading) return <LoadingSpinner />;
+  const [editOpen, setEditOpen] = useState(false);
+  const [selectedApartment, setSelectedApartment] = useState<any>(null);
+  const [apartmentsState, setApartmentsState] = useState<any[]>([]);
 
-  const apartments = allApartments?.filter((app) => app.host.id == user?.id);
+  useEffect(() => {
+    if (allApartments && user?.id) {
+      setApartmentsState(allApartments.filter((app) => app.host.id == user.id));
+    }
+  }, [allApartments, user]);
+
+  const handleEdit = (apartment: any) => {
+    setSelectedApartment(apartment);
+    setEditOpen(true);
+  };
 
   const handleDelete = (apartmentId: string) => {
     console.log(apartmentId);
   };
+
+  if (loading || userLoading) return <LoadingSpinner />;
 
   return (
     <div className="px-6 py-16 space-y-6">
@@ -42,7 +58,7 @@ const HostApartmentsPage: React.FC = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700">
-            {apartments.map((apartment) => (
+            {apartmentsState.map((apartment) => (
               <tr
                 key={apartment.id}
                 className="hover:bg-gray-100 transition-all duration-200"
@@ -69,21 +85,19 @@ const HostApartmentsPage: React.FC = () => {
                 <td className="py-4 px-6 text-sm">{apartment.rentalCount}</td>
                 <td className="py-4 px-6 flex space-x-2">
                   <Link
-                    to={`/host/apartments/${apartment.id}`}
+                    to={`/apartment-details/${apartment.id}`}
                     className="text-blue-500 hover:text-white hover:bg-blue-500 p-2 rounded-full transition-all duration-300"
                     aria-label="View Apartment"
                   >
                     <FaEye className="text-lg" />
                   </Link>
-
-                  <Link
-                    to={`/host/apartments/edit/${apartment.id}`}
-                    className="text-yellow-500 hover:text-white hover:bg-yellow-500 p-2 rounded-full transition-all duration-300"
+                  <button
+                    onClick={() => handleEdit(apartment)}
+                    className="text-yellow-500 hover:text-white hover:bg-yellow-500 p-2 rounded-full transition-all duration-300 cursor-pointer"
                     aria-label="Edit Apartment"
                   >
                     <FaEdit className="text-lg" />
-                  </Link>
-
+                  </button>
                   <button
                     onClick={() => handleDelete(apartment.id)}
                     className="text-red-500 hover:text-white hover:bg-red-500 p-2 rounded-full transition-all duration-300 cursor-pointer"
@@ -97,6 +111,14 @@ const HostApartmentsPage: React.FC = () => {
           </tbody>
         </table>
       </div>
+
+      <EditApartmentModal
+        open={editOpen}
+        onOpenChange={setEditOpen}
+        apartment={selectedApartment}
+        setApartment={setSelectedApartment}
+        updateApartments={setApartmentsState}
+      />
     </div>
   );
 };

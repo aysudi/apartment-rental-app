@@ -121,6 +121,11 @@ const Header = () => {
                       Dashboard
                     </NavItem>
                   )}
+                  {user.role === "admin" && (
+                    <NavItem to="/admin/dashboard" icon={ChartColumnBig}>
+                      Dashboard
+                    </NavItem>
+                  )}
                   <NavItem
                     to="/login"
                     icon={LogOut}
@@ -222,6 +227,11 @@ const Header = () => {
                 </NavItem>
                 {user.role == "host" && (
                   <NavItem to="/host/dashboard" icon={ChartColumnBig}>
+                    Dashboard
+                  </NavItem>
+                )}
+                {user.role == "admin" && (
+                  <NavItem to="/admin/dashboard" icon={ChartColumnBig}>
                     Dashboard
                   </NavItem>
                 )}

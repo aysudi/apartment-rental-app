@@ -1,7 +1,7 @@
-import type { Booking } from "@/types/type";
+import type { CreatedBooking } from "@/types/type";
 import { Link } from "react-router";
 
-type Props = { bookedApartments: Booking[] };
+type Props = { bookedApartments: CreatedBooking[] };
 
 const Trips = ({ bookedApartments }: Props) => {
   return (
