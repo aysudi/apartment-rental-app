@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import reviewsController from "@/services/api/reviews/reviewsApi";
 import { toast } from "sonner";
-import type { User } from "@/types/type";
+import type { Review as ReviewType, User } from "@/types/type";
 import Review from "@/classes/Review";
 
 interface ReviewFormProps {
   apartmentId: string;
   user: User;
-  onSubmitSuccess?: () => void;
+  onSubmitSuccess?: (newReview: ReviewType) => void;
 }
 
 const ReviewForm: React.FC<ReviewFormProps> = ({
@@ -30,18 +30,25 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
 
     try {
       setSubmitting(true);
+
       const newReview = new Review(user.id, apartmentId, rating, comment);
-      console.log(newReview);
-      //   await reviewsController.postReview({
-      //     userId: user.id,
-      //     apartmentId,
-      //     rating,
-      //     comment,
-      //   });
+      const posted = await reviewsController.postReview(newReview);
+
+      const enrichedReview: ReviewType = {
+        ...posted,
+        user: {
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          profileImage: user.profileImage,
+          createdAt: new Date().toISOString(),
+        },
+      };
+
       toast.success("Review submitted!");
       setRating(0);
       setComment("");
-      onSubmitSuccess?.();
+      onSubmitSuccess?.(enrichedReview);
     } catch {
       toast.error("Failed to submit review.");
     } finally {
@@ -53,7 +60,6 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <h4 className="text-lg font-semibold text-gray-800">Leave a Review</h4>
 
-      {/* Star Rating */}
       <div className="flex items-center gap-1">
         {[...Array(5)].map((_, index) => {
           const starValue = index + 1;
@@ -79,7 +85,6 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
         })}
       </div>
 
-      {/* Comment Input */}
       <textarea
         className="w-full p-3 border border-gray-300 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-white"
         rows={4}
@@ -88,7 +93,6 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
         onChange={(e) => setComment(e.target.value)}
       />
 
-      {/* Submit Button */}
       <div>
         <button
           type="submit"
