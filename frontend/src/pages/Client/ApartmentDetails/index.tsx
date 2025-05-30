@@ -6,8 +6,11 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import type { Review } from "@/types/type";
 import useFetchReviews from "@/hooks/useFetchReviews";
 import { formatMonthYear } from "@/utils/formatMonthYear";
-import { FaStar } from "react-icons/fa";
 import ApartmentImageSlider from "@/components/ApartmentSlider";
+import ReviewForm from "@/components/ReviewForm";
+import { useAuth } from "@/context/AuthContext";
+import useFetchBookings from "@/hooks/useFetchBookings";
+import { FaStar } from "react-icons/fa";
 
 const ApartmentDetails = () => {
   const { id } = useParams();
@@ -21,6 +24,8 @@ const ApartmentDetails = () => {
     loading: boolean;
     error: string | null;
   } = useFetchReviews();
+  const { bookings } = useFetchBookings();
+  const { user } = useAuth();
 
   if (loading && reviewsLoading) return <LoadingSpinner />;
   if (error && reviewsError) return <p>{error}</p>;
@@ -28,6 +33,13 @@ const ApartmentDetails = () => {
 
   const validReviews = reviews?.filter(
     (review) => review.apartmentId == apartment.id
+  );
+
+  const userHasBooking = bookings.some(
+    (b) =>
+      b.userId === user?.id &&
+      b.apartmentId === apartment.id &&
+      new Date(b.bookedDates.endDate) < new Date()
   );
 
   return (
@@ -98,36 +110,54 @@ const ApartmentDetails = () => {
           <div className="flex flex-col gap-2">
             <h3 className="text-2xl font-bold">Reviews</h3>
             <div>
-              {apartment.avgRating} |{" "}
-              {apartment?.reviews?.length > 0 ? apartment.reviews.length : "0"}{" "}
-              reviews
+              {apartment.avgRating} | {apartment?.reviews?.length || 0} reviews
             </div>
-            <div className="flex flex-col gap-4 mt-4">
-              {validReviews?.map((review: Review, idx: number) => (
-                <div key={idx} className="flex flex-col gap-3">
-                  <div className="flex gap-4 items-center">
-                    <div className="h-14 w-14">
+            <div className="flex flex-col gap-1 mt-4">
+              <div className="flex flex-col gap-4">
+                {validReviews?.map((review: Review, idx: number) => (
+                  <div key={idx} className="border-b border-gray-200 pb-6">
+                    {/* Reviewer Info */}
+                    <div className="flex items-center gap-4 mb-2">
                       <img
-                        className="h-full w-full object-cover rounded-full"
-                        src={review?.user.profileImage}
+                        src={review.user.profileImage}
                         alt="Reviewer"
+                        className="w-12 h-12 rounded-full object-cover"
                       />
+                      <div>
+                        <p className="font-semibold text-gray-800">
+                          {review.user.firstName} {review.user.lastName}
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          {formatMonthYear(review.user.createdAt)}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-bold text-lg">
-                        {review.user.firstName} {review.user.lastName}
-                      </h3>
-                      <p className="text-gray-500 text-sm">
-                        {formatMonthYear(review.user.createdAt)}
-                      </p>
+
+                    {/* Star Rating */}
+                    <div className="flex items-center mb-2">
+                      {[...Array(5)].map((_, i) => (
+                        <FaStar
+                          key={i}
+                          size={16}
+                          className={
+                            i < review.rating
+                              ? "text-yellow-400"
+                              : "text-gray-300"
+                          }
+                        />
+                      ))}
                     </div>
+
+                    {/* Comment */}
+                    <p className="text-gray-700 text-sm leading-relaxed">
+                      {review.comment}
+                    </p>
                   </div>
-                  <div className="flex flex-col gap-2">
-                    <FaStar color="#F59E0B" size={20} />
-                    <p className="text-gray-600">{review.comment}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
+              {user && userHasBooking && (
+                <ReviewForm user={user} apartmentId={apartment.id} />
+              )}
             </div>
           </div>
         </div>
