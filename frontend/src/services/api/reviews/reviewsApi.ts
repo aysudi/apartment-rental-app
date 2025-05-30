@@ -53,7 +53,6 @@ async function updateReview(reviewId: string, reviewData: PostedReview) {
 async function postReview(reviewData: PostedReview) {
   try {
     const response = await instance.post(endpoints.reviews, reviewData);
-    console.log("hello");
     return response.data;
   } catch (error) {
     console.error("Error creating new review", error);

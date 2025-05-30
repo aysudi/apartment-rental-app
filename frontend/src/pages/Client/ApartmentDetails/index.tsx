@@ -11,6 +11,7 @@ import ReviewForm from "@/components/ReviewForm";
 import { useAuth } from "@/context/AuthContext";
 import useFetchBookings from "@/hooks/useFetchBookings";
 import { FaStar } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 const ApartmentDetails = () => {
   const { id } = useParams();
@@ -24,26 +25,54 @@ const ApartmentDetails = () => {
     loading: boolean;
     error: string | null;
   } = useFetchReviews();
-  const { bookings } = useFetchBookings();
   const { user } = useAuth();
+  const { bookings } = useFetchBookings();
 
-  if (loading && reviewsLoading) return <LoadingSpinner />;
-  if (error && reviewsError) return <p>{error}</p>;
+  const [localReviews, setLocalReviews] = useState<Review[]>([]);
+
+  useEffect(() => {
+    if (reviews && apartment) {
+      const filtered = reviews.filter((r) => r.apartmentId === apartment.id);
+      setLocalReviews(filtered);
+    }
+  }, [reviews, apartment]);
+
+  const averageRating =
+    localReviews.length > 0
+      ? (
+          localReviews.reduce((acc, review) => acc + review.rating, 0) /
+          localReviews.length
+        ).toFixed(1)
+      : "0.0";
+
+  const userHasBooking = user
+    ? bookings.some(
+        (b) =>
+          b.userId === user.id &&
+          b.apartmentId === apartment?.id &&
+          new Date(b.bookedDates.endDate) < new Date()
+      )
+    : false;
+
+  const handleReviewSubmit = (newReview: Review) => {
+    setLocalReviews((prev) => [
+      {
+        ...newReview,
+        user: {
+          ...user!,
+          createdAt: user!.createdAt || new Date().toISOString(),
+        },
+      },
+      ...prev,
+    ]);
+  };
+
+  if (loading || reviewsLoading) return <LoadingSpinner />;
+  if (error || reviewsError) return <p>{error || reviewsError}</p>;
   if (!apartment) return <p>No apartment found.</p>;
 
-  const validReviews = reviews?.filter(
-    (review) => review.apartmentId == apartment.id
-  );
-
-  const userHasBooking = bookings.some(
-    (b) =>
-      b.userId === user?.id &&
-      b.apartmentId === apartment.id &&
-      new Date(b.bookedDates.endDate) < new Date()
-  );
-
   return (
-    <div className="min-h-screen flex flex-col gap-10 pt-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="min-h-screen flex flex-col gap-10 py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <ApartmentImageSlider
         images={apartment.images}
         coverImg={apartment.coverImage}
@@ -110,30 +139,32 @@ const ApartmentDetails = () => {
           <div className="flex flex-col gap-2">
             <h3 className="text-2xl font-bold">Reviews</h3>
             <div>
-              {apartment.avgRating} | {apartment?.reviews?.length || 0} reviews
+              {averageRating} | {localReviews.length} review
+              {localReviews.length !== 1 && "s"}
             </div>
             <div className="flex flex-col gap-1 mt-4">
               <div className="flex flex-col gap-4">
-                {validReviews?.map((review: Review, idx: number) => (
-                  <div key={idx} className="border-b border-gray-200 pb-6">
-                    {/* Reviewer Info */}
+                {localReviews?.map((review: Review, idx: number) => (
+                  <div key={idx} className="border-b border-gray-200 pb-4 mb-2">
                     <div className="flex items-center gap-4 mb-2">
                       <img
-                        src={review.user.profileImage}
+                        src={review?.user?.profileImage || "/default-user.png"}
                         alt="Reviewer"
                         className="w-12 h-12 rounded-full object-cover"
                       />
                       <div>
                         <p className="font-semibold text-gray-800">
-                          {review.user.firstName} {review.user.lastName}
+                          {review?.user?.firstName || "Unknown"}{" "}
+                          {review?.user?.lastName || ""}
                         </p>
                         <p className="text-sm text-gray-500">
-                          {formatMonthYear(review.user.createdAt)}
+                          {review.user?.createdAt
+                            ? formatMonthYear(review.user.createdAt)
+                            : "Unknown"}
                         </p>
                       </div>
                     </div>
 
-                    {/* Star Rating */}
                     <div className="flex items-center mb-2">
                       {[...Array(5)].map((_, i) => (
                         <FaStar
@@ -148,15 +179,18 @@ const ApartmentDetails = () => {
                       ))}
                     </div>
 
-                    {/* Comment */}
                     <p className="text-gray-700 text-sm leading-relaxed">
-                      {review.comment}
+                      {review?.comment}
                     </p>
                   </div>
                 ))}
               </div>
               {user && userHasBooking && (
-                <ReviewForm user={user} apartmentId={apartment.id} />
+                <ReviewForm
+                  user={user}
+                  apartmentId={apartment.id}
+                  onSubmitSuccess={handleReviewSubmit}
+                />
               )}
             </div>
           </div>
