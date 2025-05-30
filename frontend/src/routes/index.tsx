@@ -16,6 +16,8 @@ import HostDashboard from "@/pages/Host/Dashboard";
 import HostApartments from "@/pages/Host/Apartments";
 import HostBookings from "@/pages/Host/Bookings";
 import HostReviews from "@/pages/Host/Reviews";
+import PrivateRoute from "@/routes/PrivateRoute";
+import HostRoute from "./HostRoute";
 
 const ROUTES = [
   //client
@@ -42,11 +44,43 @@ const ROUTES = [
       },
       {
         path: "user",
-        element: <UserProfile />,
+        element: (
+          <PrivateRoute>
+            <UserProfile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "edit-profile",
-        element: <EditProfile />,
+        element: (
+          <PrivateRoute>
+            <EditProfile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "wishlist",
+        element: (
+          <PrivateRoute>
+            <Wishlist />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/become-host",
+        element: (
+          <PrivateRoute>
+            <BecomeHost />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "become-host-start",
+        element: (
+          <PrivateRoute>
+            <HostForm />
+          </PrivateRoute>
+        ),
       },
       {
         path: "contact",
@@ -57,10 +91,6 @@ const ROUTES = [
         element: <About />,
       },
       {
-        path: "wishlist",
-        element: <Wishlist />,
-      },
-      {
         path: "login",
         element: <Login />,
       },
@@ -68,35 +98,44 @@ const ROUTES = [
         path: "register",
         element: <Register />,
       },
-      {
-        path: "/become-host",
-        element: <BecomeHost />,
-      },
-      {
-        path: "become-host-start",
-        element: <HostForm />,
-      },
     ],
   },
+  //host
   {
     path: "/host",
     element: <HostLayout />,
     children: [
       {
         path: "dashboard",
-        element: <HostDashboard />,
+        element: (
+          <HostRoute>
+            <HostDashboard />
+          </HostRoute>
+        ),
       },
       {
         path: "apartments",
-        element: <HostApartments />,
+        element: (
+          <HostRoute>
+            <HostApartments />
+          </HostRoute>
+        ),
       },
       {
         path: "bookings",
-        element: <HostBookings />,
+        element: (
+          <HostRoute>
+            <HostBookings />
+          </HostRoute>
+        ),
       },
       {
         path: "reviews",
-        element: <HostReviews />,
+        element: (
+          <HostRoute>
+            <HostReviews />
+          </HostRoute>
+        ),
       },
     ],
   },

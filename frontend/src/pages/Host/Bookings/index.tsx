@@ -1,23 +1,35 @@
+import LoadingSpinner from "@/components/LoadingSpinner";
+import { useAuth } from "@/context/AuthContext";
+import useFetchApartments from "@/hooks/useFetchApartments";
 import useFetchBookings from "@/hooks/useFetchBookings";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router";
 
 const HostBookings = () => {
-  const { bookings } = useFetchBookings();
+  const { bookings: allBookings, loading } = useFetchBookings();
+  const { user, loading: userLoading } = useAuth();
+  const { apartments: allApartments, loading: apartmentsLoading } =
+    useFetchApartments();
+
+  if (loading || userLoading || apartmentsLoading) return <LoadingSpinner />;
+
+  const apartments = allApartments?.filter((app) => app.host.id == user?.id);
+
+  const validBookings = allBookings.filter((booking) =>
+    apartments.some((app) => app.id === booking.apartmentId)
+  );
 
   const formatDate = (date: Date) => {
     const parsedDate = new Date(date);
-    return parsedDate.toLocaleDateString(); // You can customize the format here
+    return parsedDate.toLocaleDateString();
   };
 
   return (
-    <div className="p-6 space-y-6">
-      {/* Page Header */}
+    <div className="px-6 py-16 space-y-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-[#FF9A1E]">Your Bookings</h1>
       </div>
 
-      {/* Bookings Table */}
       <div className="overflow-x-auto bg-white shadow-md rounded-lg">
         <table className="min-w-full table-auto text-left">
           <thead className="bg-[#FF9A1E] text-white">
@@ -31,8 +43,8 @@ const HostBookings = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700">
-            {bookings &&
-              bookings?.map((booking, idx) => (
+            {validBookings &&
+              validBookings?.map((booking, idx) => (
                 <tr
                   key={idx}
                   className="hover:bg-gray-100 transition-all duration-200"
@@ -57,7 +69,6 @@ const HostBookings = () => {
                     ${booking.totalPrice}
                   </td>
                   <td className="py-4 px-6 flex space-x-2">
-                    {/* Edit Button */}
                     <Link
                       to={`/host/bookings/edit`}
                       className="text-yellow-500 hover:text-white hover:bg-yellow-500 p-2 rounded-full transition-all duration-300"
@@ -66,7 +77,6 @@ const HostBookings = () => {
                       <FaEdit className="text-lg" />
                     </Link>
 
-                    {/* Delete Button */}
                     <button
                       className="text-red-500 hover:text-white hover:bg-red-500 p-2 rounded-full transition-all duration-300"
                       aria-label="Delete Booking"
