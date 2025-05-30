@@ -28,7 +28,6 @@ async function getOneUser(userId: string) {
 async function getUserByEmail(email: string) {
   try {
     const response = await instance.get(`${endpoints.users}?email=${email}`);
-    console.log(response);
     return response.data || null;
   } catch (error) {
     console.error(`Error fetching user by email`, error);
