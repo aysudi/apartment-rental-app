@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -21,20 +21,39 @@ import {
   XCircle,
 } from "lucide-react";
 import type { CreatedBooking } from "@/types/type";
+import bookingsController from "@/services/api/bookings/bookingsApi";
+import { toast } from "sonner";
 
-const AdminBookingsPage = () => {
-  const { bookings, loading } = useFetchBookings();
+const AdminBookings = () => {
+  const { bookings: fetchedBookings, loading } = useFetchBookings();
+  const [localBookings, setLocalBookings] = useState<CreatedBooking[]>([]);
   const [processingId, setProcessingId] = useState<string | null>(null);
 
-  const handleStatusUpdate = (
+  useEffect(() => {
+    if (fetchedBookings.length > 0) {
+      setLocalBookings(fetchedBookings);
+    }
+  }, [fetchedBookings]);
+
+  const handleStatusUpdate = async (
     id: string,
     newStatus: "confirmed" | "cancelled"
   ) => {
-    setProcessingId(id);
-    setTimeout(() => {
-      console.log(`Booking ${id} set to ${newStatus}`);
+    try {
+      setProcessingId(id);
+      await bookingsController.updateBooking(id, { status: newStatus });
+      setLocalBookings((prev) =>
+        prev.map((booking) =>
+          booking.id === id ? { ...booking, status: newStatus } : booking
+        )
+      );
+      toast.success(`Booking ${newStatus} successfully!`);
+    } catch (err) {
+      toast.error("Failed to update booking status.");
+      console.error(err);
+    } finally {
       setProcessingId(null);
-    }, 800);
+    }
   };
 
   if (loading) return <LoadingSpinner />;
@@ -58,7 +77,7 @@ const AdminBookingsPage = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {bookings.map((booking: CreatedBooking, idx) => (
+            {localBookings.map((booking: CreatedBooking, idx) => (
               <TableRow
                 key={idx}
                 className="hover:bg-orange-50/40 transition-all"
@@ -152,4 +171,4 @@ const AdminBookingsPage = () => {
   );
 };
 
-export default AdminBookingsPage;
+export default AdminBookings;

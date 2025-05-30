@@ -20,10 +20,10 @@ import HostRoute from "./HostRoute";
 import AddApartment from "@/pages/Host/AddApartment";
 import AdminRoute from "./AdminRoute";
 import AdminLayout from "@/layout/Admin";
-import AdminDashboard from "@/components/Admin/Dashboard";
-import AdminApartments from "@/components/Admin/Apartments";
-import AdminBookings from "@/components/Admin/Bookings";
-import AdminUsers from "@/components/Admin/Users";
+import AdminDashboard from "@/pages/Admin/Dashboard";
+import AdminApartments from "@/pages/Admin/Apartments";
+import AdminBookings from "@/pages/Admin/Bookings";
+import AdminUsers from "@/pages/Admin/Users";
 
 const ROUTES = [
   //client
