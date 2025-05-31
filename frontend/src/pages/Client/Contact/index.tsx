@@ -1,4 +1,40 @@
+import ContactClass from "@/classes/Contact";
+import { useAuth } from "@/context/AuthContext";
+import contactsController from "@/services/api/contacts/contactsApi";
+import contactFormSchema from "@/validation/addContactSchema";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
+
 const Contact = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const contactFormik = useFormik({
+    initialValues: {
+      fullName: "",
+      email: "",
+      subject: "",
+      message: "",
+    },
+    onSubmit: async (values, actions) => {
+      if (user) {
+        const newContact = new ContactClass(
+          values.fullName,
+          values.email,
+          values.subject,
+          values.message,
+          user?.id
+        );
+        await contactsController.postContact(newContact);
+        toast.success("Message sent successfully!");
+        actions.resetForm();
+        navigate("/apartments");
+      }
+    },
+    validationSchema: contactFormSchema,
+  });
+
   return (
     <div className="w-full min-h-screen bg-gray-50">
       <section
@@ -16,22 +52,45 @@ const Contact = () => {
 
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Contact Form */}
           <div className="w-full">
             <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>
-            <form className="flex flex-col space-y-6">
+            <form
+              onSubmit={contactFormik.handleSubmit}
+              className="flex flex-col space-y-4"
+            >
               <input
                 type="text"
                 placeholder="Your Name"
+                value={contactFormik.values.fullName}
+                onChange={contactFormik.handleChange}
+                onBlur={contactFormik.handleBlur}
+                name="fullName"
                 className="p-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
               <input
                 type="email"
                 placeholder="Your Email"
+                value={contactFormik.values.email}
+                onChange={contactFormik.handleChange}
+                onBlur={contactFormik.handleBlur}
+                name="email"
+                className="p-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+              <input
+                type="text"
+                placeholder="Subject"
+                value={contactFormik.values.subject}
+                onChange={contactFormik.handleChange}
+                onBlur={contactFormik.handleBlur}
+                name="subject"
                 className="p-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
               <textarea
                 placeholder="Your Message"
+                value={contactFormik.values.message}
+                onChange={contactFormik.handleChange}
+                onBlur={contactFormik.handleBlur}
+                name="message"
                 className="p-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 rows={6}
               ></textarea>
@@ -44,7 +103,6 @@ const Contact = () => {
             </form>
           </div>
 
-          {/* Contact Information */}
           <div className="w-full">
             <h2 className="text-2xl font-semibold mb-4">
               Our Contact Information

@@ -38,6 +38,13 @@ const BookApartment = ({ apartment }: any) => {
           title: "Oops...",
           text: "You should select dates!",
         });
+      } else if (user.isBanned == true) {
+        setIsModalOpen(false);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "You are banned! Try again later!",
+        });
       } else {
         openModal();
       }

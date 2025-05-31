@@ -69,6 +69,7 @@ model User {
   bookings     Booking[]   @relation("UserBookings")
   reviews      Review[]    @relation("UserReviews")
   apartments   Apartment[] @relation("HostApartments")
+  contacts     Contact[] @relation("UserContact")
 }
 
 model Apartment {
@@ -141,6 +142,8 @@ model Contact {
   isRead       Boolean  @default(false)
   submittedAt  DateTime @default(now())
   deleted      Boolean  @default(false)
+  userId       String
+  user         User     @relation("UserContact", fields: [userId], references: [id])
 }
 
 model Coupon {

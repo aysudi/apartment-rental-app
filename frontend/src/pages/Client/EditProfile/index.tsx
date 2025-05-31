@@ -11,10 +11,21 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router";
 
 const EditProfile = () => {
-  const { user, loading } = useAuth();
+  const { user, loading, setUser } = useAuth();
   const [showImageOptions, setShowImageOptions] = useState(false);
   const [selectedImageURL, setSelectedImageURL] = useState("");
   const navigate = useNavigate();
+
+  const refreshUser = async () => {
+    if (user?.id) {
+      const refreshedUser = await authController.getOneUser(user.id);
+      setUser(refreshedUser);
+    }
+  };
+
+  useEffect(() => {
+    refreshUser();
+  }, []);
 
   useEffect(() => {
     if (user?.profileImage) {
@@ -65,6 +76,7 @@ const EditProfile = () => {
           values.balance
         );
         await authController.updateUser(user.id, updatedUser);
+        await refreshUser();
         toast.success("Profile updated successfully");
         navigate("/user");
         actions.resetForm();
@@ -79,7 +91,6 @@ const EditProfile = () => {
   return (
     <div className="min-h-screen pt-[7rem] bg-gray-50 pb-12">
       <div className="max-w-7xl m-auto flex flex-col lg:flex-row gap-10">
-        {/* Profile Image Section */}
         <div className="w-full lg:w-1/4 flex flex-col items-center gap-4">
           <div className="relative group flex flex-col items-center">
             <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-md bg-white">

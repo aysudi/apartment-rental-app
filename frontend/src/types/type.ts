@@ -116,3 +116,22 @@ export type BookedDate = {
   apartmentId: string;
   endDate: Date;
 };
+
+export type Contact = {
+  id: string;
+  fullName: string;
+  email: string;
+  subject: string;
+  message: string;
+  isRead: boolean;
+  userId: string;
+};
+
+export type NewContact = {
+  fullName: string;
+  email: string;
+  subject: string;
+  message: string;
+  isRead: boolean;
+  userId: string;
+};

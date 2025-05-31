@@ -1,17 +1,33 @@
 import LoadingSpinner from "@/components/LoadingSpinner";
 import useFetchReviews from "@/hooks/useFetchReviews";
+import authController from "@/services/api/users/usersApi";
 import type { User } from "@/types/type";
+import type React from "react";
+import { useEffect } from "react";
 import { Link } from "react-router";
 
-type Props = { user: User | null };
+type Props = {
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+};
 
-const AboutMe = ({ user }: Props) => {
+const AboutMe = ({ user, setUser }: Props) => {
   const { reviews, loading } = useFetchReviews();
+
+  const refreshUser = async () => {
+    if (user?.id) {
+      const refreshedUser = await authController.getOneUser(user.id);
+      setUser(refreshedUser);
+    }
+  };
+
+  useEffect(() => {
+    refreshUser();
+  }, []);
 
   if (loading) return <LoadingSpinner />;
 
   const validReviews = reviews.filter((review) => review?.userId == user?.id);
-  console.log(validReviews);
 
   return (
     <>

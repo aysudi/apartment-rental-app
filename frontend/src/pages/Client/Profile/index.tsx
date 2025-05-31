@@ -6,7 +6,7 @@ import { Luggage } from "lucide-react";
 import { useState } from "react";
 
 const UserProfile = () => {
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
   const { bookings, loading, error } = useFetchBookings();
   const [activeSection, setActiveSection] = useState("AboutMe");
 
@@ -40,23 +40,25 @@ const UserProfile = () => {
             </a>
           </li>
           <li
-            onClick={() => handleSectionChange("PastTrips")}
+            onClick={() => handleSectionChange("Trips")}
             className="flex items-center gap-3 cursor-pointer"
           >
             <div className="bg-white p-3 rounded-full w-12 h-12 flex justify-center items-center shadow-lg">
               <Luggage className="w-12" />
             </div>
             <a href="#" className="text-xl hover:text-[#FF9A1E]">
-              Past trips
+              Trips
             </a>
           </li>
         </ul>
       </div>
 
       <div className="w-full lg:w-3/4 bg-white py-14 px-6 sm:px-12 lg:px-14">
-        {activeSection == "AboutMe" && <AboutMe user={user} />}
+        {activeSection == "AboutMe" && (
+          <AboutMe setUser={setUser} user={user} />
+        )}
 
-        {activeSection === "PastTrips" && (
+        {activeSection === "Trips" && (
           <Trips bookedApartments={bookedApartments} />
         )}
       </div>

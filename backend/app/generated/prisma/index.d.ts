@@ -1570,6 +1570,7 @@ export namespace Prisma {
     bookings: number
     reviews: number
     apartments: number
+    contacts: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1577,6 +1578,7 @@ export namespace Prisma {
     bookings?: boolean | UserCountOutputTypeCountBookingsArgs
     reviews?: boolean | UserCountOutputTypeCountReviewsArgs
     apartments?: boolean | UserCountOutputTypeCountApartmentsArgs
+    contacts?: boolean | UserCountOutputTypeCountContactsArgs
   }
 
   // Custom InputTypes
@@ -1616,6 +1618,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountApartmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ApartmentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountContactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContactWhereInput
   }
 
 
@@ -1994,6 +2003,7 @@ export namespace Prisma {
     bookings?: boolean | User$bookingsArgs<ExtArgs>
     reviews?: boolean | User$reviewsArgs<ExtArgs>
     apartments?: boolean | User$apartmentsArgs<ExtArgs>
+    contacts?: boolean | User$contactsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2057,6 +2067,7 @@ export namespace Prisma {
     bookings?: boolean | User$bookingsArgs<ExtArgs>
     reviews?: boolean | User$reviewsArgs<ExtArgs>
     apartments?: boolean | User$apartmentsArgs<ExtArgs>
+    contacts?: boolean | User$contactsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2069,6 +2080,7 @@ export namespace Prisma {
       bookings: Prisma.$BookingPayload<ExtArgs>[]
       reviews: Prisma.$ReviewPayload<ExtArgs>[]
       apartments: Prisma.$ApartmentPayload<ExtArgs>[]
+      contacts: Prisma.$ContactPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2484,6 +2496,7 @@ export namespace Prisma {
     bookings<T extends User$bookingsArgs<ExtArgs> = {}>(args?: Subset<T, User$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reviews<T extends User$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     apartments<T extends User$apartmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$apartmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApartmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    contacts<T extends User$contactsArgs<ExtArgs> = {}>(args?: Subset<T, User$contactsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3009,6 +3022,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ApartmentScalarFieldEnum | ApartmentScalarFieldEnum[]
+  }
+
+  /**
+   * User.contacts
+   */
+  export type User$contactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    where?: ContactWhereInput
+    orderBy?: ContactOrderByWithRelationInput | ContactOrderByWithRelationInput[]
+    cursor?: ContactWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContactScalarFieldEnum | ContactScalarFieldEnum[]
   }
 
   /**
@@ -7761,6 +7798,7 @@ export namespace Prisma {
     isRead: boolean | null
     submittedAt: Date | null
     deleted: boolean | null
+    userId: string | null
   }
 
   export type ContactMaxAggregateOutputType = {
@@ -7772,6 +7810,7 @@ export namespace Prisma {
     isRead: boolean | null
     submittedAt: Date | null
     deleted: boolean | null
+    userId: string | null
   }
 
   export type ContactCountAggregateOutputType = {
@@ -7783,6 +7822,7 @@ export namespace Prisma {
     isRead: number
     submittedAt: number
     deleted: number
+    userId: number
     _all: number
   }
 
@@ -7796,6 +7836,7 @@ export namespace Prisma {
     isRead?: true
     submittedAt?: true
     deleted?: true
+    userId?: true
   }
 
   export type ContactMaxAggregateInputType = {
@@ -7807,6 +7848,7 @@ export namespace Prisma {
     isRead?: true
     submittedAt?: true
     deleted?: true
+    userId?: true
   }
 
   export type ContactCountAggregateInputType = {
@@ -7818,6 +7860,7 @@ export namespace Prisma {
     isRead?: true
     submittedAt?: true
     deleted?: true
+    userId?: true
     _all?: true
   }
 
@@ -7902,6 +7945,7 @@ export namespace Prisma {
     isRead: boolean
     submittedAt: Date
     deleted: boolean
+    userId: string
     _count: ContactCountAggregateOutputType | null
     _min: ContactMinAggregateOutputType | null
     _max: ContactMaxAggregateOutputType | null
@@ -7930,6 +7974,8 @@ export namespace Prisma {
     isRead?: boolean
     submittedAt?: boolean
     deleted?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contact"]>
 
   export type ContactSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7941,6 +7987,8 @@ export namespace Prisma {
     isRead?: boolean
     submittedAt?: boolean
     deleted?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contact"]>
 
   export type ContactSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7952,6 +8000,8 @@ export namespace Prisma {
     isRead?: boolean
     submittedAt?: boolean
     deleted?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contact"]>
 
   export type ContactSelectScalar = {
@@ -7963,13 +8013,25 @@ export namespace Prisma {
     isRead?: boolean
     submittedAt?: boolean
     deleted?: boolean
+    userId?: boolean
   }
 
-  export type ContactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "subject" | "message" | "isRead" | "submittedAt" | "deleted", ExtArgs["result"]["contact"]>
+  export type ContactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "subject" | "message" | "isRead" | "submittedAt" | "deleted" | "userId", ExtArgs["result"]["contact"]>
+  export type ContactInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ContactIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ContactIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
   export type $ContactPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Contact"
-    objects: {}
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       fullName: string
@@ -7979,6 +8041,7 @@ export namespace Prisma {
       isRead: boolean
       submittedAt: Date
       deleted: boolean
+      userId: string
     }, ExtArgs["result"]["contact"]>
     composites: {}
   }
@@ -8373,6 +8436,7 @@ export namespace Prisma {
    */
   export interface Prisma__ContactClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8410,6 +8474,7 @@ export namespace Prisma {
     readonly isRead: FieldRef<"Contact", 'Boolean'>
     readonly submittedAt: FieldRef<"Contact", 'DateTime'>
     readonly deleted: FieldRef<"Contact", 'Boolean'>
+    readonly userId: FieldRef<"Contact", 'String'>
   }
     
 
@@ -8426,6 +8491,10 @@ export namespace Prisma {
      * Omit specific fields from the Contact
      */
     omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
     /**
      * Filter, which Contact to fetch.
      */
@@ -8445,6 +8514,10 @@ export namespace Prisma {
      */
     omit?: ContactOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    /**
      * Filter, which Contact to fetch.
      */
     where: ContactWhereUniqueInput
@@ -8462,6 +8535,10 @@ export namespace Prisma {
      * Omit specific fields from the Contact
      */
     omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
     /**
      * Filter, which Contact to fetch.
      */
@@ -8511,6 +8588,10 @@ export namespace Prisma {
      */
     omit?: ContactOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    /**
      * Filter, which Contact to fetch.
      */
     where?: ContactWhereInput
@@ -8559,6 +8640,10 @@ export namespace Prisma {
      */
     omit?: ContactOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    /**
      * Filter, which Contacts to fetch.
      */
     where?: ContactWhereInput
@@ -8602,6 +8687,10 @@ export namespace Prisma {
      */
     omit?: ContactOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    /**
      * The data needed to create a Contact.
      */
     data: XOR<ContactCreateInput, ContactUncheckedCreateInput>
@@ -8635,6 +8724,10 @@ export namespace Prisma {
      */
     data: ContactCreateManyInput | ContactCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -8649,6 +8742,10 @@ export namespace Prisma {
      * Omit specific fields from the Contact
      */
     omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
     /**
      * The data needed to update a Contact.
      */
@@ -8701,6 +8798,10 @@ export namespace Prisma {
      * Limit how many Contacts to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -8715,6 +8816,10 @@ export namespace Prisma {
      * Omit specific fields from the Contact
      */
     omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
     /**
      * The filter to search for the Contact to update in case it exists.
      */
@@ -8741,6 +8846,10 @@ export namespace Prisma {
      * Omit specific fields from the Contact
      */
     omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
     /**
      * Filter which Contact to delete.
      */
@@ -8773,6 +8882,10 @@ export namespace Prisma {
      * Omit specific fields from the Contact
      */
     omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
   }
 
 
@@ -10889,7 +11002,8 @@ export namespace Prisma {
     message: 'message',
     isRead: 'isRead',
     submittedAt: 'submittedAt',
-    deleted: 'deleted'
+    deleted: 'deleted',
+    userId: 'userId'
   };
 
   export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
@@ -11076,6 +11190,7 @@ export namespace Prisma {
     bookings?: BookingListRelationFilter
     reviews?: ReviewListRelationFilter
     apartments?: ApartmentListRelationFilter
+    contacts?: ContactListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -11098,6 +11213,7 @@ export namespace Prisma {
     bookings?: BookingOrderByRelationAggregateInput
     reviews?: ReviewOrderByRelationAggregateInput
     apartments?: ApartmentOrderByRelationAggregateInput
+    contacts?: ContactOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -11123,6 +11239,7 @@ export namespace Prisma {
     bookings?: BookingListRelationFilter
     reviews?: ReviewListRelationFilter
     apartments?: ApartmentListRelationFilter
+    contacts?: ContactListRelationFilter
   }, "id" | "username" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -11506,6 +11623,8 @@ export namespace Prisma {
     isRead?: BoolFilter<"Contact"> | boolean
     submittedAt?: DateTimeFilter<"Contact"> | Date | string
     deleted?: BoolFilter<"Contact"> | boolean
+    userId?: StringFilter<"Contact"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type ContactOrderByWithRelationInput = {
@@ -11517,6 +11636,8 @@ export namespace Prisma {
     isRead?: SortOrder
     submittedAt?: SortOrder
     deleted?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
   }
 
   export type ContactWhereUniqueInput = Prisma.AtLeast<{
@@ -11531,6 +11652,8 @@ export namespace Prisma {
     isRead?: BoolFilter<"Contact"> | boolean
     submittedAt?: DateTimeFilter<"Contact"> | Date | string
     deleted?: BoolFilter<"Contact"> | boolean
+    userId?: StringFilter<"Contact"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type ContactOrderByWithAggregationInput = {
@@ -11542,6 +11665,7 @@ export namespace Prisma {
     isRead?: SortOrder
     submittedAt?: SortOrder
     deleted?: SortOrder
+    userId?: SortOrder
     _count?: ContactCountOrderByAggregateInput
     _max?: ContactMaxOrderByAggregateInput
     _min?: ContactMinOrderByAggregateInput
@@ -11559,6 +11683,7 @@ export namespace Prisma {
     isRead?: BoolWithAggregatesFilter<"Contact"> | boolean
     submittedAt?: DateTimeWithAggregatesFilter<"Contact"> | Date | string
     deleted?: BoolWithAggregatesFilter<"Contact"> | boolean
+    userId?: StringWithAggregatesFilter<"Contact"> | string
   }
 
   export type CouponWhereInput = {
@@ -11682,6 +11807,7 @@ export namespace Prisma {
     bookings?: BookingCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     apartments?: ApartmentCreateNestedManyWithoutHostInput
+    contacts?: ContactCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -11704,6 +11830,7 @@ export namespace Prisma {
     bookings?: BookingUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     apartments?: ApartmentUncheckedCreateNestedManyWithoutHostInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -11726,6 +11853,7 @@ export namespace Prisma {
     bookings?: BookingUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     apartments?: ApartmentUpdateManyWithoutHostNestedInput
+    contacts?: ContactUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -11748,6 +11876,7 @@ export namespace Prisma {
     bookings?: BookingUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     apartments?: ApartmentUncheckedUpdateManyWithoutHostNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -12155,6 +12284,7 @@ export namespace Prisma {
     isRead?: boolean
     submittedAt?: Date | string
     deleted?: boolean
+    user: UserCreateNestedOneWithoutContactsInput
   }
 
   export type ContactUncheckedCreateInput = {
@@ -12166,6 +12296,7 @@ export namespace Prisma {
     isRead?: boolean
     submittedAt?: Date | string
     deleted?: boolean
+    userId: string
   }
 
   export type ContactUpdateInput = {
@@ -12177,6 +12308,7 @@ export namespace Prisma {
     isRead?: BoolFieldUpdateOperationsInput | boolean
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutContactsNestedInput
   }
 
   export type ContactUncheckedUpdateInput = {
@@ -12188,6 +12320,7 @@ export namespace Prisma {
     isRead?: BoolFieldUpdateOperationsInput | boolean
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ContactCreateManyInput = {
@@ -12199,6 +12332,7 @@ export namespace Prisma {
     isRead?: boolean
     submittedAt?: Date | string
     deleted?: boolean
+    userId: string
   }
 
   export type ContactUpdateManyMutationInput = {
@@ -12221,6 +12355,7 @@ export namespace Prisma {
     isRead?: BoolFieldUpdateOperationsInput | boolean
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CouponCreateInput = {
@@ -12421,6 +12556,12 @@ export namespace Prisma {
     none?: ReviewWhereInput
   }
 
+  export type ContactListRelationFilter = {
+    every?: ContactWhereInput
+    some?: ContactWhereInput
+    none?: ContactWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -12435,6 +12576,10 @@ export namespace Prisma {
   }
 
   export type ReviewOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ContactOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12874,6 +13019,7 @@ export namespace Prisma {
     isRead?: SortOrder
     submittedAt?: SortOrder
     deleted?: SortOrder
+    userId?: SortOrder
   }
 
   export type ContactMaxOrderByAggregateInput = {
@@ -12885,6 +13031,7 @@ export namespace Prisma {
     isRead?: SortOrder
     submittedAt?: SortOrder
     deleted?: SortOrder
+    userId?: SortOrder
   }
 
   export type ContactMinOrderByAggregateInput = {
@@ -12896,6 +13043,7 @@ export namespace Prisma {
     isRead?: SortOrder
     submittedAt?: SortOrder
     deleted?: SortOrder
+    userId?: SortOrder
   }
 
   export type CouponCountOrderByAggregateInput = {
@@ -12978,6 +13126,13 @@ export namespace Prisma {
     connect?: ApartmentWhereUniqueInput | ApartmentWhereUniqueInput[]
   }
 
+  export type ContactCreateNestedManyWithoutUserInput = {
+    create?: XOR<ContactCreateWithoutUserInput, ContactUncheckedCreateWithoutUserInput> | ContactCreateWithoutUserInput[] | ContactUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContactCreateOrConnectWithoutUserInput | ContactCreateOrConnectWithoutUserInput[]
+    createMany?: ContactCreateManyUserInputEnvelope
+    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+  }
+
   export type ApartmentUncheckedCreateNestedManyWithoutWishlistedByInput = {
     create?: XOR<ApartmentCreateWithoutWishlistedByInput, ApartmentUncheckedCreateWithoutWishlistedByInput> | ApartmentCreateWithoutWishlistedByInput[] | ApartmentUncheckedCreateWithoutWishlistedByInput[]
     connectOrCreate?: ApartmentCreateOrConnectWithoutWishlistedByInput | ApartmentCreateOrConnectWithoutWishlistedByInput[]
@@ -13003,6 +13158,13 @@ export namespace Prisma {
     connectOrCreate?: ApartmentCreateOrConnectWithoutHostInput | ApartmentCreateOrConnectWithoutHostInput[]
     createMany?: ApartmentCreateManyHostInputEnvelope
     connect?: ApartmentWhereUniqueInput | ApartmentWhereUniqueInput[]
+  }
+
+  export type ContactUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ContactCreateWithoutUserInput, ContactUncheckedCreateWithoutUserInput> | ContactCreateWithoutUserInput[] | ContactUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContactCreateOrConnectWithoutUserInput | ContactCreateOrConnectWithoutUserInput[]
+    createMany?: ContactCreateManyUserInputEnvelope
+    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -13092,6 +13254,20 @@ export namespace Prisma {
     deleteMany?: ApartmentScalarWhereInput | ApartmentScalarWhereInput[]
   }
 
+  export type ContactUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ContactCreateWithoutUserInput, ContactUncheckedCreateWithoutUserInput> | ContactCreateWithoutUserInput[] | ContactUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContactCreateOrConnectWithoutUserInput | ContactCreateOrConnectWithoutUserInput[]
+    upsert?: ContactUpsertWithWhereUniqueWithoutUserInput | ContactUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ContactCreateManyUserInputEnvelope
+    set?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    disconnect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    delete?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    update?: ContactUpdateWithWhereUniqueWithoutUserInput | ContactUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ContactUpdateManyWithWhereWithoutUserInput | ContactUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ContactScalarWhereInput | ContactScalarWhereInput[]
+  }
+
   export type ApartmentUncheckedUpdateManyWithoutWishlistedByNestedInput = {
     create?: XOR<ApartmentCreateWithoutWishlistedByInput, ApartmentUncheckedCreateWithoutWishlistedByInput> | ApartmentCreateWithoutWishlistedByInput[] | ApartmentUncheckedCreateWithoutWishlistedByInput[]
     connectOrCreate?: ApartmentCreateOrConnectWithoutWishlistedByInput | ApartmentCreateOrConnectWithoutWishlistedByInput[]
@@ -13145,6 +13321,20 @@ export namespace Prisma {
     update?: ApartmentUpdateWithWhereUniqueWithoutHostInput | ApartmentUpdateWithWhereUniqueWithoutHostInput[]
     updateMany?: ApartmentUpdateManyWithWhereWithoutHostInput | ApartmentUpdateManyWithWhereWithoutHostInput[]
     deleteMany?: ApartmentScalarWhereInput | ApartmentScalarWhereInput[]
+  }
+
+  export type ContactUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ContactCreateWithoutUserInput, ContactUncheckedCreateWithoutUserInput> | ContactCreateWithoutUserInput[] | ContactUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContactCreateOrConnectWithoutUserInput | ContactCreateOrConnectWithoutUserInput[]
+    upsert?: ContactUpsertWithWhereUniqueWithoutUserInput | ContactUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ContactCreateManyUserInputEnvelope
+    set?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    disconnect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    delete?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    update?: ContactUpdateWithWhereUniqueWithoutUserInput | ContactUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ContactUpdateManyWithWhereWithoutUserInput | ContactUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ContactScalarWhereInput | ContactScalarWhereInput[]
   }
 
   export type ApartmentCreateimagesInput = {
@@ -13494,6 +13684,20 @@ export namespace Prisma {
     upsert?: ApartmentUpsertWithoutReviewsInput
     connect?: ApartmentWhereUniqueInput
     update?: XOR<XOR<ApartmentUpdateToOneWithWhereWithoutReviewsInput, ApartmentUpdateWithoutReviewsInput>, ApartmentUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type UserCreateNestedOneWithoutContactsInput = {
+    create?: XOR<UserCreateWithoutContactsInput, UserUncheckedCreateWithoutContactsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutContactsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutContactsNestedInput = {
+    create?: XOR<UserCreateWithoutContactsInput, UserUncheckedCreateWithoutContactsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutContactsInput
+    upsert?: UserUpsertWithoutContactsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutContactsInput, UserUpdateWithoutContactsInput>, UserUncheckedUpdateWithoutContactsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -13894,6 +14098,38 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ContactCreateWithoutUserInput = {
+    id?: string
+    fullName: string
+    email: string
+    subject: string
+    message: string
+    isRead?: boolean
+    submittedAt?: Date | string
+    deleted?: boolean
+  }
+
+  export type ContactUncheckedCreateWithoutUserInput = {
+    id?: string
+    fullName: string
+    email: string
+    subject: string
+    message: string
+    isRead?: boolean
+    submittedAt?: Date | string
+    deleted?: boolean
+  }
+
+  export type ContactCreateOrConnectWithoutUserInput = {
+    where: ContactWhereUniqueInput
+    create: XOR<ContactCreateWithoutUserInput, ContactUncheckedCreateWithoutUserInput>
+  }
+
+  export type ContactCreateManyUserInputEnvelope = {
+    data: ContactCreateManyUserInput | ContactCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ApartmentUpsertWithWhereUniqueWithoutWishlistedByInput = {
     where: ApartmentWhereUniqueInput
     update: XOR<ApartmentUpdateWithoutWishlistedByInput, ApartmentUncheckedUpdateWithoutWishlistedByInput>
@@ -14006,6 +14242,37 @@ export namespace Prisma {
     data: XOR<ApartmentUpdateManyMutationInput, ApartmentUncheckedUpdateManyWithoutHostInput>
   }
 
+  export type ContactUpsertWithWhereUniqueWithoutUserInput = {
+    where: ContactWhereUniqueInput
+    update: XOR<ContactUpdateWithoutUserInput, ContactUncheckedUpdateWithoutUserInput>
+    create: XOR<ContactCreateWithoutUserInput, ContactUncheckedCreateWithoutUserInput>
+  }
+
+  export type ContactUpdateWithWhereUniqueWithoutUserInput = {
+    where: ContactWhereUniqueInput
+    data: XOR<ContactUpdateWithoutUserInput, ContactUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ContactUpdateManyWithWhereWithoutUserInput = {
+    where: ContactScalarWhereInput
+    data: XOR<ContactUpdateManyMutationInput, ContactUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ContactScalarWhereInput = {
+    AND?: ContactScalarWhereInput | ContactScalarWhereInput[]
+    OR?: ContactScalarWhereInput[]
+    NOT?: ContactScalarWhereInput | ContactScalarWhereInput[]
+    id?: StringFilter<"Contact"> | string
+    fullName?: StringFilter<"Contact"> | string
+    email?: StringFilter<"Contact"> | string
+    subject?: StringFilter<"Contact"> | string
+    message?: StringFilter<"Contact"> | string
+    isRead?: BoolFilter<"Contact"> | boolean
+    submittedAt?: DateTimeFilter<"Contact"> | Date | string
+    deleted?: BoolFilter<"Contact"> | boolean
+    userId?: StringFilter<"Contact"> | string
+  }
+
   export type BookedDateCreateWithoutApartmentInput = {
     id?: string
     startDate: Date | string
@@ -14051,6 +14318,7 @@ export namespace Prisma {
     wishlist?: ApartmentCreateNestedManyWithoutWishlistedByInput
     bookings?: BookingCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
+    contacts?: ContactCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutApartmentsInput = {
@@ -14072,6 +14340,7 @@ export namespace Prisma {
     wishlist?: ApartmentUncheckedCreateNestedManyWithoutWishlistedByInput
     bookings?: BookingUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutApartmentsInput = {
@@ -14156,6 +14425,7 @@ export namespace Prisma {
     bookings?: BookingCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     apartments?: ApartmentCreateNestedManyWithoutHostInput
+    contacts?: ContactCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWishlistInput = {
@@ -14177,6 +14447,7 @@ export namespace Prisma {
     bookings?: BookingUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     apartments?: ApartmentUncheckedCreateNestedManyWithoutHostInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWishlistInput = {
@@ -14241,6 +14512,7 @@ export namespace Prisma {
     wishlist?: ApartmentUpdateManyWithoutWishlistedByNestedInput
     bookings?: BookingUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
+    contacts?: ContactUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApartmentsInput = {
@@ -14262,6 +14534,7 @@ export namespace Prisma {
     wishlist?: ApartmentUncheckedUpdateManyWithoutWishlistedByNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ReviewUpsertWithWhereUniqueWithoutApartmentInput = {
@@ -14352,6 +14625,7 @@ export namespace Prisma {
     wishlist?: ApartmentCreateNestedManyWithoutWishlistedByInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     apartments?: ApartmentCreateNestedManyWithoutHostInput
+    contacts?: ContactCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBookingsInput = {
@@ -14373,6 +14647,7 @@ export namespace Prisma {
     wishlist?: ApartmentUncheckedCreateNestedManyWithoutWishlistedByInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     apartments?: ApartmentUncheckedCreateNestedManyWithoutHostInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBookingsInput = {
@@ -14478,6 +14753,7 @@ export namespace Prisma {
     wishlist?: ApartmentUpdateManyWithoutWishlistedByNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     apartments?: ApartmentUpdateManyWithoutHostNestedInput
+    contacts?: ContactUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBookingsInput = {
@@ -14499,6 +14775,7 @@ export namespace Prisma {
     wishlist?: ApartmentUncheckedUpdateManyWithoutWishlistedByNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     apartments?: ApartmentUncheckedUpdateManyWithoutHostNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ApartmentUpsertWithoutBookingsInput = {
@@ -14746,6 +15023,7 @@ export namespace Prisma {
     wishlist?: ApartmentCreateNestedManyWithoutWishlistedByInput
     bookings?: BookingCreateNestedManyWithoutUserInput
     apartments?: ApartmentCreateNestedManyWithoutHostInput
+    contacts?: ContactCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReviewsInput = {
@@ -14767,6 +15045,7 @@ export namespace Prisma {
     wishlist?: ApartmentUncheckedCreateNestedManyWithoutWishlistedByInput
     bookings?: BookingUncheckedCreateNestedManyWithoutUserInput
     apartments?: ApartmentUncheckedCreateNestedManyWithoutHostInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReviewsInput = {
@@ -14851,6 +15130,7 @@ export namespace Prisma {
     wishlist?: ApartmentUpdateManyWithoutWishlistedByNestedInput
     bookings?: BookingUpdateManyWithoutUserNestedInput
     apartments?: ApartmentUpdateManyWithoutHostNestedInput
+    contacts?: ContactUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -14872,6 +15152,7 @@ export namespace Prisma {
     wishlist?: ApartmentUncheckedUpdateManyWithoutWishlistedByNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutUserNestedInput
     apartments?: ApartmentUncheckedUpdateManyWithoutHostNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ApartmentUpsertWithoutReviewsInput = {
@@ -14927,6 +15208,110 @@ export namespace Prisma {
     wishlistedBy?: UserUncheckedUpdateManyWithoutWishlistNestedInput
   }
 
+  export type UserCreateWithoutContactsInput = {
+    id?: string
+    firstName?: string | null
+    lastName?: string | null
+    username: string
+    email: string
+    password: string
+    role: $Enums.Role
+    profileImage: string
+    balance?: number
+    hostRequest?: boolean
+    isBanned?: boolean
+    banDate?: Date | string | null
+    createdAt?: Date | string
+    lastLogin?: Date | string | null
+    deleted?: boolean
+    wishlist?: ApartmentCreateNestedManyWithoutWishlistedByInput
+    bookings?: BookingCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
+    apartments?: ApartmentCreateNestedManyWithoutHostInput
+  }
+
+  export type UserUncheckedCreateWithoutContactsInput = {
+    id?: string
+    firstName?: string | null
+    lastName?: string | null
+    username: string
+    email: string
+    password: string
+    role: $Enums.Role
+    profileImage: string
+    balance?: number
+    hostRequest?: boolean
+    isBanned?: boolean
+    banDate?: Date | string | null
+    createdAt?: Date | string
+    lastLogin?: Date | string | null
+    deleted?: boolean
+    wishlist?: ApartmentUncheckedCreateNestedManyWithoutWishlistedByInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    apartments?: ApartmentUncheckedCreateNestedManyWithoutHostInput
+  }
+
+  export type UserCreateOrConnectWithoutContactsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutContactsInput, UserUncheckedCreateWithoutContactsInput>
+  }
+
+  export type UserUpsertWithoutContactsInput = {
+    update: XOR<UserUpdateWithoutContactsInput, UserUncheckedUpdateWithoutContactsInput>
+    create: XOR<UserCreateWithoutContactsInput, UserUncheckedCreateWithoutContactsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutContactsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutContactsInput, UserUncheckedUpdateWithoutContactsInput>
+  }
+
+  export type UserUpdateWithoutContactsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    profileImage?: StringFieldUpdateOperationsInput | string
+    balance?: FloatFieldUpdateOperationsInput | number
+    hostRequest?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    banDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    wishlist?: ApartmentUpdateManyWithoutWishlistedByNestedInput
+    bookings?: BookingUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
+    apartments?: ApartmentUpdateManyWithoutHostNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutContactsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    profileImage?: StringFieldUpdateOperationsInput | string
+    balance?: FloatFieldUpdateOperationsInput | number
+    hostRequest?: BoolFieldUpdateOperationsInput | boolean
+    isBanned?: BoolFieldUpdateOperationsInput | boolean
+    banDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    wishlist?: ApartmentUncheckedUpdateManyWithoutWishlistedByNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    apartments?: ApartmentUncheckedUpdateManyWithoutHostNestedInput
+  }
+
   export type BookingCreateManyUserInput = {
     id?: string
     apartmentId: string
@@ -14961,6 +15346,17 @@ export namespace Prisma {
     avgRating?: number
     deleted?: boolean
     rentalCount?: number
+  }
+
+  export type ContactCreateManyUserInput = {
+    id?: string
+    fullName: string
+    email: string
+    subject: string
+    message: string
+    isRead?: boolean
+    submittedAt?: Date | string
+    deleted?: boolean
   }
 
   export type ApartmentUpdateWithoutWishlistedByInput = {
@@ -15139,6 +15535,39 @@ export namespace Prisma {
     rentalCount?: IntFieldUpdateOperationsInput | number
   }
 
+  export type ContactUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ContactUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ContactUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type BookedDateCreateManyApartmentInput = {
     id?: string
     startDate: Date | string
@@ -15264,6 +15693,7 @@ export namespace Prisma {
     bookings?: BookingUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     apartments?: ApartmentUpdateManyWithoutHostNestedInput
+    contacts?: ContactUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWishlistInput = {
@@ -15285,6 +15715,7 @@ export namespace Prisma {
     bookings?: BookingUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     apartments?: ApartmentUncheckedUpdateManyWithoutHostNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutWishlistInput = {

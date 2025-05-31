@@ -6,6 +6,7 @@ const endpoints = {
   bookings: "/api/bookings",
   reviews: "/api/reviews",
   bookedDates: "/api/bookedDates",
+  contacts: "/api/contacts",
 };
 
 export default endpoints;

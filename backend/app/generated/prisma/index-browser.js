@@ -193,7 +193,8 @@ exports.Prisma.ContactScalarFieldEnum = {
   message: 'message',
   isRead: 'isRead',
   submittedAt: 'submittedAt',
-  deleted: 'deleted'
+  deleted: 'deleted',
+  userId: 'userId'
 };
 
 exports.Prisma.CouponScalarFieldEnum = {
