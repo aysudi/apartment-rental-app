@@ -15,6 +15,7 @@ type AuthContextType = {
   logout: () => void;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  refreshUser: (userId: string) => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -70,6 +71,15 @@ function AuthProvider({ children }: AuthProviderProps) {
     localStorage.removeItem("wishlist");
   };
 
+  const refreshUser = async (userId: string) => {
+    try {
+      const updatedUser = await authController.getOneUser(userId);
+      setUser(updatedUser);
+    } catch (error) {
+      console.error("Failed to refresh user:", error);
+    }
+  };
+
   const value: AuthContextType = {
     user,
     setUser,
@@ -77,6 +87,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     logout,
     loading,
     setLoading,
+    refreshUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

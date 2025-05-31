@@ -1,4 +1,4 @@
-import { Calendar, Hotel, House, LogOut, User } from "lucide-react";
+import { Calendar, Contact, Hotel, House, LogOut, User } from "lucide-react";
 import { NavLink, useNavigate } from "react-router";
 
 const AdminSidebar = () => {
@@ -52,6 +52,18 @@ const AdminSidebar = () => {
           >
             <User size={20} />
             Users
+          </NavLink>
+
+          <NavLink
+            to="/admin/contacts"
+            className={({ isActive }) =>
+              `flex items-center gap-3 py-3 px-4 text-xl text-black hover:bg-[#FF9A1E] hover:text-white rounded-md ${
+                isActive ? "bg-[#f18502] text-white" : ""
+              }`
+            }
+          >
+            <Contact size={20} />
+            Contacts
           </NavLink>
 
           <NavLink

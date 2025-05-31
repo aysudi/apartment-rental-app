@@ -24,6 +24,7 @@ import AdminDashboard from "@/pages/Admin/Dashboard";
 import AdminApartments from "@/pages/Admin/Apartments";
 import AdminBookings from "@/pages/Admin/Bookings";
 import AdminUsers from "@/pages/Admin/Users";
+import AdminContacts from "@/pages/Admin/Contacts";
 
 const ROUTES = [
   //client
@@ -179,6 +180,14 @@ const ROUTES = [
         element: (
           <AdminRoute>
             <AdminUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "contacts",
+        element: (
+          <AdminRoute>
+            <AdminContacts />
           </AdminRoute>
         ),
       },

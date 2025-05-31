@@ -82,7 +82,7 @@ const ApartmentCard = ({ apartment, idx }: Props) => {
       <div className="p-4 flex flex-col gap-2">
         <Link
           to={`/apartment-details/${apartment.id}`}
-          className="font-medium text-lg cursor-pointer hover:underline truncate"
+          className="font-semibold text-xl cursor-pointer hover:underline hover:text-[#FF9A1E] truncate"
         >
           {apartment.title}
         </Link>

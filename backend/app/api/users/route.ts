@@ -21,6 +21,7 @@ export async function GET(req: NextRequest) {
           bookings: true,
           reviews: true,
           wishlist: true,
+          contacts: true,
         },
       });
 
@@ -40,6 +41,7 @@ export async function GET(req: NextRequest) {
         bookings: true,
         reviews: true,
         wishlist: true,
+        contacts: true,
       },
     });
     return setCorsHeaders(NextResponse.json(users));
@@ -87,6 +89,9 @@ export async function POST(req: Request) {
         password,
         profileImage,
         role,
+      },
+      include: {
+        contacts: true,
       },
     });
 
