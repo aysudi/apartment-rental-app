@@ -1,4 +1,4 @@
-import LogInForm from "@/components/LogInForm";
+import LogInForm from "@/components/Common/LogInForm";
 import img from "../../../assets/images/sign-img.png";
 import { Check } from "lucide-react";
 import { Link } from "react-router";

@@ -1,13 +1,13 @@
 import { useParams } from "react-router";
 import useFetchOneApartment from "@/hooks/useFetchOneApartment";
 import { MapPin, Check } from "lucide-react";
-import BookApartment from "@/components/BookApartment";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import BookApartment from "@/components/Client/BookApartment";
+import LoadingSpinner from "@/components/Common/LoadingSpinner";
 import type { Review } from "@/types/type";
 import useFetchReviews from "@/hooks/useFetchReviews";
 import { formatMonthYear } from "@/utils/formatMonthYear";
-import ApartmentImageSlider from "@/components/ApartmentSlider";
-import ReviewForm from "@/components/ReviewForm";
+import ApartmentImageSlider from "@/components/Client/ApartmentSlider";
+import ReviewForm from "@/components/Client/ReviewForm";
 import { useAuth } from "@/context/AuthContext";
 import useFetchBookings from "@/hooks/useFetchBookings";
 import { FaStar } from "react-icons/fa";

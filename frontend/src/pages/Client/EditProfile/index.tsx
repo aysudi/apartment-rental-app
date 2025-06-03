@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Pencil } from "lucide-react";
 import { useFormik } from "formik";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/Common/LoadingSpinner";
 import updateProfileSchema from "@/validation/updateProfileSchema";
 import { useAuth } from "@/context/AuthContext";
 import Swal from "sweetalert2";

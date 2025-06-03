@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Navigation } from "swiper/modules";
 import useFetchApartments from "@/hooks/useFetchApartments";
-import LoadingSpinner from "../LoadingSpinner";
+import LoadingSpinner from "../../Common/LoadingSpinner";
 import { useNavigate } from "react-router";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 

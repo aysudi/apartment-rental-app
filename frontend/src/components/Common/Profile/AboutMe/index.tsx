@@ -1,4 +1,4 @@
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/Common/LoadingSpinner";
 import useFetchReviews from "@/hooks/useFetchReviews";
 import authController from "@/services/api/users/usersApi";
 import type { User } from "@/types/type";

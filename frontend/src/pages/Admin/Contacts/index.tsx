@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import contactController from "@/services/api/contacts/contactsApi";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/Common/LoadingSpinner";
 import { toast } from "sonner";
 
 const AdminContacts = () => {

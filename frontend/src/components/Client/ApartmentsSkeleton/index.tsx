@@ -1,5 +1,5 @@
+import ApartmentsSearchSortFilter from "@/components/Client/FindApartments/ApartmentsSearchSortFilter";
 import { Skeleton } from "@/components/ui/skeleton";
-import ApartmentsSearchSortFilter from "../FindApartments/ApartmentsSearchSortFilter";
 import type { Apartment } from "@/types/type";
 
 type Props = {

@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import img from "../../../assets/images/home-image.jpeg";
 import { Check } from "lucide-react";
-import SliderComponent from "../../../components/HomeSlider";
+import SliderComponent from "../../../components/Client/HomeSlider";
 
 const Home = () => {
   return (
