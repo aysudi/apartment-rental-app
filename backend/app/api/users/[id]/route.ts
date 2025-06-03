@@ -10,10 +10,10 @@ export async function OPTIONS() {
 // GET /api/users/:id or /api/users/:id?email=test@example.com
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
-    const { id } = params;
+    const { id } = context.params;
 
     const user = await prisma.user.findUnique({
       where: { id },
@@ -47,11 +47,11 @@ export async function GET(
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
     const body = await req.json();
-    const { id } = params;
+    const { id } = context.params;
 
     const existingUser = await prisma.user.findUnique({
       where: { id },
