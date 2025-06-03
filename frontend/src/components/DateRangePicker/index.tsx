@@ -41,7 +41,6 @@ const DateRangeCalendar = ({
       } else if (day.getTime() > startDate.getTime()) {
         setEndDate(day);
       } else {
-        // clicked same day again – do nothing
       }
     } else {
       setStartDate(null);
