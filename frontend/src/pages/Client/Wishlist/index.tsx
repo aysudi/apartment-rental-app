@@ -17,7 +17,7 @@ const Wishlist = () => {
   );
 
   return (
-    <div className="min-h-full h-[100vh] w-full max-w-7xl mx-auto pt-[7rem] pb-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-full h-[100%] w-full max-w-7xl mx-auto pt-[7rem] pb-16 px-4 sm:px-6 lg:px-8">
       <h1 className="font-bold text-3xl">Favorites</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-4">
         {apartments &&
