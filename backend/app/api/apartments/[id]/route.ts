@@ -9,10 +9,10 @@ export async function OPTIONS() {
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
-    const { id } = params;
+    const { id } = context.params;
 
     const apartment = await prisma.apartment.findUnique({
       where: { id },
@@ -46,11 +46,11 @@ export async function GET(
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
     const body = await req.json();
-    const { id } = params;
+    const { id } = context.params;
 
     const existingApartment = await prisma.apartment.findUnique({
       where: { id },
@@ -96,10 +96,10 @@ export async function PATCH(
 
 export async function DELETE(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
-    const { id } = params;
+    const { id } = context.params;
 
     const existingApartment = await prisma.apartment.findUnique({
       where: { id },
