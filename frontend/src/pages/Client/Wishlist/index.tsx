@@ -1,5 +1,5 @@
-import ApartmentCard from "@/components/ApartmentCard";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import ApartmentCard from "@/components/Client/ApartmentCard";
+import LoadingSpinner from "@/components/Common/LoadingSpinner";
 import useFetchApartments from "@/hooks/useFetchApartments";
 import type { Apartment } from "@/types/type";
 

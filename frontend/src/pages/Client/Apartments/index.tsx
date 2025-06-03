@@ -1,9 +1,9 @@
 import useFetchApartments from "../../../hooks/useFetchApartments";
 import type { Apartment } from "../../../types/type";
-import ApartmentsSkeleton from "@/components/ApartmentsSkeleton";
-import ApartmentCard from "@/components/ApartmentCard";
+import ApartmentCard from "@/components/Client/ApartmentCard";
 import { useEffect, useState } from "react";
-import ApartmentsSearchSortFilter from "@/components/FindApartments/ApartmentsSearchSortFilter";
+import ApartmentsSearchSortFilter from "@/components/Client/FindApartments/ApartmentsSearchSortFilter";
+import ApartmentsSkeleton from "@/components/Client/ApartmentsSkeleton";
 
 const Apartments = () => {
   const { apartments, loading, error } = useFetchApartments();

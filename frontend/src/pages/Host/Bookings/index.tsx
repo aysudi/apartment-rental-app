@@ -1,5 +1,5 @@
 import { useAuth } from "@/context/AuthContext";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/Common/LoadingSpinner";
 import useFetchApartments from "@/hooks/useFetchApartments";
 import useFetchBookings from "@/hooks/useFetchBookings";
 import bookingsController from "@/services/api/bookings/bookingsApi";

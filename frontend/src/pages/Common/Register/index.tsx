@@ -1,7 +1,7 @@
 import img from "../../../assets/images/sign-img.png";
 import { Check } from "lucide-react";
 import { Link } from "react-router";
-import SignUpForm from "@/components/SigUpForm";
+import SignUpForm from "@/components/Common/SigUpForm";
 
 const Register = () => {
   return (

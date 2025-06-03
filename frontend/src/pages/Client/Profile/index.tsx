@@ -1,5 +1,5 @@
-import AboutMe from "@/components/Profile/AboutMe";
-import Trips from "@/components/Profile/Trips";
+import AboutMe from "@/components/Common/Profile/AboutMe";
+import Trips from "@/components/Common/Profile/Trips";
 import { useAuth } from "@/context/AuthContext";
 import useFetchBookings from "@/hooks/useFetchBookings";
 import { Luggage } from "lucide-react";

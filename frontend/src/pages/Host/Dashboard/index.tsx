@@ -1,4 +1,4 @@
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/Common/LoadingSpinner";
 import { useAuth } from "@/context/AuthContext";
 import useFetchApartments from "@/hooks/useFetchApartments";
 import React from "react";

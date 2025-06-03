@@ -17,7 +17,7 @@ import {
 import useFetchBookings from "@/hooks/useFetchBookings";
 import useFetchApartments from "@/hooks/useFetchApartments";
 import useFetchUsers from "@/hooks/useFetchUsers";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/Common/LoadingSpinner";
 
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7f50", "#a4de6c"];
 

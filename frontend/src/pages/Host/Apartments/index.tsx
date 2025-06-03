@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import useFetchApartments from "@/hooks/useFetchApartments";
 import { Link } from "react-router-dom";
 import { FaEye, FaEdit, FaTrashAlt } from "react-icons/fa";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/Common/LoadingSpinner";
 import { useAuth } from "@/context/AuthContext";
-import EditApartmentModal from "@/components/EditApartment";
+import EditApartmentModal from "@/components/Common/EditApartment";
 import apartmentsController from "@/services/api/apartments/apartmentsApi";
 import Swal from "sweetalert2";
 

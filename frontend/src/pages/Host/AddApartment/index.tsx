@@ -6,7 +6,7 @@ import Images from "@/components/Host/AddApartment/Images";
 import Rules from "@/components/Host/AddApartment/Rules";
 import TitleLocation from "@/components/Host/AddApartment/TitleLocation";
 import TypePrice from "@/components/Host/AddApartment/TypePrice";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/Common/LoadingSpinner";
 import { useAuth } from "@/context/AuthContext";
 import apartmentsController from "@/services/api/apartments/apartmentsApi";
 import authController from "@/services/api/users/usersApi";

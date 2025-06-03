@@ -10,12 +10,12 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import useFetchApartments from "@/hooks/useFetchApartments";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/Common/LoadingSpinner";
 import { Sparkle } from "lucide-react";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 import apartmentsController from "@/services/api/apartments/apartmentsApi";
-import EditApartmentModal from "@/components/EditApartment";
+import EditApartmentModal from "@/components/Common/EditApartment";
 
 const AdminApartments = () => {
   const { apartments: initialApartments, loading } = useFetchApartments();

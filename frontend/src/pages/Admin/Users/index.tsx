@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import useFetchUsers from "@/hooks/useFetchUsers";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/Common/LoadingSpinner";
 import { ShieldCheck, Ban, User, Mail, ChevronDown } from "lucide-react";
 import usersController from "@/services/api/users/usersApi";
 import { toast } from "sonner";
