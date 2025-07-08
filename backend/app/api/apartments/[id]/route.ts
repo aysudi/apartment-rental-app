@@ -8,11 +8,11 @@ export async function OPTIONS() {
 }
 
 export async function GET(
-  _req: NextRequest,
-  context: { params: { id: string } }
+  _: NextRequest,
+  { params }: { params: { id: string } }
 ) {
   try {
-    const { id } = context.params;
+    const { id } = params;
 
     const apartment = await prisma.apartment.findUnique({
       where: { id },
