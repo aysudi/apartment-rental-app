@@ -2,13 +2,11 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { handleOptionsRequest, setCorsHeaders } from "../cors";
 
-// Handling OPTIONS (for preflight requests)
 export async function OPTIONS() {
   return handleOptionsRequest();
 }
 
-// GET Method
-export async function GET(req: Request) {
+export async function GET(_: Request) {
   try {
     const apartments = await prisma.apartment.findMany({
       include: {
@@ -32,7 +30,6 @@ export async function GET(req: Request) {
   }
 }
 
-// POST Method
 export async function POST(req: Request) {
   try {
     const body = await req.json();

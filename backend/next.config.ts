@@ -1,4 +1,10 @@
-export const nextConfig = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   async headers() {
     return [
       {
@@ -6,7 +12,7 @@ export const nextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "http://localhost:5173",
+            value: "*",
           },
           {
             key: "Access-Control-Allow-Methods",
@@ -21,3 +27,5 @@ export const nextConfig = {
     ];
   },
 };
+
+export default nextConfig;

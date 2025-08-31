@@ -11,7 +11,6 @@ const useFetchApartments = () => {
     const fetchApartments = async () => {
       try {
         const data = await apartmentsController.getAllApartments();
-        console.log("debugging apartments: ", data);
         setApartments(data);
         setLoading(false);
       } catch (err) {

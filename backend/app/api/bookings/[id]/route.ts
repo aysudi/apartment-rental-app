@@ -9,10 +9,10 @@ export async function OPTIONS() {
 
 export async function GET(
   _req: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = context.params;
+    const { id } = await params;
 
     const booking = await prisma.booking.findUnique({
       where: { id },
@@ -45,11 +45,11 @@ export async function GET(
 
 export async function PATCH(
   req: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const body = await req.json();
-    const { id } = context.params;
+    const { id } = await params;
 
     const existingBooking = await prisma.booking.findUnique({
       where: { id },

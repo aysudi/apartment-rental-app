@@ -253,7 +253,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/aysu/Desktop/apartment-rental-platform/backend/app/generated/prisma",
+      "value": "/Users/aysu/Desktop/apartment/apartment-rental-app/backend/app/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -267,7 +267,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/aysu/Desktop/apartment-rental-platform/backend/prisma/schema.prisma",
+    "sourceFilePath": "/Users/aysu/Desktop/apartment/apartment-rental-app/backend/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

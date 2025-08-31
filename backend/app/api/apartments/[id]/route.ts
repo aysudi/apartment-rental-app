@@ -2,17 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { handleOptionsRequest, setCorsHeaders } from "@/app/api/cors";
 
-// Preflight CORS
 export async function OPTIONS() {
   return handleOptionsRequest();
 }
 
 export async function GET(
-  _: NextRequest,
-  { params }: { params: { id: string } }
+  _req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     const apartment = await prisma.apartment.findUnique({
       where: { id },
@@ -46,11 +45,11 @@ export async function GET(
 
 export async function PATCH(
   req: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const body = await req.json();
-    const { id } = context.params;
+    const { id } = await params;
 
     const existingApartment = await prisma.apartment.findUnique({
       where: { id },
@@ -96,10 +95,10 @@ export async function PATCH(
 
 export async function DELETE(
   _req: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = context.params;
+    const { id } = await params;
 
     const existingApartment = await prisma.apartment.findUnique({
       where: { id },
