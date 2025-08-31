@@ -1,6 +1,6 @@
-import type { Booking } from "@/types/type";
 import instance from "../../axios/axiosConfig";
 import endpoints from "../../endpoints/constants";
+import { Booking as BookingClass } from "@/classes/Booking";
 
 // Fetch all bookings
 async function getAllBookings() {
@@ -52,7 +52,7 @@ async function updateBooking(bookingId: string, bookingData: any) {
 }
 
 // Create a new booking
-async function postBooking(bookingData: Booking) {
+async function postBooking(bookingData: BookingClass) {
   try {
     const response = await instance.post(endpoints.bookings, bookingData);
     return response.data;
