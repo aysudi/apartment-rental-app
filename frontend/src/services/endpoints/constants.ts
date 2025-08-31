@@ -1,4 +1,4 @@
-export const API_URL = "http://localhost:3000";
+export const API_URL = "https://apartment-rental-server.vercel.app";
 
 const endpoints = {
   apartments: "/api/apartments",
